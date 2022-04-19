@@ -11,7 +11,7 @@ import SwiftUI
 struct TreasureHuntARApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView(presenter: MainViewPresenter())
         }
     }
 }
