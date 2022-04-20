@@ -10,6 +10,7 @@ import SwiftUI
 enum Utils: String {
     case mainBackground = "main_background_portrait"
     case mainImage = "title"
+    case parchmentRepository = "Parchmnents"
 }
 
 

@@ -68,69 +68,7 @@ struct CreateView: View {
                 
                 
                 
-                ZStack{
-                    
-                    RoundedRectangle(cornerRadius: 50, style: .continuous)
-                        .fill(Color.black)
-                        .opacity(0.5)
-                        .frame(width: 230, height: 80)
-                    
-                    
-                    HStack(spacing: 15){
-                        
-                        if(self.selectId >= 0) {
-                            Button(action: {
-                                self.selectId = -1
-                            }) {
-                                Image(systemName: "trash").resizable().frame(width: 25, height: 25)
-                                    .foregroundColor(Color.red)
-                            }.padding(.trailing).buttonStyle(PlainButtonStyle()).shadow(radius: 8)
-                            
-                            
-                        }
-                        
-                        if(self.selectId == 1 || self.selectId == -1) {
-                            Button(action: {
-                                self.selectParchment = true
-                                self.selectId = 1
-                            }) {
-                                Image("pergamena_4").resizable()
-                                    .frame(width: 55, height: 55)
-                                    .foregroundColor(Color.white)
-                                    .clipShape(Circle())
-                                
-                            }.buttonStyle(PlainButtonStyle()).shadow(radius: 8)
-                            
-                        }
-                        if(self.selectId == 2 || self.selectId == -1) {
-                            Button(action: {
-                                self.selectId = 2
-                            }) {
-                                Image("forziere").resizable()
-                                    .frame(width: 55, height: 55)
-                                    .foregroundColor(Color.white)
-                                    .clipShape(Circle())
-                            }.buttonStyle(PlainButtonStyle()).shadow(radius: 8)
-                            
-                        }
-                        if(self.selectId == -1) {
-                            Button(action: {
-                                self.showBrowse = true
-                            }) {
-                                Image(systemName: "circle.grid.3x3.circle.fill").resizable().frame(width: 45, height: 45)
-                                    .foregroundColor(Color.white)
-                                    .clipShape(Circle())
-                            }
-                            .sheet(isPresented: $showBrowse) {
-                                BrowseView(showBrowse: $showBrowse)
-                            }
-                            .buttonStyle(PlainButtonStyle()).shadow(radius: 8)
-                            
-                            
-                        }
-                    }
-                }
-                .padding(.bottom).animation(.easeInOut)
+                MyItemBar(presenter: self.presenter, showBrowse: self.$showBrowse)
                 
             }.edgesIgnoringSafeArea(.all).frame(
                 minWidth: 0,
@@ -206,6 +144,8 @@ struct CreateView: View {
                 maxHeight: .infinity,
                 alignment: .topTrailing
             )
+            
+            PopUpWindow(title: "Log", buttonText: "OK", show: Observed.shared.showPopUp).zIndex(10)
          
         }.navigationBarHidden(true)
     

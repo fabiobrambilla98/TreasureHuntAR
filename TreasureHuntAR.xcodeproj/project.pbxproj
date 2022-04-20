@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA32843A28103F9E00E36A3E /* p_parchment_05.png in Resources */ = {isa = PBXBuildFile; fileRef = FA32843628103F9B00E36A3E /* p_parchment_05.png */; };
+		FA32843B28103F9E00E36A3E /* p_parchment_06.png in Resources */ = {isa = PBXBuildFile; fileRef = FA32843728103F9C00E36A3E /* p_parchment_06.png */; };
+		FA32843C28103F9E00E36A3E /* p_parchment_01.png in Resources */ = {isa = PBXBuildFile; fileRef = FA32843828103F9D00E36A3E /* p_parchment_01.png */; };
+		FA32843D28103F9E00E36A3E /* p_parchment_03.png in Resources */ = {isa = PBXBuildFile; fileRef = FA32843928103F9E00E36A3E /* p_parchment_03.png */; };
+		FA32843F2810459D00E36A3E /* MyItemBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA32843E2810459D00E36A3E /* MyItemBar.swift */; };
+		FA3284412810517F00E36A3E /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3284402810517F00E36A3E /* List.swift */; };
+		FA3284432810557500E36A3E /* EButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3284422810557500E36A3E /* EButton.swift */; };
 		FA48EE43280E99410033B407 /* TreasureHuntARApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA48EE42280E99410033B407 /* TreasureHuntARApp.swift */; };
 		FA48EE47280E99470033B407 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA48EE46280E99470033B407 /* Assets.xcassets */; };
 		FA48EE4A280E99470033B407 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA48EE49280E99470033B407 /* Preview Assets.xcassets */; };
@@ -24,6 +31,12 @@
 		FA6CB14E280F31C6007E2FDC /* PlayViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB14D280F31C6007E2FDC /* PlayViewPresenter.swift */; };
 		FA6CB150280F3284007E2FDC /* ViewSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB14F280F3284007E2FDC /* ViewSelection.swift */; };
 		FA6CB154280F3491007E2FDC /* ItemsGreed.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB153280F3491007E2FDC /* ItemsGreed.swift */; };
+		FA6CB159280FF1C4007E2FDC /* AppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB158280FF1C4007E2FDC /* AppService.swift */; };
+		FA6CB15B280FF3B5007E2FDC /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB15A280FF3B5007E2FDC /* Repository.swift */; };
+		FA6CB15D280FF425007E2FDC /* Parchment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB15C280FF425007E2FDC /* Parchment.swift */; };
+		FA6CB15F280FFDBD007E2FDC /* MyHorizontalGreed.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB15E280FFDBD007E2FDC /* MyHorizontalGreed.swift */; };
+		FA6CB16128101060007E2FDC /* PopUpWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB16028101060007E2FDC /* PopUpWindow.swift */; };
+		FA6CB16328101593007E2FDC /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB16228101593007E2FDC /* FileManager.swift */; };
 		FAE30FC4280EACCB00DB682C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FAE30FC6280EACCB00DB682C /* Localizable.strings */; };
 		FAE30FCA280ECF5A00DB682C /* treasure.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAE30FC9280ECF5A00DB682C /* treasure.ttf */; };
 /* End PBXBuildFile section */
@@ -43,6 +56,13 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
+		FA32843628103F9B00E36A3E /* p_parchment_05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = p_parchment_05.png; path = ../../../../img.bundle/p_parchment_05.png; sourceTree = "<group>"; };
+		FA32843728103F9C00E36A3E /* p_parchment_06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p_parchment_06.png; sourceTree = "<group>"; };
+		FA32843828103F9D00E36A3E /* p_parchment_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p_parchment_01.png; sourceTree = "<group>"; };
+		FA32843928103F9E00E36A3E /* p_parchment_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = p_parchment_03.png; sourceTree = "<group>"; };
+		FA32843E2810459D00E36A3E /* MyItemBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyItemBar.swift; sourceTree = "<group>"; };
+		FA3284402810517F00E36A3E /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		FA3284422810557500E36A3E /* EButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EButton.swift; sourceTree = "<group>"; };
 		FA48EE3F280E99410033B407 /* TreasureHuntAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TreasureHuntAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA48EE42280E99410033B407 /* TreasureHuntARApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureHuntARApp.swift; sourceTree = "<group>"; };
 		FA48EE46280E99470033B407 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -62,6 +82,12 @@
 		FA6CB14D280F31C6007E2FDC /* PlayViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewPresenter.swift; sourceTree = "<group>"; };
 		FA6CB14F280F3284007E2FDC /* ViewSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSelection.swift; sourceTree = "<group>"; };
 		FA6CB153280F3491007E2FDC /* ItemsGreed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsGreed.swift; sourceTree = "<group>"; };
+		FA6CB158280FF1C4007E2FDC /* AppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppService.swift; sourceTree = "<group>"; };
+		FA6CB15A280FF3B5007E2FDC /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		FA6CB15C280FF425007E2FDC /* Parchment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parchment.swift; sourceTree = "<group>"; };
+		FA6CB15E280FFDBD007E2FDC /* MyHorizontalGreed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHorizontalGreed.swift; sourceTree = "<group>"; };
+		FA6CB16028101060007E2FDC /* PopUpWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindow.swift; sourceTree = "<group>"; };
+		FA6CB16228101593007E2FDC /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		FAE30FC5280EACCB00DB682C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FAE30FC7280EACD400DB682C /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FAE30FC9280ECF5A00DB682C /* treasure.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = treasure.ttf; sourceTree = "<group>"; };
@@ -86,6 +112,7 @@
 				FA48EE40280E99410033B407 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		FA48EE40280E99410033B407 /* Products */ = {
 			isa = PBXGroup;
@@ -98,6 +125,9 @@
 		FA48EE41280E99410033B407 /* TreasureHuntAR */ = {
 			isa = PBXGroup;
 			children = (
+				FA6CB16A28103EBF007E2FDC /* Resources */,
+				FA6CB157280FF14D007E2FDC /* Services */,
+				FA6CB156280FECB3007E2FDC /* Models */,
 				FA6CB135280EF1E2007E2FDC /* Coordinator */,
 				FA6CB147280F30E4007E2FDC /* Enumerations */,
 				FA6CB13D280F0768007E2FDC /* Extensions */,
@@ -106,6 +136,7 @@
 				FA48EE42280E99410033B407 /* TreasureHuntARApp.swift */,
 				FA48EE46280E99470033B407 /* Assets.xcassets */,
 				FA48EE48280E99470033B407 /* Preview Content */,
+				FA6CB16028101060007E2FDC /* PopUpWindow.swift */,
 			);
 			path = TreasureHuntAR;
 			sourceTree = "<group>";
@@ -220,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				FA6CB143280F2FC2007E2FDC /* Binding.swift */,
+				FA6CB16228101593007E2FDC /* FileManager.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -251,10 +283,58 @@
 		FA6CB152280F33D5007E2FDC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FA6CB153280F3491007E2FDC /* ItemsGreed.swift */,
+				FA6CB155280FEBF8007E2FDC /* Components */,
 				FA6CB141280F0A62007E2FDC /* CreateView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		FA6CB155280FEBF8007E2FDC /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				FA6CB153280F3491007E2FDC /* ItemsGreed.swift */,
+				FA6CB15E280FFDBD007E2FDC /* MyHorizontalGreed.swift */,
+				FA32843E2810459D00E36A3E /* MyItemBar.swift */,
+				FA3284422810557500E36A3E /* EButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		FA6CB156280FECB3007E2FDC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FA6CB15C280FF425007E2FDC /* Parchment.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FA6CB157280FF14D007E2FDC /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FA6CB158280FF1C4007E2FDC /* AppService.swift */,
+				FA6CB15A280FF3B5007E2FDC /* Repository.swift */,
+				FA3284402810517F00E36A3E /* List.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		FA6CB16A28103EBF007E2FDC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FA6CB16B28103EC7007E2FDC /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		FA6CB16B28103EC7007E2FDC /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				FA32843828103F9D00E36A3E /* p_parchment_01.png */,
+				FA32843928103F9E00E36A3E /* p_parchment_03.png */,
+				FA32843628103F9B00E36A3E /* p_parchment_05.png */,
+				FA32843728103F9C00E36A3E /* p_parchment_06.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		FAE30FC8280ECF3F00DB682C /* project_fonts */ = {
@@ -325,9 +405,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA32843B28103F9E00E36A3E /* p_parchment_06.png in Resources */,
 				FA48EE4A280E99470033B407 /* Preview Assets.xcassets in Resources */,
 				FAE30FC4280EACCB00DB682C /* Localizable.strings in Resources */,
 				FA48EE47280E99470033B407 /* Assets.xcassets in Resources */,
+				FA32843A28103F9E00E36A3E /* p_parchment_05.png in Resources */,
+				FA32843D28103F9E00E36A3E /* p_parchment_03.png in Resources */,
+				FA32843C28103F9E00E36A3E /* p_parchment_01.png in Resources */,
 				FAE30FCA280ECF5A00DB682C /* treasure.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,8 +425,13 @@
 			files = (
 				FA6CB137280EF1F2007E2FDC /* AppCoordinator.swift in Sources */,
 				FA48EE59280E9F4F0033B407 /* MainView.swift in Sources */,
+				FA32843F2810459D00E36A3E /* MyItemBar.swift in Sources */,
 				FA6CB146280F3094007E2FDC /* MyBlur.swift in Sources */,
+				FA6CB16328101593007E2FDC /* FileManager.swift in Sources */,
 				FA6CB150280F3284007E2FDC /* ViewSelection.swift in Sources */,
+				FA6CB16128101060007E2FDC /* PopUpWindow.swift in Sources */,
+				FA6CB15D280FF425007E2FDC /* Parchment.swift in Sources */,
+				FA6CB15F280FFDBD007E2FDC /* MyHorizontalGreed.swift in Sources */,
 				FA6CB13C280EF657007E2FDC /* CreateViewPresenter.swift in Sources */,
 				FA6CB142280F0A62007E2FDC /* CreateView.swift in Sources */,
 				FA6CB134280EEB0B007E2FDC /* MyButton.swift in Sources */,
@@ -351,8 +440,12 @@
 				FA6CB154280F3491007E2FDC /* ItemsGreed.swift in Sources */,
 				FA6CB14E280F31C6007E2FDC /* PlayViewPresenter.swift in Sources */,
 				FA6CB139280EF3AF007E2FDC /* MainViewPresenter.swift in Sources */,
+				FA3284432810557500E36A3E /* EButton.swift in Sources */,
+				FA6CB15B280FF3B5007E2FDC /* Repository.swift in Sources */,
 				FA48EE5C280EA1B80033B407 /* Utils.swift in Sources */,
+				FA6CB159280FF1C4007E2FDC /* AppService.swift in Sources */,
 				FA6CB149280F30F8007E2FDC /* ContentLink.swift in Sources */,
+				FA3284412810517F00E36A3E /* List.swift in Sources */,
 				FA6CB144280F2FC2007E2FDC /* Binding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

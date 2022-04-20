@@ -8,14 +8,59 @@
 import SwiftUI
 
 
+
+
+
 protocol CreateViewPresenting: ObservableObject {
+    var parchementNames: [String] {get}
+    
+    func saveWorldMap()
+    func loadWorldMap()
+    func openSheet()
+    func selectEntity(_ name: String)
+}
+
+enum ButtonItemsIDs {
+    case initialSelect
+    case firstIconSelect
+    case secondIconSelect
     
 }
 
 
 final class CreateViewPresenter: CreateViewPresenting {
+   
     
-    init() {}
+    private var service = AppService.shared
+    
+    @Published var parchementNames: [String] = []
+    @Published var lastSelected: [String] = []
+    @Published var buttonItemsID: ButtonItemsIDs = ButtonItemsIDs.initialSelect
+    
+    init(){
+        print("DEBUG: INIT PRESENTER")
+        self.parchementNames = self.service.getParchmentNames()
+        for name in self.parchementNames {
+            self.lastSelected.append(name)
+        }
+    }
+    
+    func selectEntity(_ name: String) {
+        lastSelected.updateLast(name)
+    }
+    
+    func saveWorldMap() {
+        
+    }
+    
+    func loadWorldMap() {
+        
+    }
+    
+    func openSheet() {
+        
+    }
     
    
 }
+
