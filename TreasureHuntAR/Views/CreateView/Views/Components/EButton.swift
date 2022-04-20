@@ -15,11 +15,12 @@ struct EButton: View {
     
     var body: some View {
         Button(action: {
-            self.presenter.buttonItemsID = itemSelected
-            
+            withAnimation(.easeInOut) {
+                self.presenter.buttonItemsID = itemSelected
+            }
         }) {
             Image(uiImage: UIImage(named: name)!).resizable()
-                .frame(width: 55, height: 55)
+                .frame(width: 60, height: 60)
                 .foregroundColor(Color.white)
                 .clipShape(Circle())
         }.buttonStyle(PlainButtonStyle()).shadow(radius: 8)

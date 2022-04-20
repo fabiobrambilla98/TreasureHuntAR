@@ -15,34 +15,14 @@ struct MyItemBar: View {
     
     var body: some View {
         ZStack{
-            
             RoundedRectangle(cornerRadius: 50, style: .continuous)
                 .fill(Color.black)
                 .opacity(0.5)
-                .frame(width: 230, height: 80)
+                .frame(width: 270, height: 85)
             
-            
-            HStack(spacing: 15){
-                
+            HStack(spacing: 20){
                 if(self.presenter.buttonItemsID != .initialSelect) {
-                    Button(action: {
-                        switch(self.presenter.buttonItemsID) {
-                        case .firstIconSelect:
-                            self.presenter.lastSelected.updateLast(self.presenter.lastSelected[0])
-                        case .secondIconSelect:
-                            self.presenter.lastSelected.updateLast(self.presenter.lastSelected[1])
-                        case .initialSelect:
-                            return
-                        }
-                        self.presenter.buttonItemsID = B.initialSelect
-                        
-                        
-                    }) {
-                        Image(systemName: "xmark").resizable().frame(width: 23, height: 23)
-                            .foregroundColor(Color.red)
-                    }.padding(.trailing).buttonStyle(PlainButtonStyle()).shadow(radius: 8)
-                    
-                    
+                    XButton(lastSelected: self.$presenter.lastSelected, buttonItemsID: self.$presenter.buttonItemsID)
                 }
                 
                 if(self.presenter.buttonItemsID == .initialSelect || self.presenter.buttonItemsID == .firstIconSelect) {
@@ -53,26 +33,13 @@ struct MyItemBar: View {
                     
                     EButton(presenter: self.presenter, itemSelected: B.secondIconSelect, name: self.$presenter.lastSelected[1])
                     
-                    
                 }
                 if(self.presenter.buttonItemsID == .initialSelect) {
-                    Button(action: {
-                        self.showBrowse = true
-                    }) {
-                        Image(systemName: "circle.grid.3x3.circle.fill").resizable().frame(width: 45, height: 45)
-                            .foregroundColor(Color.white)
-                            .clipShape(Circle())
-                    }
-                    .sheet(isPresented: $showBrowse) {
-                        BrowseView(showBrowse: $showBrowse, presenter: self.presenter)
-                    }
-                    .buttonStyle(PlainButtonStyle()).shadow(radius: 8)
-                    
-                    
+                    SButton(presenter: self.presenter, showBrowse: self.$showBrowse)
                 }
             }
         }
-        .padding(.bottom).animation(.easeInOut)
+        .padding(.bottom)
     }
 }
 

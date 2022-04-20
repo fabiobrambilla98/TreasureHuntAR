@@ -6,30 +6,48 @@
 //
 
 import SwiftUI
+import ARKit
+import RealityKit
+import Combine
+
+
+
+
+struct LazyView<Content: View>: View {
+    let build: () -> Content
+    init(_ build: @autoclosure @escaping () -> Content) {
+        self.build = build
+    }
+    var body: Content {
+        build()
+    }
+}
+
+
+
+
+
 
 struct CreateView: View {
     
     @ObservedObject var presenter: CreateViewPresenter
-    
-    @State private var selectParchment = false
-    @State private var selectId: Int = -1
-    @State var showBrowse: Bool = false
     @State var savedMap: Bool = false
     @State var showDropDown: Bool = false
-    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     //go back <---
     //@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     //self.presentationMode.wrappedValue.dismiss()
+   
+    
+    
     
     var body: some View {
         
         
         ZStack {
             
-            
-            
-            
-            
+            ARViewContainer().edgesIgnoringSafeArea(.all)
+           
             VStack {
                 
                 HStack(spacing: 20) {
@@ -54,7 +72,6 @@ struct CreateView: View {
                                 savedMap = false
                             }
                         }) {
-                            
                             Text("New")
                                 .fontWeight(.semibold)
                                 .padding()
@@ -68,7 +85,7 @@ struct CreateView: View {
                 
                 
                 
-                MyItemBar(presenter: self.presenter, showBrowse: self.$showBrowse)
+                MyItemBar(presenter: self.presenter, showBrowse: self.$presenter.showBrowse)
                 
             }.edgesIgnoringSafeArea(.all).frame(
                 minWidth: 0,
@@ -76,16 +93,16 @@ struct CreateView: View {
                 minHeight: 0,
                 maxHeight: .infinity,
                 alignment: .bottom
-            ).background(Color.white)
+                )
             
             ZStack{
                 
                 VStack {
                     Button(action: {
                         withAnimation(.easeOut(duration: 0.2)) {
+                            self.presentationMode.wrappedValue.dismiss()
                             showDropDown.toggle()
                         }
-                        
                     }) {
                         Image(systemName: "line.3.horizontal.circle.fill").resizable()
                             .frame(width: 45, height: 45)
@@ -145,12 +162,32 @@ struct CreateView: View {
                 alignment: .topTrailing
             )
             
-            PopUpWindow(title: "Log", buttonText: "OK", show: Observed.shared.showPopUp).zIndex(10)
+            
          
         }.navigationBarHidden(true)
+            
+       
     
     }
+    
+    struct ARViewContainer: UIViewRepresentable {
+    
+        func makeUIView(context: Context) -> ARView {
+            
+            let arView = ARView(frame: .zero)
+            
+            
+            
+            return arView
+            
+        }
+        
+        func updateUIView(_ uiView: ARView, context: Context) {}
+        
+    }
+    
 }
+
 
 
 

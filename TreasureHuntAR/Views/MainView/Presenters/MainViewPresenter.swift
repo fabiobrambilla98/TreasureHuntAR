@@ -18,7 +18,9 @@ final class MainViewPresenter: MainViewPresenting, ContentFlowStateProtocol{
     @Published var activeLink: ContentLink?
     
     
-    init() {}
+    init() {
+        
+    }
     
     func open (_ view: ViewSelection) {
         switch(view) {

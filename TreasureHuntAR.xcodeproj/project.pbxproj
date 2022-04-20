@@ -37,6 +37,8 @@
 		FA6CB15F280FFDBD007E2FDC /* MyHorizontalGreed.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB15E280FFDBD007E2FDC /* MyHorizontalGreed.swift */; };
 		FA6CB16128101060007E2FDC /* PopUpWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB16028101060007E2FDC /* PopUpWindow.swift */; };
 		FA6CB16328101593007E2FDC /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB16228101593007E2FDC /* FileManager.swift */; };
+		FAA2348328108F3A00812D63 /* SButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA2348228108F3A00812D63 /* SButton.swift */; };
+		FAA23485281091E900812D63 /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA23484281091E900812D63 /* XButton.swift */; };
 		FAE30FC4280EACCB00DB682C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FAE30FC6280EACCB00DB682C /* Localizable.strings */; };
 		FAE30FCA280ECF5A00DB682C /* treasure.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAE30FC9280ECF5A00DB682C /* treasure.ttf */; };
 /* End PBXBuildFile section */
@@ -88,6 +90,8 @@
 		FA6CB15E280FFDBD007E2FDC /* MyHorizontalGreed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHorizontalGreed.swift; sourceTree = "<group>"; };
 		FA6CB16028101060007E2FDC /* PopUpWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindow.swift; sourceTree = "<group>"; };
 		FA6CB16228101593007E2FDC /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		FAA2348228108F3A00812D63 /* SButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SButton.swift; sourceTree = "<group>"; };
+		FAA23484281091E900812D63 /* XButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XButton.swift; sourceTree = "<group>"; };
 		FAE30FC5280EACCB00DB682C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FAE30FC7280EACD400DB682C /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FAE30FC9280ECF5A00DB682C /* treasure.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = treasure.ttf; sourceTree = "<group>"; };
@@ -296,6 +300,8 @@
 				FA6CB15E280FFDBD007E2FDC /* MyHorizontalGreed.swift */,
 				FA32843E2810459D00E36A3E /* MyItemBar.swift */,
 				FA3284422810557500E36A3E /* EButton.swift */,
+				FAA2348228108F3A00812D63 /* SButton.swift */,
+				FAA23484281091E900812D63 /* XButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -423,12 +429,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAA23485281091E900812D63 /* XButton.swift in Sources */,
 				FA6CB137280EF1F2007E2FDC /* AppCoordinator.swift in Sources */,
 				FA48EE59280E9F4F0033B407 /* MainView.swift in Sources */,
 				FA32843F2810459D00E36A3E /* MyItemBar.swift in Sources */,
 				FA6CB146280F3094007E2FDC /* MyBlur.swift in Sources */,
 				FA6CB16328101593007E2FDC /* FileManager.swift in Sources */,
 				FA6CB150280F3284007E2FDC /* ViewSelection.swift in Sources */,
+				FAA2348328108F3A00812D63 /* SButton.swift in Sources */,
 				FA6CB16128101060007E2FDC /* PopUpWindow.swift in Sources */,
 				FA6CB15D280FF425007E2FDC /* Parchment.swift in Sources */,
 				FA6CB15F280FFDBD007E2FDC /* MyHorizontalGreed.swift in Sources */,

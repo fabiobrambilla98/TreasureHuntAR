@@ -35,6 +35,7 @@ struct ContentFlowCoordinator<State: ContentFlowStateProtocol, Content: View>: V
     }
 
     @ViewBuilder private var navigationLinks: some View {
+    
         NavigationLink(tag: .createView, selection: activeLink, destination: createViewDestination) { EmptyView() }
         NavigationLink(tag: .playView, selection: activeLink, destination: playViewDestination) { EmptyView() }
     }

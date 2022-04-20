@@ -36,6 +36,7 @@ final class CreateViewPresenter: CreateViewPresenting {
     @Published var parchementNames: [String] = []
     @Published var lastSelected: [String] = []
     @Published var buttonItemsID: ButtonItemsIDs = ButtonItemsIDs.initialSelect
+    @Published var showBrowse: Bool = false
     
     init(){
         print("DEBUG: INIT PRESENTER")
