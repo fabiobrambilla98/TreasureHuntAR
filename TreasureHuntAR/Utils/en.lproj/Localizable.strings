@@ -1,3 +1,7 @@
 "play" = "Play";
 "create" = "Create";
 "parchments" = "Parchments";
+"back" = "Homescreen";
+"confirm-back-title" = "Are you sure?";
+"confirm-back-subtitle" = "If you exit without saving, your game map will be deleted";
+"exit" = "Exit";

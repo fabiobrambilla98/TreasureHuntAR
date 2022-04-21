@@ -39,6 +39,9 @@
 		FA6CB16328101593007E2FDC /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB16228101593007E2FDC /* FileManager.swift */; };
 		FAA2348328108F3A00812D63 /* SButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA2348228108F3A00812D63 /* SButton.swift */; };
 		FAA23485281091E900812D63 /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA23484281091E900812D63 /* XButton.swift */; };
+		FAA234A32811638B00812D63 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA234A22811638A00812D63 /* BackButton.swift */; };
+		FAA234AC281179B700812D63 /* Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA234AB281179B700812D63 /* Frame.swift */; };
+		FAA234AE2811B24B00812D63 /* SceneListPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA234AD2811B24B00812D63 /* SceneListPopup.swift */; };
 		FAE30FC4280EACCB00DB682C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FAE30FC6280EACCB00DB682C /* Localizable.strings */; };
 		FAE30FCA280ECF5A00DB682C /* treasure.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAE30FC9280ECF5A00DB682C /* treasure.ttf */; };
 /* End PBXBuildFile section */
@@ -92,6 +95,9 @@
 		FA6CB16228101593007E2FDC /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		FAA2348228108F3A00812D63 /* SButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SButton.swift; sourceTree = "<group>"; };
 		FAA23484281091E900812D63 /* XButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XButton.swift; sourceTree = "<group>"; };
+		FAA234A22811638A00812D63 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		FAA234AB281179B700812D63 /* Frame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Frame.swift; sourceTree = "<group>"; };
+		FAA234AD2811B24B00812D63 /* SceneListPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneListPopup.swift; sourceTree = "<group>"; };
 		FAE30FC5280EACCB00DB682C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FAE30FC7280EACD400DB682C /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FAE30FC9280ECF5A00DB682C /* treasure.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = treasure.ttf; sourceTree = "<group>"; };
@@ -256,6 +262,7 @@
 			children = (
 				FA6CB143280F2FC2007E2FDC /* Binding.swift */,
 				FA6CB16228101593007E2FDC /* FileManager.swift */,
+				FAA234AB281179B700812D63 /* Frame.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -302,6 +309,8 @@
 				FA3284422810557500E36A3E /* EButton.swift */,
 				FAA2348228108F3A00812D63 /* SButton.swift */,
 				FAA23484281091E900812D63 /* XButton.swift */,
+				FAA234A22811638A00812D63 /* BackButton.swift */,
+				FAA234AD2811B24B00812D63 /* SceneListPopup.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -368,6 +377,8 @@
 			dependencies = (
 			);
 			name = TreasureHuntAR;
+			packageProductDependencies = (
+			);
 			productName = TreasureHuntAR;
 			productReference = FA48EE3F280E99410033B407 /* TreasureHuntAR.app */;
 			productType = "com.apple.product-type.application";
@@ -397,6 +408,8 @@
 				it,
 			);
 			mainGroup = FA48EE36280E99410033B407;
+			packageReferences = (
+			);
 			productRefGroup = FA48EE40280E99410033B407 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -436,6 +449,7 @@
 				FA6CB146280F3094007E2FDC /* MyBlur.swift in Sources */,
 				FA6CB16328101593007E2FDC /* FileManager.swift in Sources */,
 				FA6CB150280F3284007E2FDC /* ViewSelection.swift in Sources */,
+				FAA234AE2811B24B00812D63 /* SceneListPopup.swift in Sources */,
 				FAA2348328108F3A00812D63 /* SButton.swift in Sources */,
 				FA6CB16128101060007E2FDC /* PopUpWindow.swift in Sources */,
 				FA6CB15D280FF425007E2FDC /* Parchment.swift in Sources */,
@@ -452,7 +466,9 @@
 				FA6CB15B280FF3B5007E2FDC /* Repository.swift in Sources */,
 				FA48EE5C280EA1B80033B407 /* Utils.swift in Sources */,
 				FA6CB159280FF1C4007E2FDC /* AppService.swift in Sources */,
+				FAA234A32811638B00812D63 /* BackButton.swift in Sources */,
 				FA6CB149280F30F8007E2FDC /* ContentLink.swift in Sources */,
+				FAA234AC281179B700812D63 /* Frame.swift in Sources */,
 				FA3284412810517F00E36A3E /* List.swift in Sources */,
 				FA6CB144280F2FC2007E2FDC /* Binding.swift in Sources */,
 			);

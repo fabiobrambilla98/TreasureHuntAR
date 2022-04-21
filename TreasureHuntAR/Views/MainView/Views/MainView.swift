@@ -40,15 +40,7 @@ struct MainView<P: MainViewPresenting & ContentFlowStateProtocol>: View {
         }.edgesIgnoringSafeArea(.all).navigationBarHidden(true)
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
 }
 

@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-
-
-
-
 protocol CreateViewPresenting: ObservableObject {
     var parchementNames: [String] {get}
     
@@ -18,6 +14,7 @@ protocol CreateViewPresenting: ObservableObject {
     func loadWorldMap()
     func openSheet()
     func selectEntity(_ name: String)
+    func showBackAlert()
 }
 
 enum ButtonItemsIDs {
@@ -37,6 +34,8 @@ final class CreateViewPresenter: CreateViewPresenting {
     @Published var lastSelected: [String] = []
     @Published var buttonItemsID: ButtonItemsIDs = ButtonItemsIDs.initialSelect
     @Published var showBrowse: Bool = false
+    @Published var showAlert: Bool = false
+    
     
     init(){
         print("DEBUG: INIT PRESENTER")
@@ -44,10 +43,15 @@ final class CreateViewPresenter: CreateViewPresenting {
         for name in self.parchementNames {
             self.lastSelected.append(name)
         }
+        
+    }
+    
+    func showBackAlert() {
+        self.showAlert = true
     }
     
     func selectEntity(_ name: String) {
-        lastSelected.updateLast(name)
+        self.lastSelected.updateLast(name)
     }
     
     func saveWorldMap() {

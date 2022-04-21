@@ -17,7 +17,7 @@ struct MyItemBar: View {
         ZStack{
             RoundedRectangle(cornerRadius: 50, style: .continuous)
                 .fill(Color.black)
-                .opacity(0.5)
+                .opacity(0.7)
                 .frame(width: 270, height: 85)
             
             HStack(spacing: 20){

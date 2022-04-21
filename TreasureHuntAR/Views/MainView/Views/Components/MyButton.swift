@@ -22,7 +22,7 @@ struct MyButton<P: MainViewPresenting & ContentFlowStateProtocol>: View {
                 presenter.open(ViewSelection.createView)
             }
         } ) {
-            Text(text).fontWeight(.bold)
+            Text(LocalizedStringKey(text)).fontWeight(.bold)
                 .font(Font.custom("treasure", size: 30))
         }.frame(minWidth: 0, maxWidth: 90)
             .padding()

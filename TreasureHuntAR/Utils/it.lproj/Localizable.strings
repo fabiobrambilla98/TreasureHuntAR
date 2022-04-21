@@ -1,3 +1,7 @@
 "play" = "Gioca";
 "create" = "Crea";
 "parchments" = "Pergamene";
+"back" = "Indietro";
+"confirm-back-title" = "Sei sicuro di voler uscire?";
+"confirm-back-subtitle" = "Se esci senza salvare, la mappa di gioco verrà cancellatas";
+"exit" = "Esci";

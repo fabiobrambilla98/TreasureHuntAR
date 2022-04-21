@@ -23,6 +23,6 @@ struct EButton: View {
                 .frame(width: 60, height: 60)
                 .foregroundColor(Color.white)
                 .clipShape(Circle())
-        }.buttonStyle(PlainButtonStyle()).shadow(radius: 8)
+        }.buttonStyle(PlainButtonStyle()).shadow(color: Color.white, radius: 4)
     }
 }
