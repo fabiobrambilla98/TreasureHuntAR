@@ -11,88 +11,36 @@ import RealityKit
 import Combine
 
 
-
-
-struct LazyView<Content: View>: View {
-    let build: () -> Content
-    init(_ build: @autoclosure @escaping () -> Content) {
-        self.build = build
-    }
-    var body: Content {
-        build()
-    }
-}
-
-
-
-
-
-
 struct CreateView: View {
     
     @ObservedObject var presenter: CreateViewPresenter
-    @State var savedMap: Bool = false
-    @State var presentPopUp: Bool = false
-    
     var body: some View {
         
         
-        ZStack {
+        ZStack(alignment: .bottom) {
             
-            ARViewContainer().edgesIgnoringSafeArea(.all)
+            ARViewContainer(presenter: self.presenter).edgesIgnoringSafeArea(.all)
             
             VStack {
+                SessionActionView(presenter: self.presenter)
                 
-                HStack(spacing: 20) {
-                    
-                    Button(action: {
-                        withAnimation(.easeInOut) {
-                            savedMap = true
-                        }
-                    }) {
-                        
-                        Text("Save")
-                            .fontWeight(.semibold)
-                            .padding()
-                            .foregroundColor(.white)
-                            .background(Color.green)
-                            .cornerRadius(40)
-                    }
-                    
-                    if(savedMap) {
-                        Button(action: {
-                            withAnimation(.easeInOut) {
-                                savedMap = false
-                            }
-                        }) {
-                            Text("New")
-                                .fontWeight(.semibold)
-                                .padding()
-                                .foregroundColor(.white)
-                                .background(Color.blue)
-                                .cornerRadius(40)
-                        }
-                    }
-                    
-                }
-                
-                
-                
-                MyItemBar(presenter: self.presenter, showBrowse: self.$presenter.showBrowse)
-                
-            }.edgesIgnoringSafeArea(.all).fullScreen(alignment: .bottom)
-            
-            if(presentPopUp) {
-                SceneListPopup()
+                MyItemBar(presenter: self.presenter)
+            }
+            if(self.presenter.sessionListSelection == .open) {
+                SceneListPopup(presenter: self.presenter)
             }
             
-        }.navigationBarBackButtonHidden(true)
+            if(self.presenter.showParchment) {
+                ParchmentPopup().environmentObject(presenter)
+            }
+            
+        }.edgesIgnoringSafeArea(.all).fullScreen(alignment: .bottom).navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: BackButton(presenter: self.presenter), trailing:
                                     HStack(spacing: 15) {
-                Button(action: {presentPopUp = true}) {
+                Button(action: {}) {
                     Text("Save")
                 }
-                Button(action: {presentPopUp = true}) {
+                Button(action: {self.presenter.listSelector(action: .open)}) {
                     Image(systemName: "list.bullet")
                 }
             })
@@ -108,18 +56,8 @@ struct CreateView: View {
 
 
 
-struct ARViewContainer: UIViewRepresentable {
-    
-    func makeUIView(context: Context) -> ARView {
-        
-        let arView = ARView(frame: .zero)
-        
-        
-        
-        return arView
-        
-    }
-    
-    func updateUIView(_ uiView: ARView, context: Context) {}
-    
-}
+
+
+
+
+

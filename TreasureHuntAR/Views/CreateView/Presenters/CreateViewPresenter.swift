@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Combine
+import RealityKit
 
 protocol CreateViewPresenting: ObservableObject {
     var parchementNames: [String] {get}
@@ -24,9 +26,14 @@ enum ButtonItemsIDs {
     
 }
 
+enum ShowAction {
+    case open
+    case close
+}
+
 
 final class CreateViewPresenter: CreateViewPresenting {
-   
+    
     
     private var service = AppService.shared
     
@@ -35,6 +42,16 @@ final class CreateViewPresenter: CreateViewPresenting {
     @Published var buttonItemsID: ButtonItemsIDs = ButtonItemsIDs.initialSelect
     @Published var showBrowse: Bool = false
     @Published var showAlert: Bool = false
+    @Published var saveSessionButtonPressed: Bool = false
+    @Published var newSessionButtonPressed: Bool = false
+    @Published var sessionListSelection: ShowAction = .close
+    @Published var showParchment: Bool = false
+    
+    
+    
+    
+    // MARK: - AR properties
+    var objectToAdd: ObjectEntity?
     
     
     init(){
@@ -55,17 +72,38 @@ final class CreateViewPresenter: CreateViewPresenting {
     }
     
     func saveWorldMap() {
-        
+        self.saveSessionButtonPressed = true
     }
     
     func loadWorldMap() {
         
     }
     
+    func listSelector(action: ShowAction) {
+        self.sessionListSelection = action
+    }
+    
     func openSheet() {
+        self.showBrowse = true
+    }
+    func closeSheet() {
+        self.showBrowse = false
+    }
+    
+    func selectEntityToAdd(name: String) {
+        self.objectToAdd = ParchmentEntity(modelName: name)
+        
+        
         
     }
     
-   
+    func deselectEntityToAdd() {
+        self.objectToAdd = nil
+    }
+    
+    
+    
+    
+    
 }
 

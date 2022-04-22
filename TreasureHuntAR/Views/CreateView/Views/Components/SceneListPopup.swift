@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SceneListPopup: View {
     @State var showAlert: Bool = false
+    @ObservedObject var presenter: CreateViewPresenter
     var body: some View {
         ZStack {
             
@@ -39,7 +40,9 @@ struct SceneListPopup: View {
                     }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                     
                     Divider().padding(.bottom, -3.0).foregroundColor(Color.white)
-                    Button(action: {}) {
+                    Button(action: {
+                        self.presenter.listSelector(action: .close)
+                    }) {
                         Text("Cancel").font(Font.custom("treasure", size: 27))
                     }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 42)
                     
@@ -52,8 +55,4 @@ struct SceneListPopup: View {
     }
 }
 
-struct SceneListPopup_Previews: PreviewProvider {
-    static var previews: some View {
-        SceneListPopup()
-    }
-}
+
