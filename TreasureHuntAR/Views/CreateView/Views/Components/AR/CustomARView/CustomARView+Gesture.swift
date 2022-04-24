@@ -14,44 +14,9 @@ import Combine
 extension Entity {
     /// Billboards the entity to the targetPosition which should be provided in world space.
     func billboard(targetPosition: SIMD3<Float>) {
-        look(at: targetPosition, from: position(relativeTo: nil), relativeTo: nil)
+        look(at: targetPosition, from: position(relativeTo: nil), upVector: [0,1,0], relativeTo: nil)
     }
 }
-
-
-
-extension CustomARView {
-    func enableObjectRemoval() {
-        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(recognizer:)))
-        self.addGestureRecognizer(longPressGestureRecognizer)
-    }
-    
-    @objc func handleLongPress(recognizer: UILongPressGestureRecognizer) {
-        
-        
-        let location = recognizer.location(in: self)
-        if let entity = self.entity(at: location) {
-            
-            if let anchorEntity = entity.anchor, entity.name == self.virtualObjectAnchorName {
-                
-                guard test.anchor == nil else {
-                    return
-                }
-                
-                let planeAnchor = ARAnchor(name: "test", transform: (entity.parent?.transformMatrix(relativeTo: nil))!)
-                
-                self.test.entity = entity
-                self.session.add(anchor: planeAnchor)
-                
-        
-            }
-        }
-    }
-}
-
-
-
-
 
 
 extension CustomARView {
@@ -84,11 +49,24 @@ extension CustomARView {
     
         
         if let entity = self.entity(at: point) {
-            if let deleteAnchorEntity = entity.anchor, entity.name == "test" {
+            if let actionEntity = entity.anchor, entity.name == "deleteButton" {
+                self.scene.removeAnchor(actionEntity)
+                self.scene.removeAnchor(tappedObject!.anchor!)
+                tappedObject = nil
                 
-                self.scene.removeAnchor(deleteAnchorEntity)
-                self.scene.removeAnchor(self.test.entity!.anchor!)
-                self.test = Prova()
+            } else if entity.name == "modifyButton" {
+                
+                presenter.presenter.parchmentText = tappedObject!.parchmentText!.replacingOccurrences(of: "\n", with: "")
+                presenter.presenter.objectToAdd = tappedObject?.objectEntity
+                presenter.presenter.parchmentToModify = tappedObject
+                presenter.presenter.showParchment = true
+                tappedObject?.removeChild((tappedObject?.children[0])!)
+            } else if entity.type == .none {
+                
+                let planeAnchor = ARAnchor(name: "parchmentActionButtons", transform: entity.transformMatrix(relativeTo: nil))
+                //(entity.parent?.transformMatrix(relativeTo: nil))
+                self.session.add(anchor: planeAnchor)
+                tappedObject = entity
             }
         } else {
             
@@ -102,15 +80,11 @@ extension CustomARView {
                 transform: hitTestResult.worldTransform
             )
         
+            self.presenter.presenter.showParchment = true
             self.session.add(anchor: virtualObjectAnchor!)
+            
         }
-        
-        
-        
-        
-        
-        
-        
+   
     }
     
 }

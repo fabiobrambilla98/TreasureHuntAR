@@ -11,22 +11,31 @@ struct ParchmentPopup: View {
     @State var testo: String = ""
     @EnvironmentObject var presenter: CreateViewPresenter
     
+    
+    
     var body: some View {
         ZStack(alignment: .center){
-            VisualEffectView(effect: UIBlurEffect(style: .dark))
-                .edgesIgnoringSafeArea(.all)
-           
+            
+      
            ZStack(alignment: .topLeading) {
                
-               Image(uiImage: UIImage(named: presenter.objectToAdd!.modelName)!).resizable().scaledToFill()
-               TextEditor(text: self.$testo).padding(.all).onAppear() {
+               Image(uiImage: UIImage(named: presenter.objectToAdd!.modelName)!).resizable().scaledToFit()
+               
+               
+               let parchment = presenter.objectToAdd! as! ParchmentEntity
+               
+               TextEditor(text: self.$testo).offset(x: parchment.offset.x, y: parchment.offset.y).onAppear() {
+                   
+                   testo = presenter.parchmentText
                    UITextView.appearance().backgroundColor = UIColor(white: 0.0, alpha: 0.0)
                }.onChange(of: testo) { _ in
                    if testo.contains("\n") {
+                       self.presenter.addTextToParchment(testo)
                        self.presenter.showParchment = false
+                       testo = ""
                    }
-               }
-           }.frame(maxWidth: 160, maxHeight: 280)
+               }.frame(minWidth: 0, maxWidth: parchment.offset.width)
+           }.frame(width: 250, height: 280)
               
            
         }.fullScreen(alignment: .center)

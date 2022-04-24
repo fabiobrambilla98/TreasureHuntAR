@@ -46,12 +46,14 @@ final class CreateViewPresenter: CreateViewPresenting {
     @Published var newSessionButtonPressed: Bool = false
     @Published var sessionListSelection: ShowAction = .close
     @Published var showParchment: Bool = false
-    
-    
+    var parchmentText: String = ""
+    @Published var addingParchmentText: Bool = false
     
     
     // MARK: - AR properties
+   
     var objectToAdd: ObjectEntity?
+    var parchmentToModify: Entity?
     
     
     init(){
@@ -92,16 +94,16 @@ final class CreateViewPresenter: CreateViewPresenting {
     
     func selectEntityToAdd(name: String) {
         self.objectToAdd = ParchmentEntity(modelName: name)
-        
-        
-        
     }
     
     func deselectEntityToAdd() {
         self.objectToAdd = nil
     }
     
-    
+    func addTextToParchment(_ text: String) {
+        self.parchmentText = text
+        self.addingParchmentText = true
+    }
     
     
     

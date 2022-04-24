@@ -10,16 +10,25 @@ import RealityKit
 import Combine
 
 
+
 class ParchmentEntity: ObjectEntity {
     var textureRequest: AnyCancellable? = nil
+    var offset: OffsetStruct = OffsetStruct()
     
     struct SizeStruct {
-        var width: Float = 0.2
-        var height: Float = 0.2
+        var width: Float = 0.3
+        var height: Float = 0.3
+    }
+    
+    struct OffsetStruct {
+        var x: CGFloat = 0
+        var y: CGFloat = 0
+        var width: CGFloat = .infinity
     }
     
     init(modelName: String) {
         super.init(name: modelName)
+        self.offset = getImageOffset(modelName)
         
         if #available(iOS 15.0, *) {
             
@@ -31,7 +40,7 @@ class ParchmentEntity: ObjectEntity {
                     return
                 }
                 
-                let size = self.adjustSize(baseSize: SizeStruct(width: 0.2, height: 0.2), imageSize: SizeStruct(width: Float(image.size.width), height: Float(image.size.height)))
+                let size = self.adjustSize(baseSize: SizeStruct(), imageSize: SizeStruct(width: Float(image.size.width), height: Float(image.size.height)))
                 
                 self.width = size.width
                 self.height = size.height
@@ -55,8 +64,14 @@ class ParchmentEntity: ObjectEntity {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    //base : x = k : y
-    //baseX : imageX = BaseY : imageY
+    
+    
+    private func getImageOffset(_ name: String) -> OffsetStruct {
+        let values = name.split(separator: "-")
+        return OffsetStruct(x: CGFloat(Float(values[1])!) , y: CGFloat(Float(values[2])!) , width: CGFloat(Float(values[3])!) )
+    }
+    
+    
     private func adjustSize(baseSize: SizeStruct, imageSize: SizeStruct) -> SizeStruct {
         
        

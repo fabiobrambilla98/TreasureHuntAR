@@ -22,7 +22,7 @@ struct MyHorizontalGreed: View {
                             self.presenter.selectEntityToAdd(name: presenter.parchementNames[index])
                             self.presenter.lastSelected.updateLast(presenter.parchementNames[index])
                             self.presenter.buttonItemsID = .firstIconSelect
-                            self.presenter.showParchment = true
+                           
                         }) {
                             Image(uiImage: UIImage(named: presenter.parchementNames[index])!).resizable().frame(width: 100, height: 100)
                         }

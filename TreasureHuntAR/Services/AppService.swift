@@ -29,7 +29,7 @@ final class AppService: AppServiceProtocol {
             }
             
             for fileName in files where
-                fileName.hasSuffix("png") {
+            fileName.hasSuffix("png") && fileName.hasPrefix("p_") {
                 let modelName = fileName.replacingOccurrences(of: ".png", with: "")
                     repository.parchmentNames?.append(modelName)
               

@@ -27,7 +27,15 @@ struct ARViewContainer: UIViewRepresentable {
         
     }
     
-    func updateUIView(_ uiView: CustomARView, context: Context) {}
+    func updateUIView(_ uiView: CustomARView, context: Context) {
+        
+        if(presenter.addingParchmentText) {
+            let text = presenter.parchmentText
+            uiView.addTextToParchment(text: text)
+            presenter.parchmentText = ""
+            presenter.addingParchmentText = false
+        }       
+    }
     
     func makeCoordinator() -> ARViewCoordinator{
         ARViewCoordinator(self)

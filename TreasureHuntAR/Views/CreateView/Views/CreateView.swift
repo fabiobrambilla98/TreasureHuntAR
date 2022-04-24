@@ -31,9 +31,13 @@ struct CreateView: View {
             }
             
             if(self.presenter.showParchment) {
-                ParchmentPopup().environmentObject(presenter)
+                VisualEffectView(effect: UIBlurEffect(style: .dark))
+                    .edgesIgnoringSafeArea(.all)
+                ParchmentPopup().environmentObject(presenter).navigationBarHidden(true).onDisappear() {
+                    presenter.objectToAdd = nil
+                    presenter.parchmentToModify = nil
+                }
             }
-            
         }.edgesIgnoringSafeArea(.all).fullScreen(alignment: .bottom).navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: BackButton(presenter: self.presenter), trailing:
                                     HStack(spacing: 15) {
@@ -44,13 +48,7 @@ struct CreateView: View {
                     Image(systemName: "list.bullet")
                 }
             })
-        
-        
-        
-    }
-    
-    
-    
+    }   
 }
 
 

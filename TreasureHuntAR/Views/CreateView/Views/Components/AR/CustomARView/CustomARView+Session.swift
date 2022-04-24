@@ -40,13 +40,11 @@ extension CustomARView: ARSessionDelegate {
         default:
             Observed.shared.oberved = false
         }
+       
         
-        guard (self.test.anchor != nil) else {
-            return
+        if(actionButtonsAnchorEntity != nil) {
+            actionButtonsAnchorEntity!.billboard(targetPosition: self.cameraTransform.translation)
         }
-        
-        self.test.anchor?.billboard(targetPosition: self.cameraTransform.translation)
-        
         
         // MARK: - ARSessionObserver
         

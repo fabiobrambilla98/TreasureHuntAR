@@ -9,16 +9,20 @@ import SwiftUI
 import RealityKit
 import ARKit
 
-
-struct Prova{
-    var entity: Entity?
-    var anchor: AnchorEntity?
+//This struct is used for manage the actions entity for the parchments and treasures both
+struct ActionEntityStruct{
+    var modelEntities: [Entity]?
+    var anchorEntity: AnchorEntity?
     
     init() {
-        self.entity = nil
-        self.anchor = nil
+        self.modelEntities = nil
+        self.anchorEntity = nil
     }
 }
+
+
+
+
 
 
 struct OOPresenter {
@@ -54,7 +58,6 @@ class CustomARView: ARView {
     func setup() {
         self.session.run(defaultConfiguration)
         self.session.delegate = self
-        self.enableObjectRemoval()
         self.setupGestures()
         self.debugOptions = [ ]
     }
@@ -62,10 +65,14 @@ class CustomARView: ARView {
     // MARK: - AR content
     
     var presenter: OOPresenter!
+    var actionButtonsAnchorEntity: AnchorEntity?
+    var tappedObject: Entity?
+    
+    
     var virtualObjectAnchor: ARAnchor?
     let virtualObjectAnchorName = "virtualObject"
     var virtualObjectNumber: Int = 0
-    var test: Prova = Prova()
+    
     
     // MARK: - AR session management
     var isRelocalizingMap = false

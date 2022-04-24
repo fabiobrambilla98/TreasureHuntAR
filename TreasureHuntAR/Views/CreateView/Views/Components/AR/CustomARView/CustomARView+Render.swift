@@ -10,36 +10,61 @@ import RealityKit
 import ARKit
 import SwiftUI
 
+
 extension CustomARView {
     
-    
-    func addTextToParchment(text: String, entity: ModelEntity?){
+    func addTextToParchment(text: String){
+        
+        
+        let parchmentEntity = presenter.presenter.objectToAdd as! ParchmentEntity
+        
+        
         let mesh = MeshResource.generateText(
                     text,
                     extrusionDepth: 0.0001,
                     font: .systemFont(ofSize: 0.01),
-                    containerFrame: CGRect(x: 0, y: 0, width: 0.12, height: 0.2),
+                    containerFrame: CGRect(x: 0, y: 0, width: 0.3, height: 0.3),
                     alignment: .left,
                     lineBreakMode: .byWordWrapping)
         
-        
-        
-       
         let sm = UnlitMaterial(color: UIColor.white)
         let textEntity = ModelEntity(mesh: mesh, materials: [sm])
         
+        var modelEntity: Entity
         
-        entity!.addChild(textEntity)
-        textEntity.setPosition(SIMD3<Float>(-0.06, -0.03, 0.001), relativeTo: entity!)
+        if(presenter.presenter.parchmentToModify == nil) {
+            modelEntity = (presenter.presenter.objectToAdd?.modelEntity!)! as Entity
+        } else {
+            modelEntity = presenter.presenter.parchmentToModify!
+        }
+       
         
-        self.scene.addAnchor(entity!.anchor!)
+        let screenScale = UIScreen.main.scale
+     
+        let xWidth = Float(
+            Float(parchmentEntity.width) * Float(parchmentEntity.offset.x * screenScale * 0.0002645833))
+        let yWidth = Float(250*screenScale*0.0002645833)
+        
+        let xHeight = Float(
+            Float(parchmentEntity.height) * Float(parchmentEntity.offset.y * screenScale * 0.0002645833))
+        let yHeight = Float(280*screenScale*0.0002645833)
+        
+        modelEntity.objectEntity = parchmentEntity
+        modelEntity.parchmentText = text
+        
+        textEntity.name = "parchmentText"
+        modelEntity.addChild(textEntity)
+        textEntity.setPosition(SIMD3<Float>(-presenter.presenter.objectToAdd!.width/2 + xWidth/yWidth, -presenter.presenter.objectToAdd!.height/2 - xHeight/yHeight, 0.001), relativeTo: modelEntity)
+        
+        
+        
+        self.scene.addAnchor(modelEntity.anchor!)
+        
     }
     
    
     
     func addAnchorEntityToScene(anchor: ARAnchor) {
-        
-        
         
         if(anchor.name == "parchment") {
             virtualObjectAnchor = anchor
@@ -47,7 +72,6 @@ extension CustomARView {
             
             if let modelEntity = presenter.presenter.objectToAdd?.modelEntity {
                 print("DEBUG: adding model to scene -")
-                
 
                 modelEntity.generateCollisionShapes(recursive: true)
                 
@@ -55,79 +79,54 @@ extension CustomARView {
                 
                 // Add modelEntity and anchorEntity into the scene for rendering
                 let anchorEntity = AnchorEntity(anchor: anchor)
-                modelEntity.name = virtualObjectAnchorName
-                
+                modelEntity.type = .none
+                modelEntity.name = "parchment"
                
-                
                 anchorEntity.addChild(modelEntity)
                
                 self.scene.addAnchor(anchorEntity)
-                
-                
-                
+      
             } else {
                 print("DEBUG: Unable to load modelEntity for")
             }
-            
-            presenter.presenter.objectToAdd = nil
+       
             presenter.presenter.buttonItemsID = .initialSelect
-        } else if(anchor.name == "test") {
+        } else if(anchor.name == "parchmentActionButtons") {
             
-            if(self.test.anchor != nil) {
-                return
-            }
+            let deleteButtonEntity = ARActionButton(type: .delete)
+            let modifyButtonEntity = ARActionButton(type: .modify)
             
-            var material1 = UnlitMaterial(color: UIColor.red)
+            var transparentMaterial = UnlitMaterial(color: UIColor.yellow)
+            transparentMaterial.color = .init(tint: .white.withAlphaComponent(0))
             
-            var material2 = SimpleMaterial()
+            let actionButtonContainer = ModelEntity(mesh: MeshResource.generatePlane(width: 0.3, depth: 0.1), materials: [transparentMaterial])
            
+             let anchorEntityPlane = AnchorEntity(anchor: anchor)
             
-            do {
-                if #available(iOS 15.0, *) {
-                    material2.color = try .init(tint: .white.withAlphaComponent(0.99),
-                                               texture: .init(.load(named: "thresh_3", in: nil)))
-                    
-                    material1.color = .init(tint: .white.withAlphaComponent(-1))
-                } else {
-                    return
-                }
-               
-                
-            } catch {
-                print(error.localizedDescription)
-            }
+             
             
-         
-            let m = MeshResource.generatePlane(width: 0.05, depth: 0.05)
-            let e = ModelEntity(mesh:m, materials: [material1])
-           
-            
-            let m1 = MeshResource.generatePlane(width: 0.03, depth: 0.03, cornerRadius: 1)
-            
-            let e1 = ModelEntity(mesh: m1, materials: [material2])
-            
-           
-           
-            let basePlane = AnchorEntity(anchor: anchor)
-            e1.generateCollisionShapes(recursive: true)
-            basePlane.addChild(e)
-            
-            e.setPosition(SIMD3<Float>(0.00, 0.06, 0.00), relativeTo: basePlane)
-            e.orientation = simd_quatf(angle: -.pi/2,
+            actionButtonContainer.setPosition(SIMD3<Float>(0.00, 0.22, 0.00), relativeTo: anchorEntityPlane)
+   
+            actionButtonContainer.orientation = simd_quatf(angle: -.pi/2,
                                                          axis: [1,0,0])
-            
-            e.addChild(e1)
-            basePlane.name = "test"
-            e.name = "test"
-            e1.name = "test"
-            e1.setPosition(SIMD3<Float>(0.00, 0.001, 0.0), relativeTo: e)
-            e1.orientation = simd_quatf(angle: .pi,
-                                                         axis: [0,1,0])
+           
+            actionButtonContainer.addChild(modifyButtonEntity.modelEntity!)
+            actionButtonContainer.addChild(deleteButtonEntity.modelEntity!)
             
             
-            self.scene.addAnchor(basePlane)
-            self.test.anchor = basePlane
+            anchorEntityPlane.addChild(actionButtonContainer)
             
+            modifyButtonEntity.modelEntity!.setPosition(SIMD3<Float>(0.06, 0.001, 0.001), relativeTo: actionButtonContainer)
+            modifyButtonEntity.modelEntity!.orientation = simd_quatf(angle: .pi, axis:  [0,1,0])
+            
+            deleteButtonEntity.modelEntity!.setPosition(SIMD3<Float>(-0.06, 0.001, 0.001), relativeTo: actionButtonContainer)
+            deleteButtonEntity.modelEntity!.orientation = simd_quatf(angle: .pi, axis:  [0,1,0])
+           
+            self.actionButtonsAnchorEntity = anchorEntityPlane
+            self.scene.addAnchor(anchorEntityPlane)
+            
+           
+          
         } else {
             return
         }
