@@ -12,9 +12,8 @@ import Combine
 
 
 extension Entity {
-    /// Billboards the entity to the targetPosition which should be provided in world space.
     func billboard(targetPosition: SIMD3<Float>) {
-        look(at: targetPosition, from: position(relativeTo: nil), upVector: [0,1,0], relativeTo: nil)
+        look(at: targetPosition, from: position(relativeTo: nil), relativeTo: nil)
     }
 }
 
@@ -36,7 +35,6 @@ extension CustomARView {
         }
         
         
-        
         // Hit test to find a place for a virtual object.
         guard let point = sender?.location(in: self),
               let hitTestResult = self.hitTest(
@@ -46,7 +44,7 @@ extension CustomARView {
         else {
             return
         }
-    
+        
         
         if let entity = self.entity(at: point) {
             if let actionEntity = entity.anchor, entity.name == "deleteButton" {
@@ -61,31 +59,41 @@ extension CustomARView {
                 presenter.presenter.parchmentToModify = tappedObject
                 presenter.presenter.showParchment = true
                 tappedObject?.removeChild((tappedObject?.children[0])!)
-            } else if entity.type == .none {
+            } else if entity.name == "parchmentText" ||  entity.name == "parchment" || entity.name == "treasure" {
+                if(tappedObject != nil) {
+                    return
+                }
                 
-                let planeAnchor = ARAnchor(name: "parchmentActionButtons", transform: entity.transformMatrix(relativeTo: nil))
-                //(entity.parent?.transformMatrix(relativeTo: nil))
+                let planeAnchor = ARAnchor(name: "actionButtons", transform: entity.parent!.transformMatrix(relativeTo: nil))
+                
                 self.session.add(anchor: planeAnchor)
                 tappedObject = entity
+                
             }
         } else {
             
             if(self.presenter.presenter.objectToAdd == nil) {
                 return
+             }
+                
+                guard let name = self.presenter.presenter.objectToAdd?.modelEntity?.name else {
+                    return
+                }
+                
+                virtualObjectAnchor = ARAnchor(
+                    name: name,
+                    transform: hitTestResult.worldTransform
+                )
+                
+                if(virtualObjectAnchor!.name == "parchment"){
+                    self.presenter.presenter.showParchment = true
+                }
+                
+                self.session.add(anchor: virtualObjectAnchor!)
+                
             }
             
-            
-            virtualObjectAnchor = ARAnchor(
-                name: (self.presenter.presenter.objectToAdd?.modelEntity?.name)!,
-                transform: hitTestResult.worldTransform
-            )
-        
-            self.presenter.presenter.showParchment = true
-            self.session.add(anchor: virtualObjectAnchor!)
-            
         }
-   
-    }
+        
     
 }
-

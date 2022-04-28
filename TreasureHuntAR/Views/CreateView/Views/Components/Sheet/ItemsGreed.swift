@@ -24,8 +24,10 @@ struct ItemsGreed: View {
     @ObservedObject var presenter: CreateViewPresenter
     
     var body: some View {
-        VStack {
-            MyHorizontalGreed(text: "parchments", presenter: self.presenter)
+        VStack(spacing: 25) {
+            HorizontalView(text: "Parchments", type: ModelTypes.parchment).environmentObject(presenter)
+            HorizontalView(text: "Treasures", type: ModelTypes.treasure
+            ).environmentObject(presenter)
         }
     }
 }

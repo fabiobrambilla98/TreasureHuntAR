@@ -10,7 +10,7 @@ import Combine
 import RealityKit
 
 protocol CreateViewPresenting: ObservableObject {
-    var parchementNames: [String] {get}
+    
     
     func saveWorldMap()
     func loadWorldMap()
@@ -35,9 +35,12 @@ enum ShowAction {
 final class CreateViewPresenter: CreateViewPresenting {
     
     
+    
+    
     private var service = AppService.shared
     
-    @Published var parchementNames: [String] = []
+    var parchmentImages: [(String, UIImage)] = []
+    var treasureImages: [(String, UIImage)] = []
     @Published var lastSelected: [String] = []
     @Published var buttonItemsID: ButtonItemsIDs = ButtonItemsIDs.initialSelect
     @Published var showBrowse: Bool = false
@@ -51,16 +54,24 @@ final class CreateViewPresenter: CreateViewPresenting {
     
     
     // MARK: - AR properties
-   
     var objectToAdd: ObjectEntity?
     var parchmentToModify: Entity?
-    
+    @Published var dataToBeStored: [Data] = []
+    var currentSession: Int = 0
+    @Published var featuresPoints: Int = 0
     
     init(){
-        print("DEBUG: INIT PRESENTER")
-        self.parchementNames = self.service.getParchmentNames()
-        for name in self.parchementNames {
-            self.lastSelected.append(name)
+        
+        self.parchmentImages = self.service.getModelNames(for: ModelTypes.parchment)
+        
+        self.treasureImages = self.service.getModelNames(for: ModelTypes.treasure)
+        
+        for name in self.parchmentImages {
+            self.lastSelected.append(name.0)
+        }
+        
+        for name in self.treasureImages {
+            self.lastSelected.append(name.0)
         }
         
     }
@@ -93,7 +104,12 @@ final class CreateViewPresenter: CreateViewPresenting {
     }
     
     func selectEntityToAdd(name: String) {
-        self.objectToAdd = ParchmentEntity(modelName: name)
+        if(name.hasPrefix("p_")) {
+            self.objectToAdd = ParchmentEntity(modelName: name) }
+        else if(name.hasPrefix("c_")) {
+            //size in m
+            self.objectToAdd = TreasureEntity(modelName: name, width: 0.5, height: 0.4, depth: 0.4)
+        }
     }
     
     func deselectEntityToAdd() {

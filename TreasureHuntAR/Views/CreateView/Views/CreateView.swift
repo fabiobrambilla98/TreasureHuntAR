@@ -38,6 +38,10 @@ struct CreateView: View {
                     presenter.parchmentToModify = nil
                 }
             }
+            
+            if(Observed.shared.showPopUp) {
+                PopUpWindow(title: Observed.shared.text, buttonText: "asdf", show: true)
+            }
         }.edgesIgnoringSafeArea(.all).fullScreen(alignment: .bottom).navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: BackButton(presenter: self.presenter), trailing:
                                     HStack(spacing: 15) {

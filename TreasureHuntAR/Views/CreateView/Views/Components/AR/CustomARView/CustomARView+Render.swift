@@ -20,12 +20,12 @@ extension CustomARView {
         
         
         let mesh = MeshResource.generateText(
-                    text,
-                    extrusionDepth: 0.0001,
-                    font: .systemFont(ofSize: 0.01),
-                    containerFrame: CGRect(x: 0, y: 0, width: 0.3, height: 0.3),
-                    alignment: .left,
-                    lineBreakMode: .byWordWrapping)
+            text,
+            extrusionDepth: 0.0001,
+            font: .systemFont(ofSize: 0.01),
+            containerFrame: CGRect(x: 0, y: 0, width: 0.3, height: 0.3),
+            alignment: .left,
+            lineBreakMode: .byWordWrapping)
         
         let sm = UnlitMaterial(color: UIColor.white)
         let textEntity = ModelEntity(mesh: mesh, materials: [sm])
@@ -37,10 +37,10 @@ extension CustomARView {
         } else {
             modelEntity = presenter.presenter.parchmentToModify!
         }
-       
+        
         
         let screenScale = UIScreen.main.scale
-     
+        
         let xWidth = Float(
             Float(parchmentEntity.width) * Float(parchmentEntity.offset.x * screenScale * 0.0002645833))
         let yWidth = Float(250*screenScale*0.0002645833)
@@ -62,7 +62,7 @@ extension CustomARView {
         
     }
     
-   
+    
     
     func addAnchorEntityToScene(anchor: ARAnchor) {
         
@@ -72,7 +72,7 @@ extension CustomARView {
             
             if let modelEntity = presenter.presenter.objectToAdd?.modelEntity {
                 print("DEBUG: adding model to scene -")
-
+                
                 modelEntity.generateCollisionShapes(recursive: true)
                 
                 self.installGestures([.rotation, .scale], for: modelEntity)
@@ -81,52 +81,99 @@ extension CustomARView {
                 let anchorEntity = AnchorEntity(anchor: anchor)
                 modelEntity.type = .none
                 modelEntity.name = "parchment"
-               
+                
                 anchorEntity.addChild(modelEntity)
-               
+                
                 self.scene.addAnchor(anchorEntity)
-      
+                self.presenter.presenter.buttonItemsID = .initialSelect
+                
             } else {
                 print("DEBUG: Unable to load modelEntity for")
             }
-       
+            
             presenter.presenter.buttonItemsID = .initialSelect
-        } else if(anchor.name == "parchmentActionButtons") {
+        } else if(anchor.name == "treasure" ){
+            virtualObjectAnchor = anchor
+            
+            
+            if let modelEntity = presenter.presenter.objectToAdd?.modelEntity {
+                print("DEBUG: adding model to scene -")
+                
+                modelEntity.generateCollisionShapes(recursive: true)
+                
+                self.installGestures([.rotation, .scale], for: modelEntity)
+                
+                // Add modelEntity and anchorEntity into the scene for rendering
+                let anchorEntity = AnchorEntity(anchor: anchor)
+                modelEntity.type = .none
+                modelEntity.name = "treasure"
+                
+                anchorEntity.addChild(modelEntity)
+                
+                self.scene.addAnchor(anchorEntity)
+                self.presenter.presenter.buttonItemsID = .initialSelect
+                self.presenter.presenter.objectToAdd = nil
+                
+            } else {
+                print("DEBUG: Unable to load modelEntity for")
+            }
+        } else if(anchor.name == "actionButtons") {
             
             let deleteButtonEntity = ARActionButton(type: .delete)
             let modifyButtonEntity = ARActionButton(type: .modify)
             
             var transparentMaterial = UnlitMaterial(color: UIColor.yellow)
-            transparentMaterial.color = .init(tint: .white.withAlphaComponent(0))
+            //transparentMaterial.color = .init(tint: .white.withAlphaComponent(0))
             
             let actionButtonContainer = ModelEntity(mesh: MeshResource.generatePlane(width: 0.3, depth: 0.1), materials: [transparentMaterial])
+            
+            let anchorEntityPlane = AnchorEntity(anchor: anchor)
+            
+            anchorEntityPlane.setPosition(SIMD3<Float>(0.00, tappedObject!.height!, 0.00), relativeTo: nil)
+            
+           /* actionButtonContainer.orientation = simd_quatf(angle: -.pi/2,
+                                                           axis: [1,0,0])*/
+            
+            
+            /*if(tappedObject!.name != "treasure") {
+                actionButtonContainer.addChild(modifyButtonEntity.modelEntity!)
+            }*/
+            
+           // actionButtonContainer.addChild(deleteButtonEntity.modelEntity!)
+            
+            anchorEntityPlane.addChild(deleteButtonEntity.modelEntity!)
+            if(tappedObject!.name != "treasure") {
+                anchorEntityPlane.addChild(modifyButtonEntity.modelEntity!)
+            }
            
-             let anchorEntityPlane = AnchorEntity(anchor: anchor)
-            
-             
-            
-            actionButtonContainer.setPosition(SIMD3<Float>(0.00, 0.22, 0.00), relativeTo: anchorEntityPlane)
-   
-            actionButtonContainer.orientation = simd_quatf(angle: -.pi/2,
-                                                         axis: [1,0,0])
            
-            actionButtonContainer.addChild(modifyButtonEntity.modelEntity!)
-            actionButtonContainer.addChild(deleteButtonEntity.modelEntity!)
+            
+            if(tappedObject!.name != "treasure") {
+                modifyButtonEntity.modelEntity!.setPosition(SIMD3<Float>(0.06, 0.0001, 0), relativeTo: anchorEntityPlane)
+                modifyButtonEntity.modelEntity!.orientation = simd_quatf(angle: -.pi/2,
+                                                                         axis: [1,0,0])
+            }
+          
+            
+            deleteButtonEntity.modelEntity!.setPosition(SIMD3<Float>((tappedObject!.name != "treasure") ? -0.06 : 0, 0.0001, 0), relativeTo: anchorEntityPlane)
+            deleteButtonEntity.modelEntity!.orientation =
+            simd_quatf(angle: -.pi/2,
+                                                                     axis: [1,0,0])
             
             
-            anchorEntityPlane.addChild(actionButtonContainer)
             
-            modifyButtonEntity.modelEntity!.setPosition(SIMD3<Float>(0.06, 0.001, 0.001), relativeTo: actionButtonContainer)
-            modifyButtonEntity.modelEntity!.orientation = simd_quatf(angle: .pi, axis:  [0,1,0])
             
-            deleteButtonEntity.modelEntity!.setPosition(SIMD3<Float>(-0.06, 0.001, 0.001), relativeTo: actionButtonContainer)
-            deleteButtonEntity.modelEntity!.orientation = simd_quatf(angle: .pi, axis:  [0,1,0])
+            
            
+           
+            
+            
+            
             self.actionButtonsAnchorEntity = anchorEntityPlane
             self.scene.addAnchor(anchorEntityPlane)
             
-           
-          
+            
+            
         } else {
             return
         }

@@ -21,10 +21,6 @@ struct ActionEntityStruct{
 }
 
 
-
-
-
-
 struct OOPresenter {
     @ObservedObject var presenter: CreateViewPresenter
 }
@@ -65,7 +61,7 @@ class CustomARView: ARView {
     // MARK: - AR content
     
     var presenter: OOPresenter!
-    var actionButtonsAnchorEntity: AnchorEntity?
+    var actionButtonsAnchorEntity: Entity?
     var tappedObject: Entity?
     
     
@@ -79,6 +75,8 @@ class CustomARView: ARView {
     
  
     // MARK: - Persistence: Saving and Loading
+   
+    var aviator: Set<SIMD3<Float>> = []
     let storedData = UserDefaults.standard
     var mapKeys: [String] = []
     let mapKey = "ar.worldmap"

@@ -15,13 +15,14 @@ class ObjectEntity {
     var modelEntity: ModelEntity?
     var width: Float
     var height: Float
+    var depth: Float
     
-    
-    init(name modelName: String, width: Float = 0, height: Float = 0, entity: ModelEntity? = nil) {
+    init(name modelName: String, width: Float = 0, height: Float = 0, depth: Float = 0, entity: ModelEntity? = nil) {
         self.modelName = modelName
         self.modelEntity = entity
         self.width = width
         self.height = height
+        self.depth = depth
     }
     
     

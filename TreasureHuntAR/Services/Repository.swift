@@ -8,5 +8,6 @@
 import SwiftUI
 
 struct Repository {
-    var parchmentNames: [String]? = nil
+    var parchmentNames: [(String, UIImage)]? = nil
+    var treasureNames: [(String, UIImage)]? = nil
 }

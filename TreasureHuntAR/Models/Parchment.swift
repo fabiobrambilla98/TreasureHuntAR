@@ -45,6 +45,7 @@ class ParchmentEntity: ObjectEntity {
                 self.width = size.width
                 self.height = size.height
                 
+                
                 let mesh = MeshResource.generateBox(width: size.width, height: size.height, depth: 0)
                 var material = UnlitMaterial()
                 
@@ -52,6 +53,8 @@ class ParchmentEntity: ObjectEntity {
                                        texture: MaterialParameters.Texture(texture))
                 
                 self.modelEntity = ModelEntity(mesh: mesh, materials: [material])
+                self.modelEntity?.width = self.width
+                self.modelEntity?.height = self.height
                 self.modelEntity?.name = "parchment"
             }
             

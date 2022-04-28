@@ -33,6 +33,7 @@ class ARActionButton: ARActionButtonProtocol{
                 material.color = try .init(tint: .white.withAlphaComponent(0.99),
                                            texture: .init(.load(named: (type == .delete) ? "thresh" : "pencil", in: nil)))
                 
+                
                 self.modelEntity = ModelEntity(mesh: mesh, materials: [material])
                 if(type == .delete) {
                     self.modelEntity!.name = "deleteButton"

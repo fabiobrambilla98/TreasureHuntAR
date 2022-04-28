@@ -17,24 +17,17 @@ struct SceneListPopup: View {
                 VisualEffectView(effect: UIBlurEffect(style: .dark))
                 
                 VStack(spacing: 10){
-                    Text("Select the scene to load").foregroundColor(Color.white).padding(.top)
+                    Text("\(presenter.featuresPoints)").foregroundColor(Color.white).padding(.top)
                     Divider().foregroundColor(Color.white)
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack {
-                            Button(action: {showAlert = true}) {
-                                Text("Scena 1").font(Font.custom("treasure", size: 22))
-                                
-                            }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, idealHeight: 40)
+                            ForEach(0 ..< presenter.dataToBeStored.count, id: \.self) { index in
+                                Button(action: {showAlert = true}) {
+                                    Text("Scena \(index)").font(Font.custom("treasure", size: 22))
+                                    
+                                }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, idealHeight: 40)
+                            }
                             
-                            Button(action: {showAlert = true}) {
-                                Text("Scena 2").font(Font.custom("treasure", size: 22))
-                                
-                            }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, idealHeight: 40)
-                            
-                            Button(action: {showAlert = true}) {
-                                Text("Scena 3").font(Font.custom("treasure", size: 22))
-                                
-                            }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, idealHeight: 40)
                         }
                         
                     }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
