@@ -33,7 +33,7 @@ struct BackButton: View {
                 },
                 secondaryButton: .cancel()
             )
-        }
+        }.layoutPriority(.infinity)
         
         
     }

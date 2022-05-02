@@ -32,11 +32,18 @@ extension CustomARView: ARSessionDelegate {
         
         switch frame.worldMappingStatus {
         case .extending, .mapped:
-            Observed.shared.oberved = true
+            if(detectedFeaturePoints.count > 0) {
+                self.presenter!.saveButtonEnabled = true
+            } else if(detectedFeaturePoints.count > 0 && self.presenter!.saveButtonEnabled){
+                self.presenter!.saveButtonEnabled = false
+            }
         default:
-            Observed.shared.oberved = false
+            if(self.presenter!.saveButtonEnabled) {
+                self.presenter!.saveButtonEnabled = false
+            }
+            
+            
         }
-        
         
         if(actionButtonsAnchorEntity != nil) {
             actionButtonsAnchorEntity!.billboard(targetPosition: self.cameraTransform.translation)
@@ -48,11 +55,11 @@ extension CustomARView: ARSessionDelegate {
         }
         
         for item in frame.rawFeaturePoints!.points {
-            if(!aviator.contains(item)) {
-                aviator.insert(item)
-            }    
+            if(!detectedFeaturePoints.contains(item)) {
+                detectedFeaturePoints.insert(item)
+            }
         }
-        presenter.presenter.featuresPoints = aviator.count
+        
     }
     
     

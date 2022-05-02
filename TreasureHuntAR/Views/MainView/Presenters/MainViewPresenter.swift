@@ -24,10 +24,12 @@ final class MainViewPresenter: MainViewPresenting, ContentFlowStateProtocol{
     
     func open (_ view: ViewSelection) {
         switch(view) {
-        case .playView:
-            activeLink = .playView
+        case .selectView:
+            activeLink = .selectView
         case .createView:
             activeLink = .createView
+        default:
+            activeLink = .selectView
         }
     }
 }

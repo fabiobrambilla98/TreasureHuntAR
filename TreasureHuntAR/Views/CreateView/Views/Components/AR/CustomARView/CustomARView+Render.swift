@@ -16,7 +16,7 @@ extension CustomARView {
     func addTextToParchment(text: String){
         
         
-        let parchmentEntity = presenter.presenter.objectToAdd as! ParchmentEntity
+        let parchmentEntity = self.presenter!.objectToAdd as! ParchmentEntity
         
         
         let mesh = MeshResource.generateText(
@@ -32,10 +32,10 @@ extension CustomARView {
         
         var modelEntity: Entity
         
-        if(presenter.presenter.parchmentToModify == nil) {
-            modelEntity = (presenter.presenter.objectToAdd?.modelEntity!)! as Entity
+        if(self.presenter!.parchmentToModify == nil) {
+            modelEntity = (self.presenter!.objectToAdd?.modelEntity!)! as Entity
         } else {
-            modelEntity = presenter.presenter.parchmentToModify!
+            modelEntity = self.presenter!.parchmentToModify!
         }
         
         
@@ -54,7 +54,7 @@ extension CustomARView {
         
         textEntity.name = "parchmentText"
         modelEntity.addChild(textEntity)
-        textEntity.setPosition(SIMD3<Float>(-presenter.presenter.objectToAdd!.width/2 + xWidth/yWidth, -presenter.presenter.objectToAdd!.height/2 - xHeight/yHeight, 0.001), relativeTo: modelEntity)
+        textEntity.setPosition(SIMD3<Float>(-self.presenter!.objectToAdd!.width/2 + xWidth/yWidth, -self.presenter!.objectToAdd!.height/2 - xHeight/yHeight, 0.001), relativeTo: modelEntity)
         
         
         
@@ -70,7 +70,7 @@ extension CustomARView {
             virtualObjectAnchor = anchor
             
             
-            if let modelEntity = presenter.presenter.objectToAdd?.modelEntity {
+            if let modelEntity = self.presenter!.objectToAdd?.modelEntity {
                 print("DEBUG: adding model to scene -")
                 
                 modelEntity.generateCollisionShapes(recursive: true)
@@ -85,18 +85,18 @@ extension CustomARView {
                 anchorEntity.addChild(modelEntity)
                 
                 self.scene.addAnchor(anchorEntity)
-                self.presenter.presenter.buttonItemsID = .initialSelect
+                self.presenter!.buttonItemsID = .initialSelect
                 
             } else {
                 print("DEBUG: Unable to load modelEntity for")
             }
             
-            presenter.presenter.buttonItemsID = .initialSelect
+            self.presenter!.buttonItemsID = .initialSelect
         } else if(anchor.name == "treasure" ){
             virtualObjectAnchor = anchor
             
             
-            if let modelEntity = presenter.presenter.objectToAdd?.modelEntity {
+            if let modelEntity = self.presenter!.objectToAdd?.modelEntity {
                 print("DEBUG: adding model to scene -")
                 
                 modelEntity.generateCollisionShapes(recursive: true)
@@ -111,8 +111,8 @@ extension CustomARView {
                 anchorEntity.addChild(modelEntity)
                 
                 self.scene.addAnchor(anchorEntity)
-                self.presenter.presenter.buttonItemsID = .initialSelect
-                self.presenter.presenter.objectToAdd = nil
+                self.presenter!.buttonItemsID = .initialSelect
+                self.presenter!.objectToAdd = nil
                 
             } else {
                 print("DEBUG: Unable to load modelEntity for")
@@ -121,25 +121,12 @@ extension CustomARView {
             
             let deleteButtonEntity = ARActionButton(type: .delete)
             let modifyButtonEntity = ARActionButton(type: .modify)
-            
-            var transparentMaterial = UnlitMaterial(color: UIColor.yellow)
-            //transparentMaterial.color = .init(tint: .white.withAlphaComponent(0))
-            
-            let actionButtonContainer = ModelEntity(mesh: MeshResource.generatePlane(width: 0.3, depth: 0.1), materials: [transparentMaterial])
+           
             
             let anchorEntityPlane = AnchorEntity(anchor: anchor)
-            
+            anchorEntityPlane.generateCollisionShapes(recursive: false)
             anchorEntityPlane.setPosition(SIMD3<Float>(0.00, tappedObject!.height!, 0.00), relativeTo: nil)
             
-           /* actionButtonContainer.orientation = simd_quatf(angle: -.pi/2,
-                                                           axis: [1,0,0])*/
-            
-            
-            /*if(tappedObject!.name != "treasure") {
-                actionButtonContainer.addChild(modifyButtonEntity.modelEntity!)
-            }*/
-            
-           // actionButtonContainer.addChild(deleteButtonEntity.modelEntity!)
             
             anchorEntityPlane.addChild(deleteButtonEntity.modelEntity!)
             if(tappedObject!.name != "treasure") {
@@ -159,14 +146,6 @@ extension CustomARView {
             deleteButtonEntity.modelEntity!.orientation =
             simd_quatf(angle: -.pi/2,
                                                                      axis: [1,0,0])
-            
-            
-            
-            
-            
-           
-           
-            
             
             
             self.actionButtonsAnchorEntity = anchorEntityPlane

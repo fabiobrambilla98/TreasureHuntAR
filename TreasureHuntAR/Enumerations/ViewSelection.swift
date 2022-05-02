@@ -8,5 +8,5 @@
 import SwiftUI
 
 enum ViewSelection {
-    case createView, playView
+    case createView, selectView, playView
 }

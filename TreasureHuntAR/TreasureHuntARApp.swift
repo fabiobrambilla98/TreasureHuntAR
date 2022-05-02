@@ -11,7 +11,10 @@ import SwiftUI
 struct TreasureHuntARApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView(presenter: MainViewPresenter())
+            NavigationView {
+                MainView(presenter: MainViewPresenter())
+            }
+           
         }
     }
 }

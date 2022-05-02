@@ -9,6 +9,7 @@ import SwiftUI
 
 enum ContentLink: Hashable, Identifiable {
     case createView
+    case selectView
     case playView
     
     var navigationLink: ContentLink {
@@ -19,6 +20,8 @@ enum ContentLink: Hashable, Identifiable {
         switch self {
         case .createView:
             return "createView"
+        case .selectView:
+            return "selectView"
         case .playView:
             return "playView"
         

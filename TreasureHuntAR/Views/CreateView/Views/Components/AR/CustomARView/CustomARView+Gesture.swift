@@ -20,17 +20,18 @@ extension Entity {
 
 extension CustomARView {
     
+   
     /// Add the tap gesture recogniser
     func setupGestures() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-        self.addGestureRecognizer(tap)
+        self.tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        self.addGestureRecognizer(self.tapRecognizer!)
     }
     
     // MARK: - Placing AR Content
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         // Disable placing objects when the session is still relocalizing
-        if isRelocalizingMap && virtualObjectAnchor == nil {
+        if isRelocalizingMap && virtualObjectAnchor == nil && self.presenter!.showAlert{
             return
         }
         
@@ -54,10 +55,10 @@ extension CustomARView {
                 
             } else if entity.name == "modifyButton" {
                 
-                presenter.presenter.parchmentText = tappedObject!.parchmentText!.replacingOccurrences(of: "\n", with: "")
-                presenter.presenter.objectToAdd = tappedObject?.objectEntity
-                presenter.presenter.parchmentToModify = tappedObject
-                presenter.presenter.showParchment = true
+                self.presenter!.parchmentText = tappedObject!.parchmentText!.replacingOccurrences(of: "\n", with: "")
+                self.presenter!.objectToAdd = tappedObject?.objectEntity
+                self.presenter!.parchmentToModify = tappedObject
+                self.presenter!.showParchment = true
                 tappedObject?.removeChild((tappedObject?.children[0])!)
             } else if entity.name == "parchmentText" ||  entity.name == "parchment" || entity.name == "treasure" {
                 if(tappedObject != nil) {
@@ -72,11 +73,11 @@ extension CustomARView {
             }
         } else {
             
-            if(self.presenter.presenter.objectToAdd == nil) {
+            if(self.presenter!.objectToAdd == nil) {
                 return
              }
                 
-                guard let name = self.presenter.presenter.objectToAdd?.modelEntity?.name else {
+                guard let name = self.presenter!.objectToAdd?.modelEntity?.name else {
                     return
                 }
                 
@@ -85,8 +86,10 @@ extension CustomARView {
                     transform: hitTestResult.worldTransform
                 )
                 
+            
+                
                 if(virtualObjectAnchor!.name == "parchment"){
-                    self.presenter.presenter.showParchment = true
+                    self.presenter!.showParchment = true
                 }
                 
                 self.session.add(anchor: virtualObjectAnchor!)

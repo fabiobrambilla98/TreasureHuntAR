@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ARKit
+import UIKit
 import RealityKit
 import Combine
 
@@ -22,7 +23,7 @@ struct CreateView: View {
             ARViewContainer(presenter: self.presenter).edgesIgnoringSafeArea(.all)
             
             VStack {
-                SessionActionView(presenter: self.presenter)
+                SessionActionView().environmentObject(self.presenter)
                 
                 MyItemBar(presenter: self.presenter)
             }
@@ -38,21 +39,28 @@ struct CreateView: View {
                     presenter.parchmentToModify = nil
                 }
             }
-            
-            if(Observed.shared.showPopUp) {
-                PopUpWindow(title: Observed.shared.text, buttonText: "asdf", show: true)
+         
+            if(presenter.saveWorldMapPopupShow) {
+                SaveMapPopup().environmentObject(presenter)
             }
+            
+            
         }.edgesIgnoringSafeArea(.all).fullScreen(alignment: .bottom).navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: BackButton(presenter: self.presenter), trailing:
                                     HStack(spacing: 15) {
-                Button(action: {}) {
+                Button(action: {
+                    withAnimation(.easeInOut) {
+                        presenter.saveWorldMapPopupShow = true
+                    }
+                }) {
                     Text("Save")
                 }
                 Button(action: {self.presenter.listSelector(action: .open)}) {
                     Image(systemName: "list.bullet")
                 }
             })
-    }   
+            
+    }
 }
 
 

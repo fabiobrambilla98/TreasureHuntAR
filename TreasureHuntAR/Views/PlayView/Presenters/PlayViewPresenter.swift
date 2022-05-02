@@ -8,13 +8,20 @@
 import SwiftUI
 
 
-protocol PlayViewPresenting: ObservableObject {
+protocol PlayViewPresenting: ObservableObject, Identifiable {
     
 }
 
 
-final class PlayViewPresenter: PlayViewPresenting {
+final class PlayViewPresenter: Presenters, PlayViewPresenting {
     
-    init() {}
+    private var service: AppService = AppService.shared
+    @Published var showParchmentSheet: Bool = false
+    var parchmentsFound: [(String, String)] = []
+    
+    
+    override init() {
+       
+    }
 
 }

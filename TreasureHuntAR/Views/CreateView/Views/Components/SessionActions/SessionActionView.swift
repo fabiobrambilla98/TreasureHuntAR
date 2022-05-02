@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SessionActionView: View {
     
-    @ObservedObject var presenter: CreateViewPresenter
+    @EnvironmentObject var presenter: CreateViewPresenter
     
     var body: some View {
        
@@ -18,22 +18,21 @@ struct SessionActionView: View {
                 
                 Button(action: {
                     withAnimation(.easeInOut) {
-                        presenter.saveWorldMap()
+                        presenter.saveSession()
                     }
                 }) {
-                    
-                    Text("Save")
+                    Text((presenter.saveButtonEnabled) ? "Save" : "Scanning...")
                         .fontWeight(.semibold)
                         .padding()
                         .foregroundColor(.white)
-                        .background(Color.green)
+                        .background((presenter.saveButtonEnabled) ? Color.green : Color.gray.opacity(0.8))
                         .cornerRadius(40)
-                }
+                }.disabled(!presenter.saveButtonEnabled)
                 
-                if(self.presenter.saveSessionButtonPressed) {
+                if(self.presenter.newSessionButtonVisible) {
                     Button(action: {
                         withAnimation(.easeInOut) {
-                            
+                            presenter.newSession()
                         }
                     }) {
                         Text("New")

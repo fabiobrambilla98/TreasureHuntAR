@@ -17,13 +17,15 @@ struct SceneListPopup: View {
                 VisualEffectView(effect: UIBlurEffect(style: .dark))
                 
                 VStack(spacing: 10){
-                    Text("\(presenter.featuresPoints)").foregroundColor(Color.white).padding(.top)
+                    Text("Select the scene to load").foregroundColor(Color.white).padding(.top)
                     Divider().foregroundColor(Color.white)
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack {
                             ForEach(0 ..< presenter.dataToBeStored.count, id: \.self) { index in
-                                Button(action: {showAlert = true}) {
-                                    Text("Scena \(index)").font(Font.custom("treasure", size: 22))
+                                Button(action: {
+                                    self.presenter.loadSession(number: index)
+                                }) {
+                                    Text("Scena \(index)")
                                     
                                 }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, idealHeight: 40)
                             }
@@ -36,7 +38,7 @@ struct SceneListPopup: View {
                     Button(action: {
                         self.presenter.listSelector(action: .close)
                     }) {
-                        Text("Cancel").font(Font.custom("treasure", size: 27))
+                        Text("Cancel")
                     }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 42)
                     
                 }

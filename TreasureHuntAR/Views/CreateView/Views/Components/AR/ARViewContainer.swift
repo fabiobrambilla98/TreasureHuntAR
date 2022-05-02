@@ -9,6 +9,17 @@ import SwiftUI
 import ARKit
 import RealityKit
 
+protocol PresentersProtocol: ObservableObject {
+    
+}
+class Presenters: PresentersProtocol {
+    init() {
+        
+    }
+}
+
+
+
 struct ARViewContainer: UIViewRepresentable {
     
     @ObservedObject var presenter: CreateViewPresenter
@@ -16,7 +27,7 @@ struct ARViewContainer: UIViewRepresentable {
     func makeUIView(context: Context) -> CustomARView {
         
         let arView = CustomARView(frame: .zero)
-        arView.presenter = OOPresenter(presenter: self.presenter)
+        arView.viewPresenter = presenter
         
         arView.setup()
         
@@ -34,7 +45,25 @@ struct ARViewContainer: UIViewRepresentable {
             uiView.addTextToParchment(text: text)
             presenter.parchmentText = ""
             presenter.addingParchmentText = false
-        }       
+        }
+        
+        if(presenter.saveSessionButtonPressed) {
+            uiView.saveSession()
+            presenter.saveSessionButtonPressed = false
+        }
+        
+        if(presenter.loadSessionPressed.0) {
+            uiView.loadSession(number: presenter.loadSessionPressed.1)
+            presenter.loadSessionPressed = (false, 0)
+        }
+        
+        if(presenter.newSessionButtonPressed) {
+            uiView.newSession()
+            presenter.newSessionButtonPressed = false
+        }
+        
+       
+     
     }
     
     func makeCoordinator() -> ARViewCoordinator{
@@ -53,14 +82,8 @@ class ARViewCoordinator: NSObject, ARSessionDelegate {
     
     
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        /*switch(frame.worldMappingStatus) {
-        case .mapped, .extending:
-            Observed.shared.oberved = true
-        default:
-            if(Observed.shared.oberved) {
-                Observed.shared.oberved = false
-            }
-            return
-        }*/
+        
+        
+        
     }
 }

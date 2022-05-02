@@ -12,7 +12,6 @@ import RealityKit
 protocol CreateViewPresenting: ObservableObject {
     
     
-    func saveWorldMap()
     func loadWorldMap()
     func openSheet()
     func selectEntity(_ name: String)
@@ -32,11 +31,8 @@ enum ShowAction {
 }
 
 
-final class CreateViewPresenter: CreateViewPresenting {
-    
-    
-    
-    
+final class CreateViewPresenter: Presenters, CreateViewPresenting {
+   
     private var service = AppService.shared
     
     var parchmentImages: [(String, UIImage)] = []
@@ -51,16 +47,27 @@ final class CreateViewPresenter: CreateViewPresenting {
     @Published var showParchment: Bool = false
     var parchmentText: String = ""
     @Published var addingParchmentText: Bool = false
+    @Published var loadSessionPressed: (Bool, Int) = (false, 0)
     
+    
+    // MARK: - Save world map properties
+    @Published var saveWorldMapPopupShow: Bool = false
+    var mapAlreadySavedNames: [String] = []
+    
+    // MARK: - UI properties
+    @Published var saveButtonEnabled: Bool = false
+    @Published var newSessionButtonVisible: Bool = false
     
     // MARK: - AR properties
     var objectToAdd: ObjectEntity?
     var parchmentToModify: Entity?
     @Published var dataToBeStored: [Data] = []
     var currentSession: Int = 0
-    @Published var featuresPoints: Int = 0
     
-    init(){
+    
+    override init(){
+        
+        super.init()
         
         self.parchmentImages = self.service.getModelNames(for: ModelTypes.parchment)
         
@@ -74,6 +81,8 @@ final class CreateViewPresenter: CreateViewPresenting {
             self.lastSelected.append(name.0)
         }
         
+        self.mapAlreadySavedNames = self.service.getAllStoredMapNames()
+        
     }
     
     func showBackAlert() {
@@ -84,9 +93,6 @@ final class CreateViewPresenter: CreateViewPresenting {
         self.lastSelected.updateLast(name)
     }
     
-    func saveWorldMap() {
-        self.saveSessionButtonPressed = true
-    }
     
     func loadWorldMap() {
         
@@ -121,7 +127,25 @@ final class CreateViewPresenter: CreateViewPresenting {
         self.addingParchmentText = true
     }
     
+    func saveSession() {
+        self.saveSessionButtonPressed = true
+    }
     
+    func loadSession(number: Int) {
+        self.loadSessionPressed = (true, number)
+        self.sessionListSelection = .close
+        if(!self.newSessionButtonVisible) {
+            self.newSessionButtonVisible = true
+        }
+    }
     
+    func newSession() {
+        self.newSessionButtonPressed = true
+    }
+    
+    func saveWorldMap(text: String) {
+        service.saveWorldMapPersistence(map: dataToBeStored, named: text)
+        self.saveWorldMapPopupShow = false
+    }
 }
 
