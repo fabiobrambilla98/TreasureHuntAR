@@ -9,11 +9,12 @@ import SwiftUI
 
 struct PlayView: View {
     @ObservedObject var presenter: PlayViewPresenter
-    
-    
+
     var body: some View {
         
         ZStack(alignment: .bottom){
+            
+            ARViewContainer(presenter: presenter).edgesIgnoringSafeArea(.all)
             
             HStack {
                 Spacer()
@@ -46,5 +47,7 @@ struct PlayView: View {
          
         
     }
+    
+   
 }
 

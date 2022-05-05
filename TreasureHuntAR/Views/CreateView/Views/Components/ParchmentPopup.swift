@@ -35,7 +35,7 @@ struct ParchmentPopup: View {
                        testo = ""
                    }
                }.frame(minWidth: 0, maxWidth: parchment.offset.width)
-           }.frame(width: 250, height: 280)
+           }.frame(minWidth: 0, maxWidth: 250, minHeight: 0, maxHeight: 280)
               
            
         }.fullScreen(alignment: .center)

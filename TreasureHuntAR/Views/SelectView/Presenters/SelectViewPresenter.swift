@@ -21,8 +21,6 @@ final class SelectViewPresenter: SelectViewPresenting, ContentFlowStateProtocol 
     
     init() {
         self.treasureHuntListNames = self.service.getAllStoredMapNames()
-        
-        print("entrato")
     }
     
     func open (_ view: ViewSelection) {

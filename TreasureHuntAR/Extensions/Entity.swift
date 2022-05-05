@@ -28,12 +28,38 @@ extension Entity {
         static var _depth: Float? = nil
     }
     
+    struct Tapped {
+        static var _tapped: Bool = false
+    }
+    
+    struct Identifier {
+        static var _uuid: UUID?
+    }
+    
     struct ObjectEntityContainer {
         static var _objectEntity: ObjectEntity?
     }
     
     struct TextContainer {
         static var _parchmentText: String? = nil
+    }
+    
+    var tapped: Bool {
+        get {
+            return Tapped._tapped
+        }
+        set(newValue) {
+            Tapped._tapped = newValue
+        }
+    }
+    
+    var identifier: UUID? {
+        get {
+            return Identifier._uuid
+        }
+        set(newValue) {
+            Identifier._uuid = newValue
+        }
     }
     
     var width: Float? {
@@ -82,4 +108,19 @@ extension Entity {
         }
     }
     
+}
+
+extension ARView {
+    struct Presenter {
+        @ObservedObject static var _presenter = Presenters()
+    }
+    
+    var viewPresenter: Presenters? {
+        get {
+            return Presenter._presenter
+        }
+        set(newValue) {
+            Presenter._presenter = newValue!
+        }
+    }
 }

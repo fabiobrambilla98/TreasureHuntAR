@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import RealityKit
 
-extension Array where Element == Data {
-    mutating func replace(index: Int, with data: Data) {
+extension Array where Element == SessionData {
+    mutating func replace(index: Int, with data: SessionData) {
         self[index] = data
     }
 }
+
+

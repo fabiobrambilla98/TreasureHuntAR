@@ -27,3 +27,13 @@ extension View {
         }
     }
 }
+
+
+extension View {
+    func centerCropped() -> some View {
+        GeometryReader { geo in
+            self
+            .frame(width: geo.size.width, height: geo.size.height)
+        }
+    }
+}

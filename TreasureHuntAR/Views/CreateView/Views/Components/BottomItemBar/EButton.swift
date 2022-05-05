@@ -22,9 +22,9 @@ struct EButton: View {
             }
         }) {
             Image(uiImage: UIImage(named: name)!).resizable()
-                .frame(width: 60, height: 60)
-                .foregroundColor(Color.white)
-                .clipShape(Circle())
-        }.buttonStyle(PlainButtonStyle()).shadow(color: Color.white, radius: 4)
+                .scaledToFit()
+        }.buttonStyle(PlainButtonStyle())
+            .cornerRadius(5)
+            .frame(minWidth: 0, maxWidth: 60, minHeight: 0, maxHeight: 60)
     }
 }

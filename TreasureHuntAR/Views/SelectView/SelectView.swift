@@ -12,7 +12,7 @@ struct SelectView: View {
     
     var body: some View {
         ZStack{
-                ZStack { Image("treasure_play_background").resizable().edgesIgnoringSafeArea(.top)
+            ZStack { Image("treasure_play_background").centerCropped().edgesIgnoringSafeArea(.top)
                     
                 }.fullScreen(alignment: .center)
                 

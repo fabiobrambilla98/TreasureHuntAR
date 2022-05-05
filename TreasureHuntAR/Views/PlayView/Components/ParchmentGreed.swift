@@ -15,7 +15,7 @@ struct ParchmentGreed: View {
         VStack{
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 160), spacing: 15)], spacing: 15) {
                 ForEach(0 ..< presenter.parchmentsFound.count, id: \.self) {
-                    name in ParchmentItem()
+                    index in ParchmentItem(modelEntity: presenter.parchmentsFound[index].0, text: presenter.parchmentsFound[index].1).environmentObject(presenter)
                 }
             }
             .padding(.top)

@@ -11,9 +11,10 @@ import Combine
 
 
 
-class ParchmentEntity: ObjectEntity {
+class ParchmentEntity: ObjectEntity, ObservableObject {
     var textureRequest: AnyCancellable? = nil
     var offset: OffsetStruct = OffsetStruct()
+    
     
     struct SizeStruct {
         var width: Float = 0.3
@@ -26,8 +27,8 @@ class ParchmentEntity: ObjectEntity {
         var width: CGFloat = .infinity
     }
     
-    init(modelName: String) {
-        super.init(name: modelName)
+    init(modelName: String, anchorEntity: AnchorEntity? = nil, scene: RealityKit.Scene? = nil, parchmentText: String? = nil, textPosition: SIMD3<Float>? = nil, identifier: UUID? = nil) {
+        super.init(name: modelName, id: (identifier != nil) ? identifier! : UUID())
         self.offset = getImageOffset(modelName)
         
         if #available(iOS 15.0, *) {
@@ -56,17 +57,44 @@ class ParchmentEntity: ObjectEntity {
                 self.modelEntity?.width = self.width
                 self.modelEntity?.height = self.height
                 self.modelEntity?.name = "parchment"
+                if(anchorEntity != nil && scene != nil){
+                    
+                    let mesh = MeshResource.generateText(
+                        parchmentText!,
+                        extrusionDepth: 0.0001,
+                        font: .systemFont(ofSize: 0.01),
+                        containerFrame: CGRect(x: 0, y: 0, width: 0.3, height: 0.3),
+                        alignment: .left,
+                        lineBreakMode: .byWordWrapping)
+                    
+                    let sm = UnlitMaterial(color: UIColor.white)
+                    let textEntity = ModelEntity(mesh: mesh, materials: [sm])
+                    
+                    self.modelEntity!.name = "parchment"
+                    self.modelEntity!.identifier = identifier
+                    self.modelEntity!.objectEntity = self
+                    
+                    self.modelEntity!.addChild(textEntity)
+                    textEntity.setPosition(textPosition!, relativeTo: self.modelEntity!)
+                    self.modelEntity!.generateCollisionShapes(recursive: true)
+                    anchorEntity?.addChild(self.modelEntity!)
+                    scene?.addAnchor(anchorEntity!)
+                    
+                
+                }
             }
             
         } else {
             return
         }
- 
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
     
     
     private func getImageOffset(_ name: String) -> OffsetStruct {
@@ -77,7 +105,7 @@ class ParchmentEntity: ObjectEntity {
     
     private func adjustSize(baseSize: SizeStruct, imageSize: SizeStruct) -> SizeStruct {
         
-       
+        
         
         if(imageSize.width >= imageSize.height) {
             return SizeStruct(width: baseSize.width, height: ((baseSize.height * imageSize.height) / imageSize.width))

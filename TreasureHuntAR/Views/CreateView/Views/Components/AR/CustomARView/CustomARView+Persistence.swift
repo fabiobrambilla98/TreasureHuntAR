@@ -16,19 +16,25 @@ extension CustomARView {
     // MARK: - Persistence: Saving and Loading
     
     func newSession() {
-        self.resetTracking()
-        self.presenter!.newSessionButtonVisible = false
-        self.presenter!.currentSession += 1
+        if let presenter = viewPresenter as? CreateViewPresenter {
+            self.resetTracking()
+            presenter.newSessionButtonVisible = false
+            presenter.currentSession += 1
+        }
     }
     
     func loadSession(number: Int) {
         
-        /// - Tag: ReadWorldMap
         let worldMap: ARWorldMap = {
-            let data = self.presenter!.dataToBeStored[number]
-            
+            var data: Data? = nil
+            if let presenter = viewPresenter as? CreateViewPresenter {
+                data = presenter.dataToBeStored[number].sessionWorldMap
+            } else if let presenter = viewPresenter as? PlayViewPresenter {
+                data = presenter.mapSessions[number].sessionWorldMap
+            }
+          
             do {
-                guard let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data)
+                guard let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data!)
                 else { fatalError("No ARWorldMap in archive.") }
                 return worldMap
             } catch {
@@ -40,41 +46,51 @@ extension CustomARView {
         configuration.initialWorldMap = worldMap
         self.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
         isRelocalizingMap = true
-        virtualObjectAnchor = nil
-        self.presenter!.currentSession = number
+        
+        if let presenter = viewPresenter as? CreateViewPresenter {
+            virtualObjectAnchor = nil
+            presenter.currentSession = number
+        } else if let presenter = viewPresenter as? PlayViewPresenter {
+            presenter.currentSession = number
+        }
         
         
     }
     
     func saveSession() {
-        self.session.getCurrentWorldMap { [self] worldMap, _ in
-            guard let map = worldMap else {
-                print("Cannot get current world map");
-                return
-            }
-            
-            do {
-                let data = try NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
+        if let presenter = viewPresenter as? CreateViewPresenter {
+            self.session.getCurrentWorldMap { worldMap, _ in
+                guard let map = worldMap else {
+                    print("Cannot get current world map");
+                    return
+                }
                 
-                if(self.presenter!.currentSession >= self.presenter!.dataToBeStored.count) {
-                    self.presenter!.dataToBeStored.append(data)
+                do {
+                    let data = try NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
                     
-                } else {
-                    self.presenter!.dataToBeStored.replace(index: self.presenter!.currentSession, with: data)
+                    if(presenter.currentSession >= presenter.dataToBeStored.count) {
+                       
+                        presenter.dataToBeStored.append(SessionData(data: data, modelEntities: self.sessionModelEntities))
+                        
+                    } else {
+                        presenter.dataToBeStored.replace(index: presenter.currentSession, with: SessionData(data: data, modelEntities: self.sessionModelEntities))
+                    }
+                    
+                    if(!presenter.newSessionButtonVisible) {
+                        presenter.newSessionButtonVisible = true
+                    }
+                    
+                    
+                } catch {
+                    fatalError("Can't save map: \(error.localizedDescription)")
                 }
                 
-                if(!self.presenter!.newSessionButtonVisible) {
-                    self.presenter!.newSessionButtonVisible = true
-                }
-                
-                
-            } catch {
-                fatalError("Can't save map: \(error.localizedDescription)")
             }
-            
         }
         
     }
+    
+    
     
 }
 

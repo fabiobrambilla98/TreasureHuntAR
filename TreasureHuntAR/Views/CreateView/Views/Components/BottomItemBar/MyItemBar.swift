@@ -17,7 +17,7 @@ struct MyItemBar: View {
             RoundedRectangle(cornerRadius: 50, style: .continuous)
                 .fill(Color.black)
                 .opacity(0.7)
-                .frame(width: 270, height: 85)
+                .frame(width: 290, height: 85)
             
             HStack(spacing: 20){
                 if(self.presenter.buttonItemsID != .initialSelect) {

@@ -15,7 +15,7 @@ struct TreasureHuntCard: View {
     @State var changeIntoPlayView = false
     
     var body: some View {
-        NavigationLink(destination: PlayView(presenter: PlayViewPresenter()), isActive: $changeIntoPlayView) {
+        NavigationLink(destination: PlayView(presenter: PlayViewPresenter(mapName: name)), isActive: $changeIntoPlayView) {
             Button(action: {
                 self.showingOptions = true
             }) {
@@ -42,6 +42,21 @@ struct TreasureHuntCard: View {
                     Button("Modify") {
                         
                     }
+                    Button(
+                        role: .destructive,
+                        action: {
+                            withAnimation {
+                                
+                            }
+                        }
+                    ) {
+                        HStack {
+                            Image(systemName: "trash")
+                            Text("Delete")
+                            
+                        }
+                    }
+                    
                 }
             
             

@@ -15,13 +15,14 @@ struct SButton: View {
         Button(action: {
             self.presenter.openSheet()
         }) {
-            Image(systemName: "circle.grid.3x3.circle.fill").resizable().frame(width: 60, height: 60)
-                .foregroundColor(Color.white)
-                .clipShape(Circle())
+            Image(systemName: "square.grid.2x2").resizable()
         }
         .sheet(isPresented: self.$presenter.showBrowse) {
             BrowseView(presenter: self.presenter)
         }
-        .buttonStyle(PlainButtonStyle()).shadow(radius: 8)
+        .buttonStyle(PlainButtonStyle()).frame(width: 50, height: 50)
+        .foregroundColor(Color.white)
+        .cornerRadius(5)
     }
 }
+

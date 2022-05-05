@@ -18,8 +18,8 @@ struct MyButton<P: MainViewPresenting & ContentFlowStateProtocol>: View {
             Button(action: {
                 isActive = true
             } ) {
-                Text(LocalizedStringKey(text)).fontWeight(.bold)
-                    .font(Font.custom("treasure", size: 30))
+                Text(LocalizedStringKey(text))
+                    .font(.title)
             }.frame(minWidth: 0, maxWidth: 90)
                 .padding()
                 .foregroundColor(.white)

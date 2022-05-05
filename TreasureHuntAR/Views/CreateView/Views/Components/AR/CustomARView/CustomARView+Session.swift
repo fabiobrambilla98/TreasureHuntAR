@@ -10,6 +10,7 @@ import RealityKit
 import ARKit
 import SwiftUI
 
+
 extension CustomARView: ARSessionDelegate {
     
     // MARK: - AR session delegate
@@ -20,44 +21,45 @@ extension CustomARView: ARSessionDelegate {
     // This is where we render virtual contents to scene.
     // We add an anchor in `handleTap` function, it will then call this function.
     func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
-        print("did add anchor: \(anchors.count) anchors in total")
-        
         for anchor in anchors {
+            
             addAnchorEntityToScene(anchor: anchor)
+            
         }
     }
     
     /// - Tag: CheckMappingStatus
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        
-        switch frame.worldMappingStatus {
-        case .extending, .mapped:
-            if(detectedFeaturePoints.count > 0) {
-                self.presenter!.saveButtonEnabled = true
-            } else if(detectedFeaturePoints.count > 0 && self.presenter!.saveButtonEnabled){
-                self.presenter!.saveButtonEnabled = false
-            }
-        default:
-            if(self.presenter!.saveButtonEnabled) {
-                self.presenter!.saveButtonEnabled = false
+        if let presenter = viewPresenter as? CreateViewPresenter {
+            switch frame.worldMappingStatus {
+            case .extending, .mapped:
+                if(detectedFeaturePoints.count >= 0) {
+                    presenter.saveButtonEnabled = true
+                } else if(detectedFeaturePoints.count > 0 && presenter.saveButtonEnabled){
+                    presenter.saveButtonEnabled = false
+                }
+            default:
+                if(presenter.saveButtonEnabled) {
+                    presenter.saveButtonEnabled = false
+                }
+                
+                
             }
             
-            
-        }
-        
-        if(actionButtonsAnchorEntity != nil) {
-            actionButtonsAnchorEntity!.billboard(targetPosition: self.cameraTransform.translation)
-            
-        }
-        
-        guard (frame.rawFeaturePoints != nil) else {
-            return
-        }
-        
-        for item in frame.rawFeaturePoints!.points {
-            if(!detectedFeaturePoints.contains(item)) {
-                detectedFeaturePoints.insert(item)
+            if(actionButtonsAnchorEntity != nil) {
+                actionButtonsAnchorEntity!.billboard(targetPosition: self.cameraTransform.translation)
+                
             }
+            
+            /*guard (frame.rawFeaturePoints != nil) else {
+             return
+             }
+             
+             for item in frame.rawFeaturePoints!.points {
+             if(!detectedFeaturePoints.contains(item)) {
+             detectedFeaturePoints.insert(item)
+             }
+             }*/
         }
         
     }

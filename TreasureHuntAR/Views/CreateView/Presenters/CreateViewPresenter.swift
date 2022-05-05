@@ -61,7 +61,7 @@ final class CreateViewPresenter: Presenters, CreateViewPresenting {
     // MARK: - AR properties
     var objectToAdd: ObjectEntity?
     var parchmentToModify: Entity?
-    @Published var dataToBeStored: [Data] = []
+    @Published var dataToBeStored: [SessionData] = []
     var currentSession: Int = 0
     
     

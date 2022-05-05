@@ -13,16 +13,18 @@ import Combine
 class ObjectEntity {
     var modelName: String
     var modelEntity: ModelEntity?
+    var id: UUID
     var width: Float
     var height: Float
     var depth: Float
     
-    init(name modelName: String, width: Float = 0, height: Float = 0, depth: Float = 0, entity: ModelEntity? = nil) {
+    init(name modelName: String, width: Float = 0, height: Float = 0, depth: Float = 0, entity: ModelEntity? = nil, id: UUID = UUID()) {
         self.modelName = modelName
         self.modelEntity = entity
         self.width = width
         self.height = height
         self.depth = depth
+        self.id = id
     }
     
     

@@ -30,8 +30,12 @@ extension CustomARView {
     // MARK: - Placing AR Content
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        
+        if let presenter = self.viewPresenter as? CreateViewPresenter{
+            
+    
         // Disable placing objects when the session is still relocalizing
-        if isRelocalizingMap && virtualObjectAnchor == nil && self.presenter!.showAlert{
+        if isRelocalizingMap && virtualObjectAnchor == nil && presenter.showAlert{
             return
         }
         
@@ -55,10 +59,10 @@ extension CustomARView {
                 
             } else if entity.name == "modifyButton" {
                 
-                self.presenter!.parchmentText = tappedObject!.parchmentText!.replacingOccurrences(of: "\n", with: "")
-                self.presenter!.objectToAdd = tappedObject?.objectEntity
-                self.presenter!.parchmentToModify = tappedObject
-                self.presenter!.showParchment = true
+                presenter.parchmentText = tappedObject!.parchmentText!.replacingOccurrences(of: "\n", with: "")
+                presenter.objectToAdd = tappedObject?.objectEntity
+                presenter.parchmentToModify = tappedObject
+                presenter.showParchment = true
                 tappedObject?.removeChild((tappedObject?.children[0])!)
             } else if entity.name == "parchmentText" ||  entity.name == "parchment" || entity.name == "treasure" {
                 if(tappedObject != nil) {
@@ -73,11 +77,11 @@ extension CustomARView {
             }
         } else {
             
-            if(self.presenter!.objectToAdd == nil) {
+            if(presenter.objectToAdd == nil) {
                 return
              }
                 
-                guard let name = self.presenter!.objectToAdd?.modelEntity?.name else {
+                guard let name = presenter.objectToAdd?.modelEntity?.name else {
                     return
                 }
                 
@@ -89,14 +93,44 @@ extension CustomARView {
             
                 
                 if(virtualObjectAnchor!.name == "parchment"){
-                    self.presenter!.showParchment = true
+                    presenter.showParchment = true
                 }
                 
                 self.session.add(anchor: virtualObjectAnchor!)
                 
             }
             
+        } else if let presenter = self.viewPresenter as? PlayViewPresenter {
+            
+            guard let point = sender?.location(in: self),
+                  let hitTestResult = self.hitTest(
+                    point,
+                    types: [.existingPlaneUsingGeometry, .estimatedHorizontalPlane, .estimatedVerticalPlane]
+                  ).first
+            else {
+                return
+            }
+            
+            
+            if let entity = self.entity(at: point) {
+                if entity.name == "parchmentText" {
+                    
+                    var model: StoreModelEntity?
+                    for m in presenter.mapSessions[presenter.currentSession].modelEntities {
+                        print("DEBUG: m.id:\(m.id) > e.id:\(entity.identifier!)")
+                        if(m.id == entity.identifier) {
+                            model = m
+                            presenter.parchmentsFound.append((entity.objectEntity as! ParchmentEntity, model!.text))
+                            
+                        }
+                    }
+                    entity.tapped = true
+                    
+                }
+            
         }
+    }
         
     
+}
 }

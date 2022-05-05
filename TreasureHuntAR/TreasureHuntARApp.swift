@@ -13,8 +13,9 @@ struct TreasureHuntARApp: App {
         WindowGroup {
             NavigationView {
                 MainView(presenter: MainViewPresenter())
-            }
-           
+            }.navigationViewStyle(StackNavigationViewStyle())
+            
+
         }
     }
 }

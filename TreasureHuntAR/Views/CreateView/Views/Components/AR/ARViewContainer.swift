@@ -22,48 +22,49 @@ class Presenters: PresentersProtocol {
 
 struct ARViewContainer: UIViewRepresentable {
     
-    @ObservedObject var presenter: CreateViewPresenter
+    @ObservedObject var presenter: Presenters
     
     func makeUIView(context: Context) -> CustomARView {
         
         let arView = CustomARView(frame: .zero)
-        arView.viewPresenter = presenter
+        arView.viewPresenter = self.presenter
         
-        arView.setup()
+        arView.setup(mode: ((presenter as? CreateViewPresenter) != nil) ? .create : .play)
         
-       
+        
         UIApplication.shared.isIdleTimerDisabled = true
         
         return arView
         
+        
     }
     
     func updateUIView(_ uiView: CustomARView, context: Context) {
-        
-        if(presenter.addingParchmentText) {
-            let text = presenter.parchmentText
-            uiView.addTextToParchment(text: text)
-            presenter.parchmentText = ""
-            presenter.addingParchmentText = false
+        if let presenter = self.presenter as? CreateViewPresenter {
+            if(presenter.addingParchmentText) {
+                let text = presenter.parchmentText
+                uiView.addTextToParchment(text: text)
+                presenter.parchmentText = ""
+                presenter.addingParchmentText = false
+            }
+            
+            if(presenter.saveSessionButtonPressed) {
+                uiView.saveSession()
+                presenter.saveSessionButtonPressed = false
+            }
+            
+            if(presenter.loadSessionPressed.0) {
+                uiView.loadSession(number: presenter.loadSessionPressed.1)
+                presenter.loadSessionPressed = (false, 0)
+            }
+            
+            if(presenter.newSessionButtonPressed) {
+                uiView.newSession()
+                presenter.newSessionButtonPressed = false
+            }
+            
         }
         
-        if(presenter.saveSessionButtonPressed) {
-            uiView.saveSession()
-            presenter.saveSessionButtonPressed = false
-        }
-        
-        if(presenter.loadSessionPressed.0) {
-            uiView.loadSession(number: presenter.loadSessionPressed.1)
-            presenter.loadSessionPressed = (false, 0)
-        }
-        
-        if(presenter.newSessionButtonPressed) {
-            uiView.newSession()
-            presenter.newSessionButtonPressed = false
-        }
-        
-       
-     
     }
     
     func makeCoordinator() -> ARViewCoordinator{

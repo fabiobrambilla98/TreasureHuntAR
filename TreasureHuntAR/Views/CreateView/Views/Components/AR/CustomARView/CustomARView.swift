@@ -9,8 +9,38 @@ import SwiftUI
 import RealityKit
 import ARKit
 
+/*extension ARAnchor {
+    struct SelfModelEntity {
+        static var _modelEntity: ModelEntity? = nil
+    }
+    
+    struct SelfModelEntities {
+        static var _modelEntities: [ModelEntity]? = nil
+    }
+    
+    var modelEntities: [ModelEntity]? {
+        get {
+            return SelfModelEntities._modelEntities
+        }
+        set(newValue) {
+            SelfModelEntities._modelEntities = newValue
+        }
+    }
+    
+    var modelEntity: ModelEntity? {
+        get {
+            return SelfModelEntity._modelEntity
+        }
+        set(newValue) {
+            SelfModelEntity._modelEntity = newValue
+        }
+    }
+}
+*/
 
-
+enum ARMode {
+    case play, create
+}
 
 class CustomARView: ARView {
    
@@ -33,12 +63,17 @@ class CustomARView: ARView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup() {
-        presenter = (viewPresenter as! CreateViewPresenter)
-        self.session.run(defaultConfiguration)
+    func setup(mode: ARMode) {
+        
+        if mode == .create {
+            self.session.run(defaultConfiguration)
+        } else if mode == .play {
+            loadSession(number: 0)
+        }
+        
         self.session.delegate = self
         self.setupGestures()
-        self.debugOptions = [ ]
+        
     }
     
     // MARK: - AR content
@@ -49,9 +84,10 @@ class CustomARView: ARView {
     
     var virtualObjectAnchor: ARAnchor?
     let virtualObjectAnchorName = "virtualObject"
-   
+    var sessionModelEntities: [StoreModelEntity] = []
     
-    var presenter: CreateViewPresenter?
+    
+    //var customPresenter: Presenters?
     // MARK: - AR session management
     var isRelocalizingMap = false
     var tapRecognizer: UITapGestureRecognizer? = nil

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-enum ModelTypes {
+enum ModelTypes: Codable {
     case parchment, treasure
 }
 
@@ -68,11 +68,14 @@ final class AppService: AppServiceProtocol {
         }
     }
     
-    func saveWorldMapPersistence(map: [Data], named name: String, overwrite: Bool = false){
+    func saveWorldMapPersistence(map: [SessionData], named name: String, overwrite: Bool = false){
         
         if(!overwrite) {
-            self.storedData.set(map, forKey: "m_\(name)")
+            let data = map.map({$0.serializeObject()})
+            self.storedData.set(data, forKey: "m_\(name)")
             self.storedData.synchronize()
+            
+            
         } else {
             self.storedData.setValue(map, forKey: "m_\(name)")
             self.storedData.synchronize()
@@ -82,6 +85,21 @@ final class AppService: AppServiceProtocol {
     
     func getAllStoredMapNames() -> [String] {
         return Array(UserDefaults.standard.dictionaryRepresentation().keys).filter({$0.hasPrefix("m_")}).map({$0.replacingOccurrences(of: "m_", with: "")})
+    }
+    
+    func getMap(_ name: String) -> [SessionData]{
+        do {
+            
+            let data: [Data] = (self.storedData.array(forKey: "m_\(name)") as? [Data])!
+           
+            let returnedData = try data.map({try JSONDecoder().decode(SessionData.self, from: $0)})
+            
+            return returnedData
+            
+        }  catch {
+            fatalError("Can't unarchive ARWorldMap from file data: \(error)")
+        }
+        
     }
     
 }
