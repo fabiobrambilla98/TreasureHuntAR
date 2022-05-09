@@ -32,10 +32,10 @@ extension CustomARView {
             let sm = UnlitMaterial(color: UIColor.white)
             let textEntity = ModelEntity(mesh: mesh, materials: [sm])
             
-            var modelEntity: Entity
+            var modelEntity: CustomModelEntity
             
             if(presenter.parchmentToModify == nil) {
-                modelEntity = (presenter.objectToAdd?.modelEntity!)! as Entity
+                modelEntity = (presenter.objectToAdd?.modelEntity!)! as CustomModelEntity
             } else {
                 modelEntity = presenter.parchmentToModify!
             }
@@ -58,7 +58,7 @@ extension CustomARView {
             modelEntity.addChild(textEntity)
             textEntity.setPosition(SIMD3<Float>(-presenter.objectToAdd!.width/2 + xWidth/yWidth, -presenter.objectToAdd!.height/2 - xHeight/yHeight, 0.001), relativeTo: modelEntity)
             
-            self.sessionModelEntities = self.sessionModelEntities.map({if (parchmentEntity.id == $0.id) {$0.text = text;$0.position = textEntity.position}; return $0})
+            self.sessionModelEntities = self.sessionModelEntities.map({if (parchmentEntity.identifier == $0.identifier) {$0.text = text;$0.position = textEntity.position}; return $0})
             
             self.scene.addAnchor(modelEntity.anchor!)
         }
@@ -87,7 +87,7 @@ extension CustomARView {
                     anchorEntity.addChild(modelEntity)
                     
                     self.scene.addAnchor(anchorEntity)
-                    self.sessionModelEntities.append(StoreModelEntity(transform: anchor.transform, name: presenter.objectToAdd!.modelName, type: .parchment, size: modelEntity.scale, id: presenter.objectToAdd!.id))
+                    self.sessionModelEntities.append(StoreModelEntity(transform: anchor.transform, name: presenter.objectToAdd!.modelName, type: .parchment, size: modelEntity.scale, identifier: presenter.objectToAdd!.identifier))
                     
                     
                 } else {
@@ -114,7 +114,7 @@ extension CustomARView {
                     anchorEntity.addChild(modelEntity)
                     
                     self.scene.addAnchor(anchorEntity)
-                    self.sessionModelEntities.append(StoreModelEntity(transform: anchor.transform, name: presenter.objectToAdd!.modelName, type: .treasure, size: modelEntity.scale, id: presenter.objectToAdd!.id))
+                    self.sessionModelEntities.append(StoreModelEntity(transform: anchor.transform, name: presenter.objectToAdd!.modelName, type: .treasure, size: modelEntity.scale, identifier: presenter.objectToAdd!.identifier))
                     
                     presenter.buttonItemsID = .initialSelect
                     presenter.objectToAdd = nil
@@ -165,23 +165,22 @@ extension CustomARView {
             
             if anchor.name == "parchment" {
                 
-                
-                let anchorEntity = AnchorEntity(anchor: anchor)
-                
-                for offModel in presenter.mapSessions[0].modelEntities {
+                for offModel in presenter.mapSessions[presenter.currentSession].modelEntities {
+                    print("TRANSFORM: offModel:\(offModel.transform) __ anchor:\(anchor.transform)")
                     if (offModel.transform == anchor.transform) {
-                        ParchmentEntity( modelName: offModel.name, anchorEntity: anchorEntity, scene: self.scene,
-                                         parchmentText: offModel.text,textPosition: offModel.position, identifier: offModel.id)
+                        let anchorEntity = AnchorEntity(anchor: anchor)
+                       _ = ParchmentEntity( modelName: offModel.name, anchorEntity: anchorEntity, scene: self.scene,
+                                         parchmentText: offModel.text,textPosition: offModel.position, identifier: offModel.identifier)
                     }
                 }
-                
+                presenter.currentSessionClues += 1
             } else if anchor.name == "treasure" {
                 
                 let anchorEntity = AnchorEntity(anchor: anchor)
                 
-                for offModel in presenter.mapSessions[0].modelEntities {
+                for offModel in presenter.mapSessions[presenter.currentSession].modelEntities {
                     if (offModel.transform == anchor.transform) {
-                        TreasureEntity( modelName: offModel.name, width: Float(offModel.size.x), height: Float(offModel.size.y), depth: Float(offModel.size.z), anchorEntity: anchorEntity, scene: self.scene, identifier: offModel.id)
+                        _ = TreasureEntity( modelName: offModel.name, width: Float(offModel.size.x), height: Float(offModel.size.y), depth: Float(offModel.size.z), anchorEntity: anchorEntity, scene: self.scene, identifier: offModel.identifier)
                     }
                 }
                 

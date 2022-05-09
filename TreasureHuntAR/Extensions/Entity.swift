@@ -8,6 +8,35 @@
 import SwiftUI
 import RealityKit
 
+extension View {
+    @ViewBuilder
+    func navigate<Value, Destination: View>(
+        using binding: Binding<Value?>,
+        @ViewBuilder destination: (Value) -> Destination
+    ) -> some View {
+        background(NavigationLink(binding, destination: destination))
+    }
+}
+
+extension NavigationLink where Label == EmptyView {
+    init?<Value>(
+        _ binding: Binding<Value?>,
+        @ViewBuilder destination: (Value) -> Destination
+    ) {
+        guard let value = binding.wrappedValue else {
+            return nil
+        }
+
+        let isActive = Binding(
+            get: { true },
+            set: { newValue in if !newValue { binding.wrappedValue = nil } }
+        )
+
+        self.init(destination: destination(value), isActive: isActive, label: EmptyView.init)
+    }
+}
+
+
 extension Entity {
     private static var _type: ARActionButtonTypes = .none
     var type: ARActionButtonTypes {
@@ -20,95 +49,6 @@ extension Entity {
         }
 }
 
-extension Entity {
-    
-    struct Size {
-        static var _width: Float? = nil
-        static var _height: Float? = nil
-        static var _depth: Float? = nil
-    }
-    
-    struct Tapped {
-        static var _tapped: Bool = false
-    }
-    
-    struct Identifier {
-        static var _uuid: UUID?
-    }
-    
-    struct ObjectEntityContainer {
-        static var _objectEntity: ObjectEntity?
-    }
-    
-    struct TextContainer {
-        static var _parchmentText: String? = nil
-    }
-    
-    var tapped: Bool {
-        get {
-            return Tapped._tapped
-        }
-        set(newValue) {
-            Tapped._tapped = newValue
-        }
-    }
-    
-    var identifier: UUID? {
-        get {
-            return Identifier._uuid
-        }
-        set(newValue) {
-            Identifier._uuid = newValue
-        }
-    }
-    
-    var width: Float? {
-        get {
-            return Size._width
-        }
-        set(newValue) {
-            Size._width = newValue
-        }
-    }
-    
-    var height: Float? {
-        get {
-            return Size._height
-        }
-        set(newValue) {
-            Size._height = newValue
-        }
-    }
-    
-    var depth: Float? {
-        get {
-            return Size._depth
-        }
-        set(newValue) {
-            Size._depth = newValue
-        }
-    }
-    
-    
-    var objectEntity: ObjectEntity? {
-        get {
-            return ObjectEntityContainer._objectEntity
-        }
-        set(newValue) {
-            ObjectEntityContainer._objectEntity = newValue
-        }
-    }
-    
-    var parchmentText: String? {
-        get {
-            return TextContainer._parchmentText
-        }
-        set(newValue) {
-            TextContainer._parchmentText = newValue
-        }
-    }
-    
-}
 
 extension ARView {
     struct Presenter {

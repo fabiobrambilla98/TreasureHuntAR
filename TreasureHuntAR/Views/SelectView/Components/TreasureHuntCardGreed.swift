@@ -11,6 +11,8 @@ struct TreasureHuntCardGreed: View {
     
     @EnvironmentObject var presenter: SelectViewPresenter
     
+    
+    
     var body: some View {
         VStack{
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 160), spacing: 15)], spacing: 15) {

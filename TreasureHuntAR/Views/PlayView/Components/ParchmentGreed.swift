@@ -12,6 +12,7 @@ struct ParchmentGreed: View {
     @EnvironmentObject var presenter: PlayViewPresenter
     
     var body: some View {
+        
         VStack{
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 160), spacing: 15)], spacing: 15) {
                 ForEach(0 ..< presenter.parchmentsFound.count, id: \.self) {
@@ -19,9 +20,10 @@ struct ParchmentGreed: View {
                 }
             }
             .padding(.top)
-        }
-        .padding(.horizontal)
+        }.padding(.horizontal)
+        
     }
+    
 }
 
 struct BrowseParchmentView: View {
@@ -29,15 +31,32 @@ struct BrowseParchmentView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView(showsIndicators: false) {
-                ParchmentGreed().environmentObject(presenter)
-            }.navigationBarTitle(Text("Parchments"), displayMode: .large)
+            ZStack {
+                if(!self.presenter.showParchment) {
+                    ScrollView(showsIndicators: false) {
+                        ParchmentGreed().environmentObject(presenter)
+                    }
+                } else if(self.presenter.showParchment) {
+                    VisualEffectView(effect: UIBlurEffect(style: .dark))
+                        .edgesIgnoringSafeArea(.all).onTapGesture {
+                            presenter.showParchment = false
+                        }
+                    ParchmentPlayPopup().environmentObject(presenter).navigationBarHidden(true).onDisappear(perform: {
+                        presenter.parchmentSheetSelected = nil
+                    })
+                }
+                
+            }.fullScreen(alignment: .center).navigationBarTitle(Text("Parchments"), displayMode: .large)
                 .navigationBarItems(trailing: Button(action: {
                     self.presenter.showParchmentSheet = false
                 }) {
                     Text("close").bold()
                 })
-        }
+            
+            
+        }.onDisappear(perform: {
+            self.presenter.showParchment = false
+        })
     }
 }
 

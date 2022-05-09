@@ -25,12 +25,21 @@ struct MyItemBar: View {
                 }
                 
                 if(self.presenter.buttonItemsID == .initialSelect || self.presenter.buttonItemsID == .firstIconSelect) {
-                    EButton(presenter: self.presenter,itemSelected: B.firstIconSelect, name: self.$presenter.lastSelected[0])
+                    if self.$presenter.lastSelected.count > 0 {
+                        EButton(presenter: self.presenter,itemSelected: B.firstIconSelect, name: self.$presenter.lastSelected[0])
+                        
+                    } else {
+                        EmptyView()
+                    }
                     
                 }
                 if(self.presenter.buttonItemsID == .initialSelect || self.presenter.buttonItemsID == .secondIconSelect) {
                     
-                    EButton(presenter: self.presenter, itemSelected: B.secondIconSelect, name: self.$presenter.lastSelected[1])
+                    if(self.$presenter.lastSelected.count > 1) {
+                        EButton(presenter: self.presenter, itemSelected: B.secondIconSelect, name: self.$presenter.lastSelected[1])
+                    } else {
+                        EmptyView()
+                    }
                     
                 }
                 if(self.presenter.buttonItemsID == .initialSelect) {

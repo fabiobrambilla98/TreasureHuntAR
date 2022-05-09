@@ -22,6 +22,7 @@ struct CreateView: View {
             
             ARViewContainer(presenter: self.presenter).edgesIgnoringSafeArea(.all)
             
+            
             VStack {
                 SessionActionView().environmentObject(self.presenter)
                 
@@ -64,6 +65,31 @@ struct CreateView: View {
 }
 
 
+
+
+
+struct ARVC: UIViewRepresentable {
+
+    
+    func makeUIView(context: Context) -> ARView {
+        
+        let arView = ARView(frame: .zero)
+       
+        UIApplication.shared.isIdleTimerDisabled = true
+        
+        return arView
+        
+        
+    }
+    
+    func updateUIView(_ uiView: ARView, context: Context) {
+        
+        
+    }
+    
+    
+    
+}
 
 
 

@@ -8,30 +8,29 @@
 import SwiftUI
 
 
-protocol SelectViewPresenting: ObservableObject {
-    func open(_ view: ViewSelection )
-}
 
 
-final class SelectViewPresenter: SelectViewPresenting, ContentFlowStateProtocol {
+final class SelectViewPresenter: ObservableObject {
     @Published var activeLink: ContentLink?
     
     private var service: AppService = AppService.shared
     var treasureHuntListNames: [String] = []
+    @Published var cardImages: [(String, UIImage)] = []
+    
+    deinit {
+        print("DEINIT: SelectViewPresenter")
+    }
     
     init() {
         self.treasureHuntListNames = self.service.getAllStoredMapNames()
-    }
-    
-    func open (_ view: ViewSelection) {
-        switch(view) {
-        case .playView:
-            activeLink = .playView
-        case .createView:
-            activeLink = .createView
-        default:
-            activeLink = .selectView
+        DispatchQueue.main.async { [weak self] in
+            self!.cardImages = self!.service.getStartAllStartLocationImage(mapNames: self!.treasureHuntListNames)
         }
     }
-
+    
+    func getImage(named name: String) -> UIImage {
+        
+        return service.getStartLocationImage(mapName: name).rotate(radians: 90 * .pi/180)!
+    }
+    
 }

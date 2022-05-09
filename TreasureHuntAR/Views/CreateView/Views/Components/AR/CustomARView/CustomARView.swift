@@ -9,42 +9,22 @@ import SwiftUI
 import RealityKit
 import ARKit
 
-/*extension ARAnchor {
-    struct SelfModelEntity {
-        static var _modelEntity: ModelEntity? = nil
-    }
-    
-    struct SelfModelEntities {
-        static var _modelEntities: [ModelEntity]? = nil
-    }
-    
-    var modelEntities: [ModelEntity]? {
-        get {
-            return SelfModelEntities._modelEntities
-        }
-        set(newValue) {
-            SelfModelEntities._modelEntities = newValue
-        }
-    }
-    
-    var modelEntity: ModelEntity? {
-        get {
-            return SelfModelEntity._modelEntity
-        }
-        set(newValue) {
-            SelfModelEntity._modelEntity = newValue
-        }
-    }
-}
-*/
 
 enum ARMode {
     case play, create
 }
 
 class CustomARView: ARView {
+    
+    enum PresenterType {
+        case play, create
+    }
+    
+    deinit {
+        print("DEINIT: CustomARView")
+    }
    
-    var defaultConfiguration: ARWorldTrackingConfiguration {
+   var defaultConfiguration: ARWorldTrackingConfiguration {
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = [.horizontal]
         configuration.environmentTexturing = .automatic
@@ -67,8 +47,11 @@ class CustomARView: ARView {
         
         if mode == .create {
             self.session.run(defaultConfiguration)
+            presenterType = .create
+            createViewPresenter = (self.viewPresenter as! CreateViewPresenter)
         } else if mode == .play {
             loadSession(number: 0)
+            presenterType = .play
         }
         
         self.session.delegate = self
@@ -79,8 +62,9 @@ class CustomARView: ARView {
     // MARK: - AR content
     
     var actionButtonsAnchorEntity: Entity?
-    var tappedObject: Entity?
-    
+    var tappedObject: CustomModelEntity?
+    var presenterType: PresenterType?
+    var createViewPresenter: CreateViewPresenter?
     
     var virtualObjectAnchor: ARAnchor?
     let virtualObjectAnchorName = "virtualObject"

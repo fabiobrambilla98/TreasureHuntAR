@@ -27,12 +27,13 @@ class ParchmentEntity: ObjectEntity, ObservableObject {
         var width: CGFloat = .infinity
     }
     
-    init(modelName: String, anchorEntity: AnchorEntity? = nil, scene: RealityKit.Scene? = nil, parchmentText: String? = nil, textPosition: SIMD3<Float>? = nil, identifier: UUID? = nil) {
-        super.init(name: modelName, id: (identifier != nil) ? identifier! : UUID())
+    
+    init(modelName: String, anchorEntity: AnchorEntity? = nil, scene: RealityKit.Scene? = nil, parchmentText: String? = nil, textPosition: SIMD3<Float>? = nil, identifier: UUID = UUID()) {
+        super.init(name: modelName, identifier: identifier)
         self.offset = getImageOffset(modelName)
         
         if #available(iOS 15.0, *) {
-            
+
             textureRequest = TextureResource.loadAsync(named: modelName, in: nil).sink { (error) in
                 print(error)
             } receiveValue: { (texture) in
@@ -53,7 +54,9 @@ class ParchmentEntity: ObjectEntity, ObservableObject {
                 material.color = .init(tint: .white.withAlphaComponent(0.99),
                                        texture: MaterialParameters.Texture(texture))
                 
-                self.modelEntity = ModelEntity(mesh: mesh, materials: [material])
+                
+                
+                self.modelEntity = CustomModelEntity(mesh: mesh, materials: [material])
                 self.modelEntity?.width = self.width
                 self.modelEntity?.height = self.height
                 self.modelEntity?.name = "parchment"
@@ -68,17 +71,22 @@ class ParchmentEntity: ObjectEntity, ObservableObject {
                         lineBreakMode: .byWordWrapping)
                     
                     let sm = UnlitMaterial(color: UIColor.white)
+                    
                     let textEntity = ModelEntity(mesh: mesh, materials: [sm])
                     
-                    self.modelEntity!.name = "parchment"
+                    self.modelEntity!.addChild(textEntity)
+                    
+                    textEntity.setPosition(textPosition!, relativeTo: self.modelEntity!)
+                    
+                    self.modelEntity!.generateCollisionShapes(recursive: true)
+                    
                     self.modelEntity!.identifier = identifier
                     self.modelEntity!.objectEntity = self
+                    self.modelEntity!.synchronization = nil
                     
-                    self.modelEntity!.addChild(textEntity)
-                    textEntity.setPosition(textPosition!, relativeTo: self.modelEntity!)
-                    self.modelEntity!.generateCollisionShapes(recursive: true)
                     anchorEntity?.addChild(self.modelEntity!)
                     scene?.addAnchor(anchorEntity!)
+                    
                     
                 
                 }

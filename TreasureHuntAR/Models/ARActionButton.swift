@@ -20,7 +20,7 @@ protocol ARActionButtonProtocol {
 }
 
 class ARActionButton: ARActionButtonProtocol{
-    var modelEntity: Entity?
+    var modelEntity: Entity? = nil
     var textureRequest: AnyCancellable? = nil
     
     init(_ modelEntity: Entity? = nil, type: ARActionButtonTypes) {

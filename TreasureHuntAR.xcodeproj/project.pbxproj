@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FA1335FB2812E63A00145CD8 /* ParchmentPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1335FA2812E63A00145CD8 /* ParchmentPopup.swift */; };
+		FA16D3B828257F3700059EC5 /* CustomModelEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA16D3B728257F3700059EC5 /* CustomModelEntity.swift */; };
 		FA1975A32822CF4A005AB0E2 /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1975A22822CF4A005AB0E2 /* DispatchQueue.swift */; };
 		FA2FAD2A281AD77A0087CE46 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2FAD29281AD77A0087CE46 /* Array.swift */; };
 		FA2FAD2C281AF0100087CE46 /* SIM3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2FAD2B281AF0100087CE46 /* SIM3D.swift */; };
@@ -16,9 +17,15 @@
 		FA2FAD33281EB6E30087CE46 /* TreasureHuntCardGreed.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2FAD32281EB6E30087CE46 /* TreasureHuntCardGreed.swift */; };
 		FA2FAD52281FCEB00087CE46 /* SelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2FAD51281FCEB00087CE46 /* SelectView.swift */; };
 		FA2FAD54281FCF560087CE46 /* SelectViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2FAD53281FCF560087CE46 /* SelectViewPresenter.swift */; };
+		FA31B5FF2828720200DA75FE /* MapSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA31B5FE2828720200DA75FE /* MapSheet.swift */; };
 		FA32843F2810459D00E36A3E /* MyItemBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA32843E2810459D00E36A3E /* MyItemBar.swift */; };
 		FA3284412810517F00E36A3E /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3284402810517F00E36A3E /* List.swift */; };
 		FA3284432810557500E36A3E /* EButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3284422810557500E36A3E /* EButton.swift */; };
+		FA332AA82826A5FB006E9EFE /* c_treasure_01.usdz in Resources */ = {isa = PBXBuildFile; fileRef = FA332AA72826A5FB006E9EFE /* c_treasure_01.usdz */; };
+		FA332AAB2826C95D006E9EFE /* RKAssetLoading in Frameworks */ = {isa = PBXBuildFile; productRef = FA332AAA2826C95D006E9EFE /* RKAssetLoading */; };
+		FA332AAD2826D373006E9EFE /* ParchmentPlayPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA332AAC2826D373006E9EFE /* ParchmentPlayPopup.swift */; };
+		FA332AB128271EB0006E9EFE /* SessionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA332AB028271EB0006E9EFE /* SessionButton.swift */; };
+		FA332AB32827F4D5006E9EFE /* ARAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA332AB22827F4D5006E9EFE /* ARAnchor.swift */; };
 		FA45C42228200F49007C134C /* ParchmentGreed.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA45C42128200F49007C134C /* ParchmentGreed.swift */; };
 		FA45C424282019AC007C134C /* ParchmentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA45C423282019AC007C134C /* ParchmentItem.swift */; };
 		FA45C42C28227F1B007C134C /* SessionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA45C42B28227F1B007C134C /* SessionData.swift */; };
@@ -55,7 +62,6 @@
 		FA8EA8C02817EAAC00FD4E27 /* c_treasure_01.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8EA8BF2817EAAC00FD4E27 /* c_treasure_01.png */; };
 		FA8EA8C228180A5F00FD4E27 /* Treasure.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8EA8C128180A5F00FD4E27 /* Treasure.swift */; };
 		FA8EA8C428180C0800FD4E27 /* HorizontalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8EA8C328180C0800FD4E27 /* HorizontalView.swift */; };
-		FA8EA8CA281823D500FD4E27 /* c_treasure_01.usdz in Resources */ = {isa = PBXBuildFile; fileRef = FA8EA8C9281823D500FD4E27 /* c_treasure_01.usdz */; };
 		FA97AB282812F1B200BF7B70 /* p_parchment_05-30-30-120.png in Resources */ = {isa = PBXBuildFile; fileRef = FA97AB272812F1B200BF7B70 /* p_parchment_05-30-30-120.png */; };
 		FAA2348328108F3A00812D63 /* SButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA2348228108F3A00812D63 /* SButton.swift */; };
 		FAA23485281091E900812D63 /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA23484281091E900812D63 /* XButton.swift */; };
@@ -90,6 +96,7 @@
 
 /* Begin PBXFileReference section */
 		FA1335FA2812E63A00145CD8 /* ParchmentPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParchmentPopup.swift; sourceTree = "<group>"; };
+		FA16D3B728257F3700059EC5 /* CustomModelEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModelEntity.swift; sourceTree = "<group>"; };
 		FA1975A22822CF4A005AB0E2 /* DispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
 		FA2FAD29281AD77A0087CE46 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		FA2FAD2B281AF0100087CE46 /* SIM3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIM3D.swift; sourceTree = "<group>"; };
@@ -98,9 +105,14 @@
 		FA2FAD32281EB6E30087CE46 /* TreasureHuntCardGreed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureHuntCardGreed.swift; sourceTree = "<group>"; };
 		FA2FAD51281FCEB00087CE46 /* SelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectView.swift; sourceTree = "<group>"; };
 		FA2FAD53281FCF560087CE46 /* SelectViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewPresenter.swift; sourceTree = "<group>"; };
+		FA31B5FE2828720200DA75FE /* MapSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSheet.swift; sourceTree = "<group>"; };
 		FA32843E2810459D00E36A3E /* MyItemBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyItemBar.swift; sourceTree = "<group>"; };
 		FA3284402810517F00E36A3E /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		FA3284422810557500E36A3E /* EButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EButton.swift; sourceTree = "<group>"; };
+		FA332AA72826A5FB006E9EFE /* c_treasure_01.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = c_treasure_01.usdz; path = ../../../../../Documents/c_treasure_01.usdz; sourceTree = "<group>"; };
+		FA332AAC2826D373006E9EFE /* ParchmentPlayPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParchmentPlayPopup.swift; sourceTree = "<group>"; };
+		FA332AB028271EB0006E9EFE /* SessionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionButton.swift; sourceTree = "<group>"; };
+		FA332AB22827F4D5006E9EFE /* ARAnchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARAnchor.swift; sourceTree = "<group>"; };
 		FA45C42128200F49007C134C /* ParchmentGreed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParchmentGreed.swift; sourceTree = "<group>"; };
 		FA45C423282019AC007C134C /* ParchmentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParchmentItem.swift; sourceTree = "<group>"; };
 		FA45C42B28227F1B007C134C /* SessionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionData.swift; sourceTree = "<group>"; };
@@ -139,7 +151,6 @@
 		FA8EA8BF2817EAAC00FD4E27 /* c_treasure_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = c_treasure_01.png; sourceTree = "<group>"; };
 		FA8EA8C128180A5F00FD4E27 /* Treasure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Treasure.swift; sourceTree = "<group>"; };
 		FA8EA8C328180C0800FD4E27 /* HorizontalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalView.swift; sourceTree = "<group>"; };
-		FA8EA8C9281823D500FD4E27 /* c_treasure_01.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = c_treasure_01.usdz; sourceTree = "<group>"; };
 		FA97AB272812F1B200BF7B70 /* p_parchment_05-30-30-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "p_parchment_05-30-30-120.png"; sourceTree = "<group>"; };
 		FAA2348228108F3A00812D63 /* SButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SButton.swift; sourceTree = "<group>"; };
 		FAA23484281091E900812D63 /* XButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XButton.swift; sourceTree = "<group>"; };
@@ -164,6 +175,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA332AAB2826C95D006E9EFE /* RKAssetLoading in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +187,9 @@
 			children = (
 				FA45C42128200F49007C134C /* ParchmentGreed.swift */,
 				FA45C423282019AC007C134C /* ParchmentItem.swift */,
+				FA332AAC2826D373006E9EFE /* ParchmentPlayPopup.swift */,
+				FA332AB028271EB0006E9EFE /* SessionButton.swift */,
+				FA31B5FE2828720200DA75FE /* MapSheet.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -362,6 +377,7 @@
 				FA2FAD2B281AF0100087CE46 /* SIM3D.swift */,
 				FA1975A22822CF4A005AB0E2 /* DispatchQueue.swift */,
 				FA70D3012823D49000DB54F2 /* Image.swift */,
+				FA332AB22827F4D5006E9EFE /* ARAnchor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -422,6 +438,7 @@
 				FA8EA8AA2815369D00FD4E27 /* ARActionButton.swift */,
 				FA8EA8C128180A5F00FD4E27 /* Treasure.swift */,
 				FA45C42B28227F1B007C134C /* SessionData.swift */,
+				FA16D3B728257F3700059EC5 /* CustomModelEntity.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -462,7 +479,7 @@
 		FA8EA8BA2817E68100FD4E27 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FA8EA8C9281823D500FD4E27 /* c_treasure_01.usdz */,
+				FA332AA72826A5FB006E9EFE /* c_treasure_01.usdz */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -542,6 +559,7 @@
 			);
 			name = TreasureHuntAR;
 			packageProductDependencies = (
+				FA332AAA2826C95D006E9EFE /* RKAssetLoading */,
 			);
 			productName = TreasureHuntAR;
 			productReference = FA48EE3F280E99410033B407 /* TreasureHuntAR.app */;
@@ -573,6 +591,7 @@
 			);
 			mainGroup = FA48EE36280E99410033B407;
 			packageReferences = (
+				FA332AA92826C95D006E9EFE /* XCRemoteSwiftPackageReference "RealityKit-Asset-Loading" */,
 			);
 			productRefGroup = FA48EE40280E99410033B407 /* Products */;
 			projectDirPath = "";
@@ -597,9 +616,9 @@
 				FA564F9928140501002B050C /* p_parchment_02-40-30-180.png in Resources */,
 				FAE30FC4280EACCB00DB682C /* Localizable.strings in Resources */,
 				FA97AB282812F1B200BF7B70 /* p_parchment_05-30-30-120.png in Resources */,
-				FA8EA8CA281823D500FD4E27 /* c_treasure_01.usdz in Resources */,
 				FA48EE47280E99470033B407 /* Assets.xcassets in Resources */,
 				FAE30FCA280ECF5A00DB682C /* treasure.ttf in Resources */,
+				FA332AA82826A5FB006E9EFE /* c_treasure_01.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -616,11 +635,13 @@
 				FA32843F2810459D00E36A3E /* MyItemBar.swift in Sources */,
 				FA2FAD2C281AF0100087CE46 /* SIM3D.swift in Sources */,
 				FA6CB146280F3094007E2FDC /* MyBlur.swift in Sources */,
+				FA332AAD2826D373006E9EFE /* ParchmentPlayPopup.swift in Sources */,
 				FAA234C52812A6B000812D63 /* CustomARView+Session.swift in Sources */,
 				FA8EA8C228180A5F00FD4E27 /* Treasure.swift in Sources */,
 				FA6CB16328101593007E2FDC /* FileManager.swift in Sources */,
 				FA6CB150280F3284007E2FDC /* ViewSelection.swift in Sources */,
 				FA45C42C28227F1B007C134C /* SessionData.swift in Sources */,
+				FA31B5FF2828720200DA75FE /* MapSheet.swift in Sources */,
 				FA1975A32822CF4A005AB0E2 /* DispatchQueue.swift in Sources */,
 				FA2FAD2E281C076D0087CE46 /* SaveMapPopup.swift in Sources */,
 				FA2FAD2A281AD77A0087CE46 /* Array.swift in Sources */,
@@ -651,9 +672,12 @@
 				FA6CB159280FF1C4007E2FDC /* AppService.swift in Sources */,
 				FA45C42228200F49007C134C /* ParchmentGreed.swift in Sources */,
 				FAA234C72812BDCF00812D63 /* ObjectEntity.swift in Sources */,
+				FA332AB32827F4D5006E9EFE /* ARAnchor.swift in Sources */,
+				FA16D3B828257F3700059EC5 /* CustomModelEntity.swift in Sources */,
 				FAA234C12812A66800812D63 /* CustomARView+Persistence.swift in Sources */,
 				FAA234A32811638B00812D63 /* BackButton.swift in Sources */,
 				FA2FAD54281FCF560087CE46 /* SelectViewPresenter.swift in Sources */,
+				FA332AB128271EB0006E9EFE /* SessionButton.swift in Sources */,
 				FA1335FB2812E63A00145CD8 /* ParchmentPopup.swift in Sources */,
 				FA6CB149280F30F8007E2FDC /* ContentLink.swift in Sources */,
 				FA45C424282019AC007C134C /* ParchmentItem.swift in Sources */,
@@ -881,6 +905,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FA332AA92826C95D006E9EFE /* XCRemoteSwiftPackageReference "RealityKit-Asset-Loading" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Reality-Dev/RealityKit-Asset-Loading";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FA332AAA2826C95D006E9EFE /* RKAssetLoading */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA332AA92826C95D006E9EFE /* XCRemoteSwiftPackageReference "RealityKit-Asset-Loading" */;
+			productName = RKAssetLoading;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FA48EE37280E99410033B407 /* Project object */;
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SelectView: View {
-    @StateObject var presenter: SelectViewPresenter
+    @ObservedObject var presenter: SelectViewPresenter
     
     var body: some View {
         ZStack{

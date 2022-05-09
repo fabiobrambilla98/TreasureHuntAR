@@ -28,7 +28,7 @@ class StoreModelEntity: Codable {
     var size: SIMD3<Float>
     var position: SIMD3<Float>
     var text: String
-    var id: UUID
+    var identifier: UUID
     
     
     private enum CodingKeys: String, CodingKey {
@@ -38,17 +38,17 @@ class StoreModelEntity: Codable {
         case size
         case position
         case text
-        case id
+        case identifier
     }
     
-    init(transform: simd.float4x4, name: String, type: ModelTypes, size: SIMD3<Float>, position: SIMD3<Float> = SIMD3<Float>.init(), text: String = "", id: UUID) {
+    init(transform: simd.float4x4, name: String, type: ModelTypes, size: SIMD3<Float>, position: SIMD3<Float> = SIMD3<Float>.init(), text: String = "", identifier: UUID) {
         self.transform = transform
         self.name = name
         self.type = type
         self.size = size
         self.position = position
         self.text = text
-        self.id = id
+        self.identifier = identifier
     }
     
     
@@ -68,7 +68,7 @@ class StoreModelEntity: Codable {
         
         text = try values.decode(String.self, forKey: .text)
         
-        id = try values.decode(UUID.self, forKey: .id)
+        identifier = try values.decode(UUID.self, forKey: .identifier)
     }
 }
 

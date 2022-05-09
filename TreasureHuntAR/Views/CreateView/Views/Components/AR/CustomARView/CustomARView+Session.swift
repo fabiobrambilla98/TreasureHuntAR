@@ -30,17 +30,39 @@ extension CustomARView: ARSessionDelegate {
     
     /// - Tag: CheckMappingStatus
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        if let presenter = viewPresenter as? CreateViewPresenter {
+        
+        
+        
+        if presenterType == .create {
+            
+            if createViewPresenter!.caputureImage {
+                let image = CIImage(cvPixelBuffer: frame.capturedImage)
+                let orientation = CGImagePropertyOrientation(rawValue: UInt32(UIDevice.current.orientation.rawValue))
+                
+                let context = CIContext(options: [.useSoftwareRenderer: false])
+                guard let data = context.jpegRepresentation(of: image.oriented(orientation!),
+                                                            colorSpace: CGColorSpaceCreateDeviceRGB(),
+                                                            options: [kCGImageDestinationLossyCompressionQuality as CIImageRepresentationOption: 0.7])
+                else {
+                    return
+                }
+                
+                
+                createViewPresenter!.startingPointCapturedImage = data
+                createViewPresenter!.caputureImage = false
+            }
+            
+            
+            
             switch frame.worldMappingStatus {
             case .extending, .mapped:
-                if(detectedFeaturePoints.count >= 0) {
-                    presenter.saveButtonEnabled = true
-                } else if(detectedFeaturePoints.count > 0 && presenter.saveButtonEnabled){
-                    presenter.saveButtonEnabled = false
+                if(!createViewPresenter!.saveButtonEnabled) {
+                    createViewPresenter!.saveButtonEnabled = true
                 }
+                
             default:
-                if(presenter.saveButtonEnabled) {
-                    presenter.saveButtonEnabled = false
+                if(createViewPresenter!.saveButtonEnabled) {
+                    createViewPresenter!.saveButtonEnabled = false
                 }
                 
                 
@@ -50,57 +72,50 @@ extension CustomARView: ARSessionDelegate {
                 actionButtonsAnchorEntity!.billboard(targetPosition: self.cameraTransform.translation)
                 
             }
-            
-            /*guard (frame.rawFeaturePoints != nil) else {
-             return
-             }
-             
-             for item in frame.rawFeaturePoints!.points {
-             if(!detectedFeaturePoints.contains(item)) {
-             detectedFeaturePoints.insert(item)
-             }
-             }*/
         }
         
-    }
-    
-    
-    // MARK: - ARSessionObserver
-    
-    func sessionWasInterrupted(_ session: ARSession) {
         
-    }
-    
-    func sessionInterruptionEnded(_ session: ARSession) {
-        
-        
-    }
-    
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        
-        guard error is ARError else { return }
-        
-        let errorWithInfo = error as NSError
-        let messages = [
-            errorWithInfo.localizedDescription,
-            errorWithInfo.localizedFailureReason,
-            errorWithInfo.localizedRecoverySuggestion
-        ]
-        
-        // Remove optional error messages.
-        let errorMessage = messages.compactMap({ $0 }).joined(separator: "\n")
-        
-        DispatchQueue.main.async {
-            print("ERROR: \(errorMessage)")
-            print("TODO: show error as an alert.")
-        }
-    }
-    
-    func sessionShouldAttemptRelocalization(_ session: ARSession) -> Bool {
-        return true
     }
     
 }
+
+
+// MARK: - ARSessionObserver
+
+func sessionWasInterrupted(_ session: ARSession) {
+    
+}
+
+func sessionInterruptionEnded(_ session: ARSession) {
+    
+    
+}
+
+func session(_ session: ARSession, didFailWithError error: Error) {
+    
+    guard error is ARError else { return }
+    
+    let errorWithInfo = error as NSError
+    let messages = [
+        errorWithInfo.localizedDescription,
+        errorWithInfo.localizedFailureReason,
+        errorWithInfo.localizedRecoverySuggestion
+    ]
+    
+    // Remove optional error messages.
+    let errorMessage = messages.compactMap({ $0 }).joined(separator: "\n")
+    
+    DispatchQueue.main.async {
+        print("ERROR: \(errorMessage)")
+        print("TODO: show error as an alert.")
+    }
+}
+
+func sessionShouldAttemptRelocalization(_ session: ARSession) -> Bool {
+    return true
+}
+
+
 
 
 

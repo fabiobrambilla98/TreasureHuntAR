@@ -15,35 +15,37 @@ struct PlayView: View {
         ZStack(alignment: .bottom){
             
             ARViewContainer(presenter: presenter).edgesIgnoringSafeArea(.all)
+            ZStack(alignment: .center) {
+                
+                HStack(spacing: 40) {
+                    Button(action: {
+                        self.presenter.showMapSheet = true
+                    }) {
+                        Image(systemName: "lightbulb.circle.fill").resizable().frame(width: 40, height: 40).scaledToFit().padding().foregroundColor(Color.white)
+                    }.sheet(isPresented: self.$presenter.showMapSheet) {
+                        MapSheet(presenter: presenter).navigationBarHidden(true)
+                    }
+                    
+                    
+                    Button(action: {
+                        self.presenter.showParchmentSheet = true
+                    }) {
+                        Image(systemName: "archivebox.circle.fill").resizable().frame(width: 40, height: 40).scaledToFit().padding().foregroundColor(Color.white)
+                    }.sheet(isPresented: self.$presenter.showParchmentSheet) {
+                        BrowseParchmentView().environmentObject(presenter)
+                    }
+                  
+                    if(presenter.sessionClueFound >= presenter.currentSessionClues && presenter.currentSession < presenter.mapSessions.count - 1 && presenter.currentSessionClues != 0) {
+                        SessionButton(type: .next).environmentObject(presenter)
+                    }
+                   
+                }
+            }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 70).background(Color.black.opacity(0.5))
+           
             
-            HStack {
-                Spacer()
-                Button(action: {}) {
-                    HStack {
-                        Image(systemName: "chevron.left")
-                        Text("Previ")
-                    }.frame(width: 100, alignment: .trailing)
-                }
-                Spacer()
-                Button(action: {
-                    self.presenter.showParchmentSheet = true
-                }) {
-                    Image(systemName: "archivebox.circle").resizable().frame(width: 50, height: 50).padding()
-                }.sheet(isPresented: self.$presenter.showParchmentSheet) {
-                    BrowseParchmentView().environmentObject(presenter)
-                }
-                Spacer()
-                Button(action: {}) {
-                    HStack {
-                        
-                        Text("Next")
-                        
-                        Image(systemName: "chevron.right")
-                    }.frame(width: 100, alignment: .leading)
-                }
-                Spacer()
-            }
-        }.fullScreen(alignment: .bottom).padding(.bottom)
+            
+            
+        }.fullScreen(alignment: .bottom)
          
         
     }

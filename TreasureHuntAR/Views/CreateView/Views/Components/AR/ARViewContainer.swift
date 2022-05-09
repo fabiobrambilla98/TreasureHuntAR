@@ -29,8 +29,13 @@ struct ARViewContainer: UIViewRepresentable {
         let arView = CustomARView(frame: .zero)
         arView.viewPresenter = self.presenter
         
+        
         arView.setup(mode: ((presenter as? CreateViewPresenter) != nil) ? .create : .play)
         
+        arView.renderOptions = [.disableMotionBlur,
+                                .disableDepthOfField,
+                                .disableGroundingShadows,
+                                .disableHDR]
         
         UIApplication.shared.isIdleTimerDisabled = true
         
@@ -61,6 +66,13 @@ struct ARViewContainer: UIViewRepresentable {
             if(presenter.newSessionButtonPressed) {
                 uiView.newSession()
                 presenter.newSessionButtonPressed = false
+            }
+            
+        } else if let presenter = self.presenter as? PlayViewPresenter {
+            
+            if(presenter.nextSessionButtonPressed.0) {
+                uiView.loadSession(number: presenter.nextSessionButtonPressed.1)
+                presenter.nextSessionButtonPressed = (false, 0)
             }
             
         }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreLocation
 import Combine
 import RealityKit
 
@@ -32,7 +33,7 @@ enum ShowAction {
 
 
 final class CreateViewPresenter: Presenters, CreateViewPresenting {
-   
+    
     private var service = AppService.shared
     
     var parchmentImages: [(String, UIImage)] = []
@@ -60,30 +61,52 @@ final class CreateViewPresenter: Presenters, CreateViewPresenting {
     
     // MARK: - AR properties
     var objectToAdd: ObjectEntity?
-    var parchmentToModify: Entity?
+    var parchmentToModify: CustomModelEntity?
     @Published var dataToBeStored: [SessionData] = []
     var currentSession: Int = 0
     
+    private var _startLocation: CLLocation? = nil
+    private let locationManager = CLLocationManager()
+    var startingPointCapturedImage: Data? = nil
+    var caputureImage: Bool = false
     
-    override init(){
+    
+    override init() {
         
         super.init()
         
-        self.parchmentImages = self.service.getModelNames(for: ModelTypes.parchment)
-        
-        self.treasureImages = self.service.getModelNames(for: ModelTypes.treasure)
-        
-        for name in self.parchmentImages {
-            self.lastSelected.append(name.0)
+        DispatchQueue.main.async { [weak self] in
+            self!.parchmentImages = self!.getModelsImages(for: .parchment)
+            
+            for name in self!.parchmentImages {
+                self!.lastSelected.append(name.0)
+            }
+            
+            self!.treasureImages =  self!.getModelsImages(for: .treasure)
+            
+            for name in self!.treasureImages {
+                self!.lastSelected.append(name.0)
+            }
+            
+            self!.mapAlreadySavedNames = self!.service.getAllStoredMapNames()
         }
-        
-        for name in self.treasureImages {
-            self.lastSelected.append(name.0)
-        }
-        
-        self.mapAlreadySavedNames = self.service.getAllStoredMapNames()
-        
+       
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
     }
+    
+    private func getModelsImages(for type: ModelTypes)  -> [(String, UIImage)] {
+        switch(type) {
+        case .parchment:
+            return self.service.getModelNames(for: type)
+        case .treasure:
+            return self.service.getModelNames(for: type)
+            
+        }
+   
+    }
+    
     
     func showBackAlert() {
         self.showAlert = true
@@ -128,6 +151,11 @@ final class CreateViewPresenter: Presenters, CreateViewPresenting {
     }
     
     func saveSession() {
+        if(currentSession == 0) {
+            caputureImage = true
+            guard let location = locationManager.location else {return}
+            _startLocation = location
+        }
         self.saveSessionButtonPressed = true
     }
     
@@ -144,6 +172,8 @@ final class CreateViewPresenter: Presenters, CreateViewPresenting {
     }
     
     func saveWorldMap(text: String) {
+        service.saveStartLocationImage(image: startingPointCapturedImage!, mapName: text)
+        service.saveLocation(location: _startLocation!, name: text)
         service.saveWorldMapPersistence(map: dataToBeStored, named: text)
         self.saveWorldMapPopupShow = false
     }

@@ -23,6 +23,8 @@ extension CustomARView {
         }
     }
     
+    
+    
     func loadSession(number: Int) {
         
         let worldMap: ARWorldMap = {
@@ -32,7 +34,7 @@ extension CustomARView {
             } else if let presenter = viewPresenter as? PlayViewPresenter {
                 data = presenter.mapSessions[number].sessionWorldMap
             }
-          
+            
             do {
                 guard let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data!)
                 else { fatalError("No ARWorldMap in archive.") }
@@ -42,17 +44,21 @@ extension CustomARView {
             }
         }()
         
+        
         let configuration = self.defaultConfiguration
         configuration.initialWorldMap = worldMap
-        self.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
-        isRelocalizingMap = true
-        
         if let presenter = viewPresenter as? CreateViewPresenter {
             virtualObjectAnchor = nil
             presenter.currentSession = number
         } else if let presenter = viewPresenter as? PlayViewPresenter {
             presenter.currentSession = number
+            presenter.currentSessionClues = 0
+            presenter.sessionClueFound = 0
         }
+        self.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+        isRelocalizingMap = true
+        
+        
         
         
     }
@@ -65,11 +71,22 @@ extension CustomARView {
                     return
                 }
                 
+                for anchorMap in map.anchors {
+                    if anchorMap.name == "parchment" {
+                        for model in self.sessionModelEntities {
+                            if model.identifier == anchorMap.identifier {
+                                model.transform = anchorMap.transform
+                            }
+                        }
+                    }
+                }
+                
+                
                 do {
                     let data = try NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
                     
                     if(presenter.currentSession >= presenter.dataToBeStored.count) {
-                       
+                        
                         presenter.dataToBeStored.append(SessionData(data: data, modelEntities: self.sessionModelEntities))
                         
                     } else {

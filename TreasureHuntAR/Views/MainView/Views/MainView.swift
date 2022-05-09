@@ -11,6 +11,8 @@ enum ButtonType {
     case playButton, createButton
 }
 
+
+
 struct MainView: View {
     typealias buttonType = ButtonType
     @State var selection: ViewSelection? = nil
@@ -29,8 +31,8 @@ struct MainView: View {
                 Image(Utils.mainImage.rawValue).resizable().frame(width: 320, height: 180).padding(.top, 50.0)
                 Spacer()
                 VStack (spacing: 30){
-                    MyButton(text: "play", type: buttonType.playButton, presenter: presenter)
-                    MyButton(text: "create", type: buttonType.createButton, presenter: presenter)
+                    MyButton(text: "play", type: buttonType.playButton)
+                    MyButton(text: "create", type: buttonType.createButton)
                 }
                 Spacer()
             }.padding(.bottom, 30)

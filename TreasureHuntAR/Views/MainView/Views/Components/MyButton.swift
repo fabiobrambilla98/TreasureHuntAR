@@ -7,25 +7,24 @@
 
 import SwiftUI
 
-struct MyButton<P: MainViewPresenting & ContentFlowStateProtocol>: View {
-    
+struct MyButton: View {
     var text: String
     var type: ButtonType
-    @StateObject var presenter: P
-    @State var isActive = false
+    @State private var selectedType: ButtonType?
+    
     var body: some View {
-        return NavigationLink(destination: destination(type: type), isActive: $isActive) {
-            Button(action: {
-                isActive = true
-            } ) {
-                Text(LocalizedStringKey(text))
-                    .font(.title)
-            }.frame(minWidth: 0, maxWidth: 90)
-                .padding()
-                .foregroundColor(.white)
-                .background(LinearGradient(gradient: Gradient(colors: [Color("DarkBlue"), Color("LightBlue")]), startPoint: .leading, endPoint: .trailing))
-                .cornerRadius(40)
-        }
+        Button(action: {
+            self.selectedType = type
+        } ) {
+            Text(LocalizedStringKey(text))
+                .font(.title)
+        }.frame(minWidth: 0, maxWidth: 90)
+            .padding()
+            .foregroundColor(.white)
+            .background(LinearGradient(gradient: Gradient(colors: [Color("DarkBlue"), Color("LightBlue")]), startPoint: .leading, endPoint: .trailing))
+            .cornerRadius(40)
+            .navigate(using: $selectedType, destination: makeDestination)
+        
     }
     
     private func destination(type: ButtonType) -> some View {
@@ -37,7 +36,15 @@ struct MyButton<P: MainViewPresenting & ContentFlowStateProtocol>: View {
         }
     }
     
-    
+    @ViewBuilder
+    private func makeDestination(for type: ButtonType) -> some View {
+        switch(type) {
+        case .playButton:
+            AnyView(SelectView(presenter: SelectViewPresenter()))
+        case .createButton:
+            AnyView(CreateView(presenter: CreateViewPresenter()))
+        }
+    }
 }
 
 
