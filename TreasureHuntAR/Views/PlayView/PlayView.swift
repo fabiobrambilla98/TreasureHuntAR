@@ -15,7 +15,31 @@ struct PlayView: View {
         ZStack(alignment: .bottom){
             
             ARViewContainer(presenter: presenter).edgesIgnoringSafeArea(.all)
+            
+            ZStack(alignment: .topTrailing) {
+                HStack {
+                    VStack {
+                        Text("Parchment")
+                        ZStack {
+                            Text("\(presenter.parchmentsFound.count)/\(presenter.currentSessionClues)").foregroundColor(Color.white)
+                        }.frame(width: 40, height:30).background(Color.black.opacity(0.4))
+                            .cornerRadius(10)
+                    }
+                    VStack {
+                        Text("Session")
+                        ZStack {
+                            Text("\(presenter.currentSession + 1)/\(presenter.mapSessions.count)").foregroundColor(Color.white)
+                        }.frame(width: 40, height:30).background(Color.black.opacity(0.4)).cornerRadius(10)
+                    }
+                }.padding(.top, 40)
+                    .padding(.trailing)
+            }.fullScreen(alignment: .topTrailing)
+                .edgesIgnoringSafeArea(.all)
+            
+            
+            
             ZStack(alignment: .center) {
+                
                 
                 HStack(spacing: 40) {
                     Button(action: {
@@ -46,8 +70,7 @@ struct PlayView: View {
             
             
         }.fullScreen(alignment: .bottom)
-         
-        
+            
     }
     
    

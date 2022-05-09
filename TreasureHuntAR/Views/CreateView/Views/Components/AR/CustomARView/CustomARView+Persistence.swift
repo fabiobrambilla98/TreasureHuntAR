@@ -78,6 +78,7 @@ extension CustomARView {
                                 model.transform = anchorMap.transform
                             }
                         }
+                        
                     }
                 }
                 

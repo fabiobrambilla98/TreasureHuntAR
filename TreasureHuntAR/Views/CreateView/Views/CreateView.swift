@@ -13,7 +13,8 @@ import Combine
 
 
 struct CreateView: View {
-    
+    @State var text: String = ""
+    @State var showErrorMessage: Bool = false
     @ObservedObject var presenter: CreateViewPresenter
     var body: some View {
         
@@ -40,7 +41,7 @@ struct CreateView: View {
                     presenter.parchmentToModify = nil
                 }
             }
-         
+            
             if(presenter.saveWorldMapPopupShow) {
                 SaveMapPopup().environmentObject(presenter)
             }
@@ -49,18 +50,27 @@ struct CreateView: View {
         }.edgesIgnoringSafeArea(.all).fullScreen(alignment: .bottom).navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: BackButton(presenter: self.presenter), trailing:
                                     HStack(spacing: 15) {
+                if(presenter.dataToBeStored.count >= 1) {
+                    Button(action: {
+                        withAnimation(.easeInOut) {
+                            presenter.saveWorldMapPopupShow = true
+                        }
+                    }) {
+                        ZStack {
+                            Image(systemName: "tray.and.arrow.down").foregroundColor(Color.white)
+                        }.frame(width: 38, height: 38).background(Color.black.opacity(0.7)).cornerRadius(100)
+                    }.padding(.top)
+                }
                 Button(action: {
                     withAnimation(.easeInOut) {
-                        presenter.saveWorldMapPopupShow = true
-                    }
-                }) {
-                    Text("Save")
-                }
-                Button(action: {self.presenter.listSelector(action: .open)}) {
-                    Image(systemName: "list.bullet")
-                }
+                        self.presenter.listSelector(action: .open)}}) {
+                    ZStack {
+                        Image(systemName: "list.bullet").foregroundColor(Color.white)
+                    }.frame(width: 38, height: 38).background(Color.black.opacity(0.7)).cornerRadius(100)
+                }.padding(.top)
             })
-            
+        
+        
     }
 }
 
@@ -69,12 +79,12 @@ struct CreateView: View {
 
 
 struct ARVC: UIViewRepresentable {
-
+    
     
     func makeUIView(context: Context) -> ARView {
         
         let arView = ARView(frame: .zero)
-       
+        
         UIApplication.shared.isIdleTimerDisabled = true
         
         return arView

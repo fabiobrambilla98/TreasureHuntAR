@@ -53,10 +53,11 @@ extension CustomARView {
             
             if let entity = self.entity(at: point) {
                 if let actionEntity = entity.anchor, entity.name == "deleteButton" {
+                    self.sessionModelEntities.remove(tappedObject!.objectEntity!.identifier)
                     self.scene.removeAnchor(actionEntity)
                     self.scene.removeAnchor(tappedObject!.anchor!)
-                    tappedObject = nil
                     
+                    tappedObject = nil
                 } else if entity.name == "modifyButton" {
                     
                     presenter.parchmentText = tappedObject!.parchmentText!.replacingOccurrences(of: "\n", with: "")

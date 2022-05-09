@@ -14,39 +14,42 @@ struct SceneListPopup: View {
         ZStack {
             
             ZStack {
-                VisualEffectView(effect: UIBlurEffect(style: .dark))
                 
                 VStack(spacing: 10){
                     Text("Select the scene to load").foregroundColor(Color.white).padding(.top)
                     Divider().foregroundColor(Color.white)
                     ScrollView(.vertical, showsIndicators: false) {
-                        VStack {
+                        VStack(spacing: 15) {
                             ForEach(0 ..< presenter.dataToBeStored.count, id: \.self) { index in
                                 Button(action: {
                                     self.presenter.loadSession(number: index)
                                 }) {
                                     Text("Scena \(index)")
                                     
-                                }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, idealHeight: 40)
+                                }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 40)
                             }
                             
                         }
                         
-                    }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                    }
                     
-                    Divider().padding(.bottom, -3.0).foregroundColor(Color.white)
-                    Button(action: {
-                        self.presenter.listSelector(action: .close)
-                    }) {
-                        Text("Cancel")
-                    }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 42)
+                    VStack {
+                        
+                        Divider().foregroundColor(Color.white)
+                        Button(action: {
+                            self.presenter.listSelector(action: .close)
+                        }) {
+                            Text("Cancel").font(.title3)
+                        }
+                            
+                    }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 42).padding(.bottom, 5)
+                    
                     
                 }
             }.frame(minWidth: 0, maxWidth: 270, minHeight: 0, maxHeight: 200, alignment: .bottom)
                 .background(Color.black.opacity(0.8))
                 .cornerRadius(20)
-                .padding(.bottom, -5)
-        }.fullScreen(alignment: .center).edgesIgnoringSafeArea(.all)
+        }.fullScreen(alignment: .center).edgesIgnoringSafeArea(.all).background(Color.black.opacity(0.4))
     }
 }
 

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ARKit
 
 struct ItemsGreed: View {
     
@@ -16,7 +17,7 @@ struct ItemsGreed: View {
             HorizontalView(text: "Parchments", type: ModelTypes.parchment).environmentObject(presenter)
             HorizontalView(text: "Treasures", type: ModelTypes.treasure
             ).environmentObject(presenter)
-        }
+        }.padding()
     }
 }
 

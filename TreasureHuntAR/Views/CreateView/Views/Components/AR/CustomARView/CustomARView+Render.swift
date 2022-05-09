@@ -130,7 +130,7 @@ extension CustomARView {
                 
                 let anchorEntityPlane = AnchorEntity(anchor: anchor)
                 anchorEntityPlane.generateCollisionShapes(recursive: false)
-                anchorEntityPlane.setPosition(SIMD3<Float>(0.00, tappedObject!.height!, 0.00), relativeTo: nil)
+                anchorEntityPlane.setPosition(SIMD3<Float>(0.00, tappedObject!.scale.y / 3, 0.00), relativeTo: nil)
                 
                 
                 anchorEntityPlane.addChild(deleteButtonEntity.modelEntity!)
@@ -155,7 +155,7 @@ extension CustomARView {
                 
                 self.actionButtonsAnchorEntity = anchorEntityPlane
                 self.scene.addAnchor(anchorEntityPlane)
-                
+                tappedObject
                 
                 
             } else {
@@ -171,9 +171,10 @@ extension CustomARView {
                         let anchorEntity = AnchorEntity(anchor: anchor)
                        _ = ParchmentEntity( modelName: offModel.name, anchorEntity: anchorEntity, scene: self.scene,
                                          parchmentText: offModel.text,textPosition: offModel.position, identifier: offModel.identifier)
+                        presenter.currentSessionClues += 1
                     }
                 }
-                presenter.currentSessionClues += 1
+                
             } else if anchor.name == "treasure" {
                 
                 let anchorEntity = AnchorEntity(anchor: anchor)

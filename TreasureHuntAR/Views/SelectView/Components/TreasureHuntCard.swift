@@ -50,7 +50,7 @@ struct TreasureHuntCard: View {
                     role: .destructive,
                     action: {
                         withAnimation {
-                            
+                            presenter.deleteMap(mapName: name)
                         }
                     }
                 ) {

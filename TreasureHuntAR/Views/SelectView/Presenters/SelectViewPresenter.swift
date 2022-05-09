@@ -14,7 +14,7 @@ final class SelectViewPresenter: ObservableObject {
     @Published var activeLink: ContentLink?
     
     private var service: AppService = AppService.shared
-    var treasureHuntListNames: [String] = []
+    @Published var treasureHuntListNames: [String] = []
     @Published var cardImages: [(String, UIImage)] = []
     
     deinit {
@@ -31,6 +31,12 @@ final class SelectViewPresenter: ObservableObject {
     func getImage(named name: String) -> UIImage {
         
         return service.getStartLocationImage(mapName: name).rotate(radians: 90 * .pi/180)!
+    }
+    
+    func deleteMap(mapName: String) {
+        service.deleteMap(mapName: mapName)
+        treasureHuntListNames.remove(mapName)
+        cardImages.remove(mapName)        
     }
     
 }

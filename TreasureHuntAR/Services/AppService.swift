@@ -95,6 +95,11 @@ final class AppService: AppServiceProtocol {
         UserDefaults.standard.set(image, forKey: "img_\(mapName)")
     }
     
+    func deleteMap(mapName: String) {
+        UserDefaults.standard.removeObject(forKey: "m_\(mapName)")
+        UserDefaults.standard.removeObject(forKey: "img_\(mapName)")
+        UserDefaults.standard.removeObject(forKey: "l_\(mapName)")
+    }
     
     func getStartAllStartLocationImage(mapNames: [String]) -> [(String, UIImage)] {
         var returnArray: [(String, UIImage)] = []

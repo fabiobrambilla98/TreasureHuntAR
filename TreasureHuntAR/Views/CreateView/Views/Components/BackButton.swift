@@ -18,10 +18,10 @@ struct BackButton: View {
             self.presenter.showBackAlert()
         })
         {
-            HStack {
-                Image(systemName: "chevron.backward")
-                Text("back").font(Font.custom("treasure", size: 20))
-            }
+                ZStack {
+                    Image(systemName: "chevron.backward").foregroundColor(Color.white)
+                }.frame(width: 38, height: 38).background(Color.black.opacity(0.7)).cornerRadius(100)
+      
         }
         .alert(isPresented: self.$presenter.showAlert) {
             Alert(
@@ -33,7 +33,8 @@ struct BackButton: View {
                 },
                 secondaryButton: .cancel()
             )
-        }.layoutPriority(.infinity)
+        }.padding(.top).layoutPriority(.infinity)
+            
         
         
     }
