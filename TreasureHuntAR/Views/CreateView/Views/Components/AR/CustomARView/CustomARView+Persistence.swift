@@ -72,7 +72,7 @@ extension CustomARView {
                 }
                 
                 for anchorMap in map.anchors {
-                    if anchorMap.name == "parchment" {
+                    if anchorMap.name == "parchment" || anchorMap.name == "treasure" {
                         for model in self.sessionModelEntities {
                             if model.identifier == anchorMap.identifier {
                                 model.transform = anchorMap.transform

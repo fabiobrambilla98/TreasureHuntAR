@@ -27,4 +27,6 @@ class CustomModelEntity: Entity, HasModel, HasCollision {
     required init() {
         fatalError("init() has not been implemented")
     }
+    
+    
 }

@@ -24,11 +24,11 @@ extension CustomARView {
             let mesh = MeshResource.generateText(
                 text,
                 extrusionDepth: 0.0001,
-                font: .systemFont(ofSize: 0.01),
+                font: .systemFont(ofSize: 0.018),
                 containerFrame: CGRect(x: 0, y: 0, width: 0.3, height: 0.3),
                 alignment: .left,
                 lineBreakMode: .byWordWrapping)
-            
+                
             let sm = UnlitMaterial(color: UIColor.white)
             let textEntity = ModelEntity(mesh: mesh, materials: [sm])
             
@@ -45,7 +45,7 @@ extension CustomARView {
             
             let xWidth = Float(
                 Float(parchmentEntity.width) * Float(parchmentEntity.offset.x * screenScale * 0.0002645833))
-            let yWidth = Float(250*screenScale*0.0002645833)
+            let yWidth =  Float(250*screenScale*0.0002645833)
             
             let xHeight = Float(
                 Float(parchmentEntity.height) * Float(parchmentEntity.offset.y * screenScale * 0.0002645833))
@@ -58,7 +58,7 @@ extension CustomARView {
             modelEntity.addChild(textEntity)
             textEntity.setPosition(SIMD3<Float>(-presenter.objectToAdd!.width/2 + xWidth/yWidth, -presenter.objectToAdd!.height/2 - xHeight/yHeight, 0.001), relativeTo: modelEntity)
             
-            self.sessionModelEntities = self.sessionModelEntities.map({if (parchmentEntity.identifier == $0.identifier) {$0.text = text;$0.position = textEntity.position}; return $0})
+            self.sessionModelEntities = self.sessionModelEntities.map({if (parchmentEntity.identifier == $0.identifier) {$0.text = text;$0.textPosition = textEntity.position}; return $0})
             
             self.scene.addAnchor(modelEntity.anchor!)
         }
@@ -77,18 +77,23 @@ extension CustomARView {
                     
                     modelEntity.generateCollisionShapes(recursive: true)
                     
-                    self.installGestures([.rotation, .scale], for: modelEntity)
+                    /*self.installGestures([.rotation, .scale], for: modelEntity)*/
+                   
+                    self.installGestures([.rotation, .scale], for: modelEntity).forEach { entityGesture in
+                            entityGesture.addTarget(self, action: #selector(handleEntityGesture(_:)))
+                        }
+                
+                    
                     
                     // Add modelEntity and anchorEntity into the scene for rendering
                     let anchorEntity = AnchorEntity(anchor: anchor)
                     modelEntity.type = .none
                     modelEntity.name = "parchment"
-                    
+                    modelEntity.identifier = presenter.objectToAdd!.identifier
                     anchorEntity.addChild(modelEntity)
                     
                     self.scene.addAnchor(anchorEntity)
                     self.sessionModelEntities.append(StoreModelEntity(transform: anchor.transform, name: presenter.objectToAdd!.modelName, type: .parchment, size: modelEntity.scale, identifier: presenter.objectToAdd!.identifier))
-                    
                     
                 } else {
                     print("DEBUG: Unable to load modelEntity for")
@@ -104,13 +109,15 @@ extension CustomARView {
                     
                     modelEntity.generateCollisionShapes(recursive: true)
                     
-                    self.installGestures([.rotation, .scale], for: modelEntity)
+                    self.installGestures([.rotation, .scale], for: modelEntity).forEach { entityGesture in
+                            entityGesture.addTarget(self, action: #selector(handleEntityGesture(_:)))
+                        }
                     
                     // Add modelEntity and anchorEntity into the scene for rendering
                     let anchorEntity = AnchorEntity(anchor: anchor)
                     modelEntity.type = .none
                     modelEntity.name = "treasure"
-                    
+                    modelEntity.identifier = presenter.objectToAdd!.identifier
                     anchorEntity.addChild(modelEntity)
                     
                     self.scene.addAnchor(anchorEntity)
@@ -155,9 +162,7 @@ extension CustomARView {
                 
                 self.actionButtonsAnchorEntity = anchorEntityPlane
                 self.scene.addAnchor(anchorEntityPlane)
-                tappedObject
-                
-                
+            
             } else {
                 return
             }
@@ -170,18 +175,19 @@ extension CustomARView {
                     if (offModel.transform == anchor.transform) {
                         let anchorEntity = AnchorEntity(anchor: anchor)
                        _ = ParchmentEntity( modelName: offModel.name, anchorEntity: anchorEntity, scene: self.scene,
-                                         parchmentText: offModel.text,textPosition: offModel.position, identifier: offModel.identifier)
+                                            parchmentText: offModel.text,textPosition: offModel.textPosition, identifier: offModel.identifier, scale: offModel.size, orient: offModel.orient)
                         presenter.currentSessionClues += 1
                     }
                 }
                 
             } else if anchor.name == "treasure" {
                 
-                let anchorEntity = AnchorEntity(anchor: anchor)
+                
                 
                 for offModel in presenter.mapSessions[presenter.currentSession].modelEntities {
                     if (offModel.transform == anchor.transform) {
-                        _ = TreasureEntity( modelName: offModel.name, width: Float(offModel.size.x), height: Float(offModel.size.y), depth: Float(offModel.size.z), anchorEntity: anchorEntity, scene: self.scene, identifier: offModel.identifier)
+                        let anchorEntity = AnchorEntity(anchor: anchor)
+                        _ = TreasureEntity( modelName: offModel.name, width: Float(offModel.size.x), height: Float(offModel.size.y), depth: Float(offModel.size.z), anchorEntity: anchorEntity, scene: self.scene, identifier: offModel.identifier,scale: offModel.size, orient: offModel.orient)
                     }
                 }
                 

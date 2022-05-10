@@ -66,7 +66,9 @@ struct PlayView: View {
                 }
             }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 70).background(Color.black.opacity(0.5))
            
-            
+            if(presenter.treasureFound) {
+                TreasureFoundPopup()
+            }
             
             
         }.fullScreen(alignment: .bottom)

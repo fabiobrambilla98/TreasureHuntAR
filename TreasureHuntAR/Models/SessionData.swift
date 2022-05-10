@@ -20,13 +20,18 @@ extension simd_float4x4: Codable {
     }
 }
 
+struct Orientation: Codable {
+    var angle: Float
+    var axis: SIMD3<Float>
+}
 
 class StoreModelEntity: Codable {
     var transform: simd.float4x4
     var name: String
     var type: ModelTypes
     var size: SIMD3<Float>
-    var position: SIMD3<Float>
+    var orient: Orientation
+    var textPosition: SIMD3<Float>
     var text: String
     var identifier: UUID
     
@@ -36,19 +41,21 @@ class StoreModelEntity: Codable {
         case name
         case type
         case size
-        case position
+        case orient
         case text
         case identifier
+        case textPosition
     }
     
-    init(transform: simd.float4x4, name: String, type: ModelTypes, size: SIMD3<Float>, position: SIMD3<Float> = SIMD3<Float>.init(), text: String = "", identifier: UUID) {
+    init(transform: simd.float4x4, name: String, type: ModelTypes, size: SIMD3<Float>, text: String = "", identifier: UUID, textPosition: SIMD3<Float> = SIMD3<Float>.init(), orient: Orientation = Orientation(angle: 0, axis: SIMD3<Float>.init())) {
         self.transform = transform
         self.name = name
         self.type = type
         self.size = size
-        self.position = position
+        self.orient = orient
         self.text = text
         self.identifier = identifier
+        self.textPosition = textPosition
     }
     
     
@@ -64,11 +71,13 @@ class StoreModelEntity: Codable {
         
         size = try values.decode(SIMD3<Float>.self, forKey: .size)
         
-        position = try values.decode(SIMD3<Float>.self, forKey: .position)
+        orient = try values.decode(Orientation.self, forKey: .orient)
         
         text = try values.decode(String.self, forKey: .text)
         
         identifier = try values.decode(UUID.self, forKey: .identifier)
+        
+        textPosition = try values.decode(SIMD3<Float>.self, forKey: .textPosition)
     }
 }
 

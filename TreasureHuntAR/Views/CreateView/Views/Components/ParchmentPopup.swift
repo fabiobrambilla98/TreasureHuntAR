@@ -14,11 +14,13 @@ struct ParchmentPopup: View {
     var body: some View {
         ZStack(alignment: .center){
             ZStack(alignment: .topLeading) {
-                Image(uiImage: UIImage(named: presenter.objectToAdd!.modelName)!).resizable().scaledToFit()
+                ZStack {
+                    Image(uiImage: UIImage(named: presenter.objectToAdd!.modelName)!).resizable().scaledToFit()
+                }.frame(width: 250, height: 280).background(Color.red)
                 
                 let parchment = presenter.objectToAdd! as! ParchmentEntity
                 
-                TextEditor(text: self.$testo).offset(x: parchment.offset.x, y: parchment.offset.y).onAppear() {
+                TextEditor(text: self.$testo).font(.system(size: 18)).offset(x: parchment.offset.x, y: parchment.offset.y).onAppear() {
                     
                     testo = presenter.parchmentText
                     UITextView.appearance().backgroundColor = UIColor(white: 0.0, alpha: 0.0)
@@ -30,11 +32,13 @@ struct ParchmentPopup: View {
                     }
                     
                 }.frame(minWidth: 0, maxWidth: parchment.offset.width)  
-            }.frame(minWidth: 0, maxWidth: 250, minHeight: 0, maxHeight: 280)
+            }.frame(width: 250, height: 280).background(Color.blue)
         }.fullScreen(alignment: .center)
             .transition(AnyTransition.scale.animation(.easeIn(duration: 0.2)))
         
     }
 }
+
+
 
 

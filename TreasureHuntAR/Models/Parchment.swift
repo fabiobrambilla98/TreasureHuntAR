@@ -28,12 +28,12 @@ class ParchmentEntity: ObjectEntity, ObservableObject {
     }
     
     
-    init(modelName: String, anchorEntity: AnchorEntity? = nil, scene: RealityKit.Scene? = nil, parchmentText: String? = nil, textPosition: SIMD3<Float>? = nil, identifier: UUID = UUID()) {
+    init(modelName: String, anchorEntity: AnchorEntity? = nil, scene: RealityKit.Scene? = nil, parchmentText: String? = nil, textPosition: SIMD3<Float>? = nil, identifier: UUID = UUID(), scale: SIMD3<Float>? = nil, orient: Orientation? = nil) {
         super.init(name: modelName, identifier: identifier)
         self.offset = getImageOffset(modelName)
         
         if #available(iOS 15.0, *) {
-
+            
             textureRequest = TextureResource.loadAsync(named: modelName, in: nil).sink { (error) in
                 print(error)
             } receiveValue: { (texture) in
@@ -83,14 +83,16 @@ class ParchmentEntity: ObjectEntity, ObservableObject {
                     self.modelEntity!.identifier = identifier
                     self.modelEntity!.objectEntity = self
                     self.modelEntity!.synchronization = nil
-                    
+                    self.modelEntity!.scale = scale!
+                    self.modelEntity!.orientation = simd_quatf.init(angle: orient!.angle, axis: orient!.axis)
                     anchorEntity?.addChild(self.modelEntity!)
                     scene?.addAnchor(anchorEntity!)
                     
                     
-                
+                    
                 }
             }
+            
             
         } else {
             return
@@ -98,11 +100,13 @@ class ParchmentEntity: ObjectEntity, ObservableObject {
         
     }
     
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     
+   
     
     
     private func getImageOffset(_ name: String) -> OffsetStruct {

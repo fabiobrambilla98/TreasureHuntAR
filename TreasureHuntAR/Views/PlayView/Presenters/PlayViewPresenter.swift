@@ -34,6 +34,7 @@ final class PlayViewPresenter: Presenters, PlayViewPresenting {
     @Published var currentSessionClues = 0
     @Published var nextSessionButtonPressed = (false, 0)
     @Published var showMapSheet = false
+    @Published var treasureFound = false
     var startLocation: CLLocation?
     var startLocationImage: UIImage?
     
