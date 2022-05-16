@@ -15,7 +15,7 @@ enum ButtonType {
 
 struct MainView: View {
     typealias buttonType = ButtonType
-    @State var selection: ViewSelection? = nil
+    
     @ObservedObject var presenter: MainViewPresenter
     
     
@@ -25,7 +25,7 @@ struct MainView: View {
             
             ZStack {
                 
-            }.centerCropped().background(Color.black.opacity(0.4))
+            }.centerCropped().background(Color.black.opacity(0.2))
             
             VStack {
                 Image(Utils.mainImage.rawValue).resizable().frame(width: 320, height: 180).padding(.top, 50.0)

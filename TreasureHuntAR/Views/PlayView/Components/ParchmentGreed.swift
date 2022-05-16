@@ -46,12 +46,12 @@ struct BrowseParchmentView: View {
                     })
                 }
                 
-            }.fullScreen(alignment: .center).navigationBarTitle(Text("Parchments"), displayMode: .large)
+            }.fullScreen(alignment: .center).navigationBarTitle(Text(LocalizedStringKey("parchments")), displayMode: .large)
                 .navigationBarItems(trailing: Button(action: {
                     self.presenter.showParchmentSheet = false
                 }) {
-                    Text("close").bold()
-                })
+                    Text(LocalizedStringKey("close")).bold()
+                }).background(Color(hex: 0xe7d9bc))
             
             
         }.onDisappear(perform: {

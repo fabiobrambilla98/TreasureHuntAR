@@ -16,12 +16,19 @@ struct MyButton: View {
         Button(action: {
             self.selectedType = type
         } ) {
-            Text(LocalizedStringKey(text))
-                .font(.title)
+            HStack {
+                if(type == .playButton) {
+                    Image(systemName: "play").foregroundColor(Color.black)
+                } else if (type == .createButton) {
+                    Image(systemName: "plus").foregroundColor(Color.black)
+                }
+                Text(LocalizedStringKey(text))
+                    .font(.title2).foregroundColor(Color.black)
+            }
+            
         }.frame(minWidth: 0, maxWidth: 90)
             .padding()
-            .foregroundColor(.white)
-            .background(LinearGradient(gradient: Gradient(colors: [Color("DarkBlue"), Color("LightBlue")]), startPoint: .leading, endPoint: .trailing))
+            .background(Color.white)
             .cornerRadius(40)
             .navigate(using: $selectedType, destination: makeDestination)
         

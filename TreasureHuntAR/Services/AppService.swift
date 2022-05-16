@@ -72,19 +72,23 @@ final class AppService: AppServiceProtocol {
         }
     }
     
-    func saveWorldMapPersistence(map: [SessionData], named name: String, overwrite: Bool = false){
+    func saveWorldMapPersistence(map: [SessionData], named name: String, overwrite: Bool = false) -> Bool{
+        
+        print("Map is saving in overwrite: \(overwrite)")
         
         if(!overwrite) {
             let data = map.map({$0.serializeObject()})
             self.storedData.set(data, forKey: "m_\(name)")
             self.storedData.synchronize()
-            
+            print("Map Saved")
             
         } else {
             self.storedData.setValue(map, forKey: "m_\(name)")
             self.storedData.synchronize()
+            print("Map Saved")
         }
         
+        return true
     }
     
     func getAllStoredMapNames() -> [String] {
@@ -142,11 +146,12 @@ final class AppService: AppServiceProtocol {
     
     func getMap(_ name: String) -> [SessionData]{
         do {
-            
+            print("Unarchive map for name: \(name)")
             let data: [Data] = (self.storedData.array(forKey: "m_\(name)") as? [Data])!
             
             let returnedData = try data.map({try JSONDecoder().decode(SessionData.self, from: $0)})
             
+            print("Map sussesfully unarchive for name: \(name)")
             return returnedData
             
         }  catch {

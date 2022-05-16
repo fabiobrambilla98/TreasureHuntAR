@@ -16,7 +16,7 @@ struct ParchmentPopup: View {
             ZStack(alignment: .topLeading) {
                 ZStack {
                     Image(uiImage: UIImage(named: presenter.objectToAdd!.modelName)!).resizable().scaledToFit()
-                }.frame(width: 250, height: 280).background(Color.red)
+                }.frame(width: 250, height: 280)
                 
                 let parchment = presenter.objectToAdd! as! ParchmentEntity
                 
@@ -32,7 +32,7 @@ struct ParchmentPopup: View {
                     }
                     
                 }.frame(minWidth: 0, maxWidth: parchment.offset.width)  
-            }.frame(width: 250, height: 280).background(Color.blue)
+            }.frame(width: 250, height: 280).edgesIgnoringSafeArea(.all)
         }.fullScreen(alignment: .center)
             .transition(AnyTransition.scale.animation(.easeIn(duration: 0.2)))
         

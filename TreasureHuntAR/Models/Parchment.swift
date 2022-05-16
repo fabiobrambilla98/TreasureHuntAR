@@ -59,7 +59,8 @@ class ParchmentEntity: ObjectEntity, ObservableObject {
                 self.modelEntity = CustomModelEntity(mesh: mesh, materials: [material])
                 self.modelEntity?.width = self.width
                 self.modelEntity?.height = self.height
-                self.modelEntity?.name = "parchment"
+                self.modelEntity?.name = "\(Utils.parchmentPrefix.rawValue)\(identifier.uuidString)"
+                self.modelEntity!.identifier = self.identifier
                 if(anchorEntity != nil && scene != nil){
                     
                     let mesh = MeshResource.generateText(

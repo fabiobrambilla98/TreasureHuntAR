@@ -13,12 +13,14 @@ struct TreasureHuntCard: View {
     var name: String
     @State var showingOptions = false
     @State var changeIntoPlayView: Bool? = nil
-    
+    @State var showAlert = false
     
     var body: some View {
         
         Button(action: {
-            self.showingOptions = true
+            withAnimation(.easeIn) {
+                self.showingOptions = true
+            }
         }) {
             ZStack(alignment: .bottom){
                 if let image = presenter.cardImages.first(where: {$0.0 == name}) {
@@ -32,7 +34,20 @@ struct TreasureHuntCard: View {
                 }
                
             }
-        }.navigate(using: $changeIntoPlayView, destination: makeDestination)
+        }.alert(isPresented: $showAlert) {
+            Alert(
+                title: Text(LocalizedStringKey("confirm-map-cancel")),
+                primaryButton:
+                        .destructive(Text(LocalizedStringKey("delete"))) {
+                            withAnimation {
+                                presenter.deleteMap(mapName: name)
+                            }
+                    
+                        },
+                secondaryButton: .cancel()
+            )
+        }
+        .navigate(using: $changeIntoPlayView, destination: makeDestination)
             .frame(width: 160, height: 217, alignment: .bottom)
             .background(LinearGradient(gradient: Gradient(colors: [Color(.gray).opacity(0.3), Color(.gray)]), startPoint: .top, endPoint: .bottom))
             .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
@@ -40,23 +55,18 @@ struct TreasureHuntCard: View {
             .confirmationDialog("", isPresented: $showingOptions, titleVisibility: .hidden) {
                 
                 
-                Button("Play") {
+                Button(LocalizedStringKey("play")) {
                     changeIntoPlayView = true
-                }
-                Button("Modify") {
-                    
                 }
                 Button(
                     role: .destructive,
                     action: {
-                        withAnimation {
-                            presenter.deleteMap(mapName: name)
-                        }
+                        showAlert = true
                     }
                 ) {
                     HStack {
                         Image(systemName: "trash")
-                        Text("Delete")
+                        Text(LocalizedStringKey("delete"))
                         
                     }
                 }

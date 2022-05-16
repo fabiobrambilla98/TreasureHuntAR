@@ -23,7 +23,7 @@ struct SelectView: View {
                 ScrollView {
                     TreasureHuntCardGreed().environmentObject(presenter)
               
-            }.navigationBarTitle("Mappe")
+            }.navigationBarTitle(LocalizedStringKey("maps"))
         }.fullScreen(alignment: .center)
         
     }

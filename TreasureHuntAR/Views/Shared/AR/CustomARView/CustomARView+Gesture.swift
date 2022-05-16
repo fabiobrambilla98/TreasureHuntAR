@@ -34,7 +34,7 @@ extension CustomARView {
             case .began:
                 print("SCALE: BEGAN")
             case .changed:
-                print("SCALE: CHANGED")// Handle things during the gesture
+                print("")// Handle things during the gesture
             case .ended:
                 let entity = scaleGesture.entity! as? CustomModelEntity
                 let scale = entity?.transform.scale
@@ -48,7 +48,7 @@ extension CustomARView {
             case .began:
                 print("ROTATION: BEGAN")
             case .changed:
-                print("ROTATION: CHANGED")
+                print("")
             case .ended:
                 let entity = rotationGesture.entity! as? CustomModelEntity
                 let orientation = entity?.orientation
@@ -90,10 +90,13 @@ extension CustomARView {
             
             if let entity = self.entity(at: point) {
                 if let actionEntity = entity.anchor, entity.name == "deleteButton" {
+                    if tappedObject!.name.hasPrefix(Utils.treasurePrefix.rawValue) {
+                        presenter.treasurePlaced = false
+                    }
                     self.sessionModelEntities.remove(tappedObject!.objectEntity!.identifier)
                     self.scene.removeAnchor(actionEntity)
                     self.scene.removeAnchor(tappedObject!.anchor!)
-                    
+                   
                     tappedObject = nil
                 } else if entity.name == "modifyButton" {
                     
@@ -102,15 +105,19 @@ extension CustomARView {
                     presenter.parchmentToModify = tappedObject
                     presenter.showParchment = true
                     tappedObject?.removeChild((tappedObject?.children[0])!)
-                } else if let entity = entity as? CustomModelEntity, entity.name == "parchmentText" ||  entity.name == "parchment" || entity.name == "treasure" {
+                } else if let entity = entity as? CustomModelEntity, entity.name == "parchmentText" ||  entity.name.hasPrefix(Utils.parchmentPrefix.rawValue) || entity.name.hasPrefix(Utils.treasurePrefix.rawValue) {
                     if(tappedObject != nil) {
+                        self.scene.removeAnchor(actionButtonsAnchorEntity as! AnchorEntity)
+                        actionButtonsAnchorEntity = nil
+                        tappedObject=nil
                         return
                     }
                     
                     let planeAnchor = ARAnchor(name: "actionButtons", transform: entity.parent!.transformMatrix(relativeTo: nil))
                     
-                    self.session.add(anchor: planeAnchor)
                     tappedObject = entity
+                    self.session.add(anchor: planeAnchor)
+                    
                     
                 }
             } else {
@@ -123,6 +130,8 @@ extension CustomARView {
                     return
                 }
                 
+                
+                
                 virtualObjectAnchor = ARAnchor(
                     name: name,
                     transform: hitTestResult.worldTransform
@@ -131,7 +140,7 @@ extension CustomARView {
                 virtualObjectAnchor!.arID = presenter.objectToAdd!.identifier
                 
                 
-                if(virtualObjectAnchor!.name == "parchment"){
+                if(virtualObjectAnchor!.name!.hasPrefix(Utils.parchmentPrefix.rawValue)){
                     presenter.showParchment = true
                 }
                 
@@ -152,7 +161,7 @@ extension CustomARView {
             
             
             if let entity = self.entity(at: point) {
-                if let entity = entity as? CustomModelEntity, entity.name == "parchment" {
+                if let entity = entity as? CustomModelEntity, entity.name.hasPrefix(Utils.parchmentPrefix.rawValue) {
                     if (!entity.tapped) {
                         var model: StoreModelEntity?
                         for m in presenter.mapSessions[presenter.currentSession].modelEntities {
@@ -164,7 +173,7 @@ extension CustomARView {
                         entity.tapped = true
                         presenter.sessionClueFound += 1
                     }
-                } else if let entity = entity as? CustomModelEntity, entity.name == "treasure" {
+                } else if let entity = entity as? CustomModelEntity, entity.name.hasPrefix(Utils.treasurePrefix.rawValue) {
                     withAnimation(.easeIn) {
                         presenter.treasureFound = true
                     }

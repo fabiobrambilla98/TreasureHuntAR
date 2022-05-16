@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TreasureFoundPopup: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body: some View {
         ZStack {
             ZStack{
@@ -22,6 +23,7 @@ struct TreasureFoundPopup: View {
                             }
                         }.fullScreen(alignment: .top).padding()
                         Button(action: {
+                            self.presentationMode.wrappedValue.dismiss()
                         } ) {
                             Text("Back")
                                 .font(.title)

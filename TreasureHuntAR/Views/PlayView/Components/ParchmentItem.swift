@@ -22,20 +22,22 @@ struct ParchmentItem: View {
                 presenter.parchmentSheetSelected = (modelEntity, text)
                 presenter.showParchment = true
             }) {
-                ZStack {
+                ZStack(alignment: .topLeading) {
                     presenter.getImage(named: modelEntity.modelName).resizable().scaledToFit()
-                    Text(text).frame(minWidth: 0, maxWidth: self.getOffset(axis: .width, for: modelEntity.offset.width)).font(.system(size: 8)).offset(x: self.getOffset(axis: .x, for: modelEntity.offset.x), y: self.getOffset(axis: .y, for: modelEntity.offset.y))
-                }
-            }.frame(width: 100, height: 100)
+                    Text(text).frame(width: self.getOffset(axis: .width, for: modelEntity.offset.width)).font(.system(size: 8)).offset(x: self.getOffset(axis: .x, for: modelEntity.offset.x), y: self.getOffset(axis: .y, for: modelEntity.offset.y)).foregroundColor(Color.white)
+                }.padding()
+            }.frame(width: 100, height: 100).background(Color(hex: 0xe1cea6)).border(Color(hex: 0xbbb086), width: 1.5)
         }
     }
     
     private func getOffset(axis: Axis, for value: CGFloat) -> CGFloat{
         switch(axis) {
-        case .x, .width:
-            return (100 * value) / 250
+        case .x:
+            return ((100 * value) / 250)/2
         case .y:
             return (100 * value) / 280
+        case .width:
+            return ((100 * value) / 250)
             
         }
     }

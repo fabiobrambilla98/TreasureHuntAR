@@ -30,17 +30,15 @@ class TreasureEntity: ObjectEntity {
          model in
          self.modelEntity = CustomModelEntity(mesh: model.model!.mesh, materials: model.model!.materials)
          self.modelEntity?.transform.scale = (anchorEntity == nil) ? SIMD3<Float>(width, height, depth) : SIMD3<Float>(width, height, depth)
-         self.modelEntity?.name = "treasure"
+         self.modelEntity?.name = "\(Utils.treasurePrefix.rawValue)\(identifier.uuidString)"
              self.setSize(width: width, height: height, depth: depth)
-             /*if (anchorEntity == nil) {
-         self.setSize(width: width, height: height, depth: depth)
-         } else {
-         self.setSize(width: width*100, height: height*100, depth: depth*100)
-         }*/
+             
+         self.modelEntity?.objectEntity = self
+         self.modelEntity!.identifier = self.identifier
          if(anchorEntity != nil && scene != nil) {
              self.modelEntity!.identifier = identifier
              self.modelEntity!.generateCollisionShapes(recursive: true)
-             self.modelEntity?.objectEntity = self
+             
              self.modelEntity!.synchronization = nil
              self.modelEntity!.scale = scale!
              self.modelEntity!.orientation = simd_quatf.init(angle: orient!.angle, axis: orient!.axis)

@@ -9,24 +9,25 @@ import SwiftUI
 
 struct BackButton: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @ObservedObject var presenter: CreateViewPresenter
+    @ObservedObject var presenter: Presenters
     
     
     var body: some View {
         
         Button(action: {
-            self.presenter.showBackAlert()
+            self.presenter.showAlert = true
         })
         {
                 ZStack {
-                    Image(systemName: "chevron.backward").foregroundColor(Color.white)
-                }.frame(width: 38, height: 38).background(Color.black.opacity(0.7)).cornerRadius(100)
+                    Image(systemName: "chevron.backward").foregroundColor(Color.white).shadow(radius: 3)
+                }.frame(width: 38, height: 38).background(Color.secondaryColor.opacity(0.7)).cornerRadius(100)
       
         }
         .alert(isPresented: self.$presenter.showAlert) {
             Alert(
                 title: Text(LocalizedStringKey("confirm-back-title")),
-                message: Text(LocalizedStringKey("confirm-back-subtitle")),
+                message:
+                    (presenter is CreateViewPresenter) ? Text(LocalizedStringKey("confirm-back-subtitle")) : Text(""),
                 primaryButton: .default(Text(LocalizedStringKey("exit"))) {
                     self.presentationMode.wrappedValue.dismiss()
                     

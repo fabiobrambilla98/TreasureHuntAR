@@ -67,8 +67,14 @@ extension CustomARView {
     
     
     func addAnchorEntityToScene(anchor: ARAnchor)  {
+        
         if let presenter = viewPresenter as? CreateViewPresenter {
-            if(anchor.name == "parchment") {
+            
+            guard anchor.name != nil else {
+                return
+            }
+           
+            if(anchor.name!.hasPrefix(Utils.parchmentPrefix.rawValue)) {
                 virtualObjectAnchor = anchor
                 
                 
@@ -76,19 +82,15 @@ extension CustomARView {
                     print("DEBUG: adding model to scene -")
                     
                     modelEntity.generateCollisionShapes(recursive: true)
-                    
-                    /*self.installGestures([.rotation, .scale], for: modelEntity)*/
                    
+                    
                     self.installGestures([.rotation, .scale], for: modelEntity).forEach { entityGesture in
                             entityGesture.addTarget(self, action: #selector(handleEntityGesture(_:)))
                         }
-                
-                    
-                    
+                 
                     // Add modelEntity and anchorEntity into the scene for rendering
                     let anchorEntity = AnchorEntity(anchor: anchor)
                     modelEntity.type = .none
-                    modelEntity.name = "parchment"
                     modelEntity.identifier = presenter.objectToAdd!.identifier
                     anchorEntity.addChild(modelEntity)
                     
@@ -100,7 +102,7 @@ extension CustomARView {
                 }
                 
                 presenter.buttonItemsID = .initialSelect
-            } else if(anchor.name == "treasure" ){
+            } else if(anchor.name!.hasPrefix(Utils.treasurePrefix.rawValue) ){
                 virtualObjectAnchor = anchor
                 
                 
@@ -116,13 +118,12 @@ extension CustomARView {
                     // Add modelEntity and anchorEntity into the scene for rendering
                     let anchorEntity = AnchorEntity(anchor: anchor)
                     modelEntity.type = .none
-                    modelEntity.name = "treasure"
                     modelEntity.identifier = presenter.objectToAdd!.identifier
                     anchorEntity.addChild(modelEntity)
                     
                     self.scene.addAnchor(anchorEntity)
                     self.sessionModelEntities.append(StoreModelEntity(transform: anchor.transform, name: presenter.objectToAdd!.modelName, type: .treasure, size: modelEntity.scale, identifier: presenter.objectToAdd!.identifier))
-                    
+                    presenter.treasurePlaced = true
                     presenter.buttonItemsID = .initialSelect
                     presenter.objectToAdd = nil
                     
@@ -137,24 +138,24 @@ extension CustomARView {
                 
                 let anchorEntityPlane = AnchorEntity(anchor: anchor)
                 anchorEntityPlane.generateCollisionShapes(recursive: false)
-                anchorEntityPlane.setPosition(SIMD3<Float>(0.00, tappedObject!.scale.y / 3, 0.00), relativeTo: nil)
+                anchorEntityPlane.setPosition(SIMD3<Float>(0.00, tappedObject!.scale.y / 4, 0.00), relativeTo: nil)
                 
                 
                 anchorEntityPlane.addChild(deleteButtonEntity.modelEntity!)
-                if(tappedObject!.name != "treasure") {
+                if(!tappedObject!.name.hasPrefix(Utils.treasurePrefix.rawValue)) {
                     anchorEntityPlane.addChild(modifyButtonEntity.modelEntity!)
                 }
                 
                 
                 
-                if(tappedObject!.name != "treasure") {
+                if(!tappedObject!.name.hasPrefix(Utils.treasurePrefix.rawValue)) {
                     modifyButtonEntity.modelEntity!.setPosition(SIMD3<Float>(0.06, 0.0001, 0), relativeTo: anchorEntityPlane)
                     modifyButtonEntity.modelEntity!.orientation = simd_quatf(angle: -.pi/2,
                                                                              axis: [1,0,0])
                 }
                 
                 
-                deleteButtonEntity.modelEntity!.setPosition(SIMD3<Float>((tappedObject!.name != "treasure") ? -0.06 : 0, 0.0001, 0), relativeTo: anchorEntityPlane)
+                deleteButtonEntity.modelEntity!.setPosition(SIMD3<Float>((!tappedObject!.name.hasPrefix(Utils.treasurePrefix.rawValue)) ? -0.06 : 0, 0.0001, 0), relativeTo: anchorEntityPlane)
                 deleteButtonEntity.modelEntity!.orientation =
                 simd_quatf(angle: -.pi/2,
                            axis: [1,0,0])
@@ -168,9 +169,27 @@ extension CustomARView {
             }
         } else if let presenter = viewPresenter as? PlayViewPresenter {
             
-            if anchor.name == "parchment" {
+            guard anchor.name != nil else {
+                return
+            }
+            
+            if anchor.name!.hasPrefix(Utils.parchmentPrefix.rawValue) {
                 
-                for offModel in presenter.mapSessions[presenter.currentSession].modelEntities {
+                
+                print("Loading parchment model")
+                guard let model = presenter.mapSessions[presenter.currentSession].modelEntities.get(anchor.name!.replacingOccurrences(of: Utils.parchmentPrefix.rawValue, with: "")) else {
+                    print("Model cannot be loaded")
+                    return
+                }
+                
+           
+                _ = ParchmentEntity( modelName: model.name, anchorEntity: AnchorEntity(anchor: anchor), scene: self.scene,
+                                     parchmentText: model.text,textPosition: model.textPosition, identifier: model.identifier, scale: model.size, orient: model.orient)
+                 
+                presenter.currentSessionClues += 1
+                
+                
+                /*for offModel in presenter.mapSessions[presenter.currentSession].modelEntities {
                     print("TRANSFORM: offModel:\(offModel.transform) __ anchor:\(anchor.transform)")
                     if (offModel.transform == anchor.transform) {
                         let anchorEntity = AnchorEntity(anchor: anchor)
@@ -178,18 +197,26 @@ extension CustomARView {
                                             parchmentText: offModel.text,textPosition: offModel.textPosition, identifier: offModel.identifier, scale: offModel.size, orient: offModel.orient)
                         presenter.currentSessionClues += 1
                     }
+                }*/
+                
+            } else if
+                
+                anchor.name!.hasPrefix(Utils.treasurePrefix.rawValue) {
+                
+                print("Loading treasure model")
+                guard let model = presenter.mapSessions[presenter.currentSession].modelEntities.get(anchor.name!.replacingOccurrences(of: Utils.treasurePrefix.rawValue, with: "")) else {
+                    print("Model cannot be loaded")
+                    return
                 }
                 
-            } else if anchor.name == "treasure" {
+                _ = TreasureEntity(modelName: model.name, width: Float(model.size.x), height: Float(model.size.y), depth: Float(model.size.z), anchorEntity: AnchorEntity(anchor: anchor), scene: self.scene, identifier: model.identifier,scale: model.size, orient: model.orient)
                 
-                
-                
-                for offModel in presenter.mapSessions[presenter.currentSession].modelEntities {
+                /*for offModel in presenter.mapSessions[presenter.currentSession].modelEntities {
                     if (offModel.transform == anchor.transform) {
                         let anchorEntity = AnchorEntity(anchor: anchor)
                         _ = TreasureEntity( modelName: offModel.name, width: Float(offModel.size.x), height: Float(offModel.size.y), depth: Float(offModel.size.z), anchorEntity: anchorEntity, scene: self.scene, identifier: offModel.identifier,scale: offModel.size, orient: offModel.orient)
                     }
-                }
+                }*/
                 
                 
             }

@@ -13,6 +13,7 @@ protocol PresentersProtocol: ObservableObject {
     
 }
 class Presenters: PresentersProtocol {
+    @Published var showAlert: Bool = false
     init() {
         
     }

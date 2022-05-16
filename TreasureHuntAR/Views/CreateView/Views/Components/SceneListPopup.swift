@@ -12,11 +12,11 @@ struct SceneListPopup: View {
     @ObservedObject var presenter: CreateViewPresenter
     var body: some View {
         ZStack {
-            
+            ZStack {
             ZStack {
                 
                 VStack(spacing: 10){
-                    Text("Select the scene to load").foregroundColor(Color.white).padding(.top)
+                    Text(LocalizedStringKey("select-session-to-load")).foregroundColor(Color.white).shadow(radius: 3).padding(.top)
                     Divider().foregroundColor(Color.white)
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack(spacing: 15) {
@@ -24,8 +24,12 @@ struct SceneListPopup: View {
                                 Button(action: {
                                     self.presenter.loadSession(number: index)
                                 }) {
-                                    Text("Scena \(index)")
-                                    
+                                    let scene = LocalizedStringKey("scene")
+                                    HStack{
+                                        Text(scene)
+                                        Text("\(index)")
+                                    }.foregroundColor(Color.white).shadow(radius: 3)
+    
                                 }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 40)
                             }
                             
@@ -39,15 +43,18 @@ struct SceneListPopup: View {
                         Button(action: {
                             self.presenter.listSelector(action: .close)
                         }) {
-                            Text("Cancel").font(.title3)
+                            Text(LocalizedStringKey("cancel")).font(.title3).foregroundColor(Color.white).shadow(radius: 3)
                         }
                             
                     }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 42).padding(.bottom, 5)
                     
                     
                 }
-            }.frame(minWidth: 0, maxWidth: 270, minHeight: 0, maxHeight: 200, alignment: .bottom)
-                .background(Color.black.opacity(0.8))
+            }.frame(minWidth: 0, maxWidth: 270, minHeight: 0, maxHeight: 200)
+                    .background(Color.secondaryColor.opacity(0.9))
+                .cornerRadius(20)
+            }.frame(minWidth: 0, maxWidth: 275, minHeight: 0, maxHeight: 205)
+                .background(Color.thirdColor.opacity(0.9))
                 .cornerRadius(20)
         }.fullScreen(alignment: .center).edgesIgnoringSafeArea(.all).background(Color.black.opacity(0.4))
     }

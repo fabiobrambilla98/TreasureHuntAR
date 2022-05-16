@@ -8,9 +8,11 @@
 import SwiftUI
 
 enum Utils: String {
-    case mainBackground = "main_background_portrait"
+    case mainBackground = "main_background"
     case mainImage = "title"
     case parchmentRepository = "Parchmnents"
+    case parchmentPrefix = "p_"
+    case treasurePrefix = "c_"
 }
 
 

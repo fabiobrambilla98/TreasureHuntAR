@@ -16,7 +16,7 @@ protocol CreateViewPresenting: ObservableObject {
     func loadWorldMap()
     func openSheet()
     func selectEntity(_ name: String)
-    func showBackAlert()
+
 }
 
 enum ButtonItemsIDs {
@@ -33,6 +33,8 @@ enum ShowAction {
 
 
 final class CreateViewPresenter: Presenters, CreateViewPresenting {
+  
+    
     
     private var service = AppService.shared
     
@@ -41,7 +43,6 @@ final class CreateViewPresenter: Presenters, CreateViewPresenting {
     @Published var lastSelected: [String] = []
     @Published var buttonItemsID: ButtonItemsIDs = ButtonItemsIDs.initialSelect
     @Published var showBrowse: Bool = false
-    @Published var showAlert: Bool = false
     @Published var saveSessionButtonPressed: Bool = false
     @Published var newSessionButtonPressed: Bool = false
     @Published var sessionListSelection: ShowAction = .close
@@ -64,12 +65,12 @@ final class CreateViewPresenter: Presenters, CreateViewPresenting {
     var parchmentToModify: CustomModelEntity?
     @Published var dataToBeStored: [SessionData] = []
     var currentSession: Int = 0
-    
+    @Published var treasurePlaced = false
     private var _startLocation: CLLocation? = nil
     private let locationManager = CLLocationManager()
     var startingPointCapturedImage: Data? = nil
     var caputureImage: Bool = false
-    
+
     
     override init() {
         
@@ -108,10 +109,6 @@ final class CreateViewPresenter: Presenters, CreateViewPresenting {
     }
     
     
-    func showBackAlert() {
-        self.showAlert = true
-    }
-    
     func selectEntity(_ name: String) {
         self.lastSelected.updateLast(name)
     }
@@ -136,7 +133,6 @@ final class CreateViewPresenter: Presenters, CreateViewPresenting {
         if(name.hasPrefix("p_")) {
             self.objectToAdd = ParchmentEntity(modelName: name) }
         else if(name.hasPrefix("c_")) {
-            //size in m
             self.objectToAdd = TreasureEntity(modelName: name, width: 0.5, height: 0.4, depth: 0.4)
         }
     }
@@ -174,7 +170,7 @@ final class CreateViewPresenter: Presenters, CreateViewPresenting {
     func saveWorldMap(text: String) {
         service.saveStartLocationImage(image: startingPointCapturedImage!, mapName: text)
         service.saveLocation(location: _startLocation!, name: text)
-        service.saveWorldMapPersistence(map: dataToBeStored, named: text)
+        _ = service.saveWorldMapPersistence(map: dataToBeStored, named: text)
         self.saveWorldMapPopupShow = false
     }
 }

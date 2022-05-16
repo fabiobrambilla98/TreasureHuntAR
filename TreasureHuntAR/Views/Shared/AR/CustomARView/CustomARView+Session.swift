@@ -22,7 +22,11 @@ extension CustomARView: ARSessionDelegate {
     // We add an anchor in `handleTap` function, it will then call this function.
     func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
         for anchor in anchors {
-            
+            if(anchor.name != nil) {
+                print("Adding anchor named: \(anchor.name!)")
+            } else {
+                print("Adding anchor unnamed")
+            }
             addAnchorEntityToScene(anchor: anchor)
             
         }

@@ -14,10 +14,9 @@ struct MyItemBar: View {
     
     var body: some View {
         ZStack{
-            RoundedRectangle(cornerRadius: 50, style: .continuous)
-                .fill(Color.black)
-                .opacity(0.7)
-                .frame(width: 290, height: 85)
+            ZStack {
+    
+                
             
             HStack(spacing: 20){
                 if(self.presenter.buttonItemsID != .initialSelect) {
@@ -26,6 +25,7 @@ struct MyItemBar: View {
                 
                 if(self.presenter.buttonItemsID == .initialSelect || self.presenter.buttonItemsID == .firstIconSelect) {
                     if self.$presenter.lastSelected.count > 0 {
+                       
                         EButton(presenter: self.presenter,itemSelected: B.firstIconSelect, name: self.$presenter.lastSelected[0])
                         
                     } else {
@@ -43,10 +43,11 @@ struct MyItemBar: View {
                     
                 }
                 if(self.presenter.buttonItemsID == .initialSelect) {
-                    SButton(presenter: self.presenter)
+                    SButton(presenter: self.presenter).padding()
                 }
             }
-        }
+            }.fullScreen(alignment: .center).background(Color.primaryColor.opacity(0.7)).cornerRadius(40)
+        }.frame(width: 275, height: 82)
         .padding(.bottom)
     }
 }

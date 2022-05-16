@@ -35,19 +35,20 @@
 		FA48EE59280E9F4F0033B407 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA48EE58280E9F4F0033B407 /* MainView.swift */; };
 		FA48EE5C280EA1B80033B407 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA48EE5B280EA1B80033B407 /* Utils.swift */; };
 		FA564F9928140501002B050C /* p_parchment_02-40-30-180.png in Resources */ = {isa = PBXBuildFile; fileRef = FA564F9628140500002B050C /* p_parchment_02-40-30-180.png */; };
-		FA564F9A28140501002B050C /* p_parchment_01-55-20-112.png in Resources */ = {isa = PBXBuildFile; fileRef = FA564F9728140501002B050C /* p_parchment_01-55-20-112.png */; };
+		FA564F9A28140501002B050C /* p_parchment_01-65-20-112.png in Resources */ = {isa = PBXBuildFile; fileRef = FA564F9728140501002B050C /* p_parchment_01-65-20-112.png */; };
 		FA69B9F1282A8F17003D54C5 /* TreasureFoundPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA69B9F0282A8F17003D54C5 /* TreasureFoundPopup.swift */; };
+		FA69B9F9282D2724003D54C5 /* pencil.png in Resources */ = {isa = PBXBuildFile; fileRef = FA69B9F8282D2723003D54C5 /* pencil.png */; };
+		FA69B9FB282D272F003D54C5 /* thresh.png in Resources */ = {isa = PBXBuildFile; fileRef = FA69B9FA282D272F003D54C5 /* thresh.png */; };
+		FA69B9FE282D42A3003D54C5 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA69B9FD282D42A3003D54C5 /* Color.swift */; };
+		FA69BA00282E7A18003D54C5 /* c_treasure_01.png in Resources */ = {isa = PBXBuildFile; fileRef = FA69B9FF282E7A18003D54C5 /* c_treasure_01.png */; };
 		FA6CB134280EEB0B007E2FDC /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB133280EEB0A007E2FDC /* MyButton.swift */; };
-		FA6CB137280EF1F2007E2FDC /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB136280EF1F2007E2FDC /* AppCoordinator.swift */; };
 		FA6CB139280EF3AF007E2FDC /* MainViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB138280EF3AF007E2FDC /* MainViewPresenter.swift */; };
 		FA6CB13C280EF657007E2FDC /* CreateViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB13B280EF657007E2FDC /* CreateViewPresenter.swift */; };
 		FA6CB142280F0A62007E2FDC /* CreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB141280F0A62007E2FDC /* CreateView.swift */; };
 		FA6CB144280F2FC2007E2FDC /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB143280F2FC2007E2FDC /* Binding.swift */; };
 		FA6CB146280F3094007E2FDC /* MyBlur.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB145280F3094007E2FDC /* MyBlur.swift */; };
-		FA6CB149280F30F8007E2FDC /* ContentLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB148280F30F8007E2FDC /* ContentLink.swift */; };
 		FA6CB14B280F31A5007E2FDC /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB14A280F31A5007E2FDC /* PlayView.swift */; };
 		FA6CB14E280F31C6007E2FDC /* PlayViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB14D280F31C6007E2FDC /* PlayViewPresenter.swift */; };
-		FA6CB150280F3284007E2FDC /* ViewSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB14F280F3284007E2FDC /* ViewSelection.swift */; };
 		FA6CB154280F3491007E2FDC /* ItemsGreed.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB153280F3491007E2FDC /* ItemsGreed.swift */; };
 		FA6CB159280FF1C4007E2FDC /* AppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB158280FF1C4007E2FDC /* AppService.swift */; };
 		FA6CB15B280FF3B5007E2FDC /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB15A280FF3B5007E2FDC /* Repository.swift */; };
@@ -57,9 +58,6 @@
 		FA70D3022823D49000DB54F2 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70D3012823D49000DB54F2 /* Image.swift */; };
 		FA8EA8AB2815369D00FD4E27 /* ARActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8EA8AA2815369D00FD4E27 /* ARActionButton.swift */; };
 		FA8EA8AD2815465200FD4E27 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8EA8AC2815465200FD4E27 /* Entity.swift */; };
-		FA8EA8B7281592D600FD4E27 /* pencil.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8EA8B6281592D600FD4E27 /* pencil.png */; };
-		FA8EA8B92815939200FD4E27 /* thresh.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8EA8B82815939200FD4E27 /* thresh.png */; };
-		FA8EA8C02817EAAC00FD4E27 /* c_treasure_01.png in Resources */ = {isa = PBXBuildFile; fileRef = FA8EA8BF2817EAAC00FD4E27 /* c_treasure_01.png */; };
 		FA8EA8C228180A5F00FD4E27 /* Treasure.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8EA8C128180A5F00FD4E27 /* Treasure.swift */; };
 		FA8EA8C428180C0800FD4E27 /* HorizontalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8EA8C328180C0800FD4E27 /* HorizontalView.swift */; };
 		FAA2348328108F3A00812D63 /* SButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA2348228108F3A00812D63 /* SButton.swift */; };
@@ -76,7 +74,6 @@
 		FAA234C52812A6B000812D63 /* CustomARView+Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA234C42812A6B000812D63 /* CustomARView+Session.swift */; };
 		FAA234C72812BDCF00812D63 /* ObjectEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA234C62812BDCF00812D63 /* ObjectEntity.swift */; };
 		FAE30FC4280EACCB00DB682C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FAE30FC6280EACCB00DB682C /* Localizable.strings */; };
-		FAE30FCA280ECF5A00DB682C /* treasure.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAE30FC9280ECF5A00DB682C /* treasure.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -122,20 +119,21 @@
 		FA48EE58280E9F4F0033B407 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		FA48EE5B280EA1B80033B407 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		FA564F9628140500002B050C /* p_parchment_02-40-30-180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "p_parchment_02-40-30-180.png"; sourceTree = "<group>"; };
-		FA564F9728140501002B050C /* p_parchment_01-55-20-112.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "p_parchment_01-55-20-112.png"; sourceTree = "<group>"; };
+		FA564F9728140501002B050C /* p_parchment_01-65-20-112.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "p_parchment_01-65-20-112.png"; sourceTree = "<group>"; };
 		FA69B9F0282A8F17003D54C5 /* TreasureFoundPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreasureFoundPopup.swift; sourceTree = "<group>"; };
+		FA69B9F8282D2723003D54C5 /* pencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pencil.png; sourceTree = "<group>"; };
+		FA69B9FA282D272F003D54C5 /* thresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thresh.png; sourceTree = "<group>"; };
+		FA69B9FD282D42A3003D54C5 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		FA69B9FF282E7A18003D54C5 /* c_treasure_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = c_treasure_01.png; sourceTree = "<group>"; };
 		FA6CB131280EDABD007E2FDC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = TreasureHuntAR/Info.plist; sourceTree = "<group>"; };
 		FA6CB133280EEB0A007E2FDC /* MyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButton.swift; sourceTree = "<group>"; };
-		FA6CB136280EF1F2007E2FDC /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		FA6CB138280EF3AF007E2FDC /* MainViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewPresenter.swift; sourceTree = "<group>"; };
 		FA6CB13B280EF657007E2FDC /* CreateViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewPresenter.swift; sourceTree = "<group>"; };
 		FA6CB141280F0A62007E2FDC /* CreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateView.swift; sourceTree = "<group>"; };
 		FA6CB143280F2FC2007E2FDC /* Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
 		FA6CB145280F3094007E2FDC /* MyBlur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBlur.swift; sourceTree = "<group>"; };
-		FA6CB148280F30F8007E2FDC /* ContentLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLink.swift; sourceTree = "<group>"; };
 		FA6CB14A280F31A5007E2FDC /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
 		FA6CB14D280F31C6007E2FDC /* PlayViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewPresenter.swift; sourceTree = "<group>"; };
-		FA6CB14F280F3284007E2FDC /* ViewSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSelection.swift; sourceTree = "<group>"; };
 		FA6CB153280F3491007E2FDC /* ItemsGreed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsGreed.swift; sourceTree = "<group>"; };
 		FA6CB158280FF1C4007E2FDC /* AppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppService.swift; sourceTree = "<group>"; };
 		FA6CB15A280FF3B5007E2FDC /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
@@ -145,9 +143,6 @@
 		FA70D3012823D49000DB54F2 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		FA8EA8AA2815369D00FD4E27 /* ARActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARActionButton.swift; sourceTree = "<group>"; };
 		FA8EA8AC2815465200FD4E27 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
-		FA8EA8B6281592D600FD4E27 /* pencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pencil.png; sourceTree = "<group>"; };
-		FA8EA8B82815939200FD4E27 /* thresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thresh.png; sourceTree = "<group>"; };
-		FA8EA8BF2817EAAC00FD4E27 /* c_treasure_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = c_treasure_01.png; sourceTree = "<group>"; };
 		FA8EA8C128180A5F00FD4E27 /* Treasure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Treasure.swift; sourceTree = "<group>"; };
 		FA8EA8C328180C0800FD4E27 /* HorizontalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalView.swift; sourceTree = "<group>"; };
 		FAA2348228108F3A00812D63 /* SButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SButton.swift; sourceTree = "<group>"; };
@@ -165,7 +160,6 @@
 		FAA234C62812BDCF00812D63 /* ObjectEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectEntity.swift; sourceTree = "<group>"; };
 		FAE30FC5280EACCB00DB682C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FAE30FC7280EACD400DB682C /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
-		FAE30FC9280ECF5A00DB682C /* treasure.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = treasure.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,8 +238,6 @@
 				FA6CB16A28103EBF007E2FDC /* Resources */,
 				FA6CB157280FF14D007E2FDC /* Services */,
 				FA6CB156280FECB3007E2FDC /* Models */,
-				FA6CB135280EF1E2007E2FDC /* Coordinator */,
-				FA6CB147280F30E4007E2FDC /* Enumerations */,
 				FA6CB13D280F0768007E2FDC /* Extensions */,
 				FA48EE54280E9E660033B407 /* Utils */,
 				FA48EE50280E9E020033B407 /* Views */,
@@ -268,6 +260,7 @@
 		FA48EE50280E9E020033B407 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FA69B9FC282D2978003D54C5 /* Shared */,
 				FA2FAD4E281FCE780087CE46 /* SelectView */,
 				FA48EE53280E9E440033B407 /* PlayView */,
 				FA48EE52280E9E2A0033B407 /* CreateView */,
@@ -309,7 +302,6 @@
 		FA48EE54280E9E660033B407 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				FAE30FC8280ECF3F00DB682C /* project_fonts */,
 				FAE30FC6280EACCB00DB682C /* Localizable.strings */,
 				FA48EE5B280EA1B80033B407 /* Utils.swift */,
 			);
@@ -349,12 +341,13 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		FA6CB135280EF1E2007E2FDC /* Coordinator */ = {
+		FA69B9FC282D2978003D54C5 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				FA6CB136280EF1F2007E2FDC /* AppCoordinator.swift */,
+				FAA234A22811638A00812D63 /* BackButton.swift */,
+				FAA234B428129F9100812D63 /* AR */,
 			);
-			path = Coordinator;
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		FA6CB13A280EF63D007E2FDC /* Presenters */ = {
@@ -377,17 +370,9 @@
 				FA1975A22822CF4A005AB0E2 /* DispatchQueue.swift */,
 				FA70D3012823D49000DB54F2 /* Image.swift */,
 				FA332AB22827F4D5006E9EFE /* ARAnchor.swift */,
+				FA69B9FD282D42A3003D54C5 /* Color.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		FA6CB147280F30E4007E2FDC /* Enumerations */ = {
-			isa = PBXGroup;
-			children = (
-				FA6CB148280F30F8007E2FDC /* ContentLink.swift */,
-				FA6CB14F280F3284007E2FDC /* ViewSelection.swift */,
-			);
-			path = Enumerations;
 			sourceTree = "<group>";
 		};
 		FA6CB14C280F31B0007E2FDC /* Presenters */ = {
@@ -417,11 +402,9 @@
 		FA6CB155280FEBF8007E2FDC /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				FAA234B428129F9100812D63 /* AR */,
 				FAA234B328129A9800812D63 /* SessionActions */,
 				FAA234B228129A8300812D63 /* Sheet */,
 				FAA234B128129A5D00812D63 /* BottomItemBar */,
-				FAA234A22811638A00812D63 /* BackButton.swift */,
 				FA2FAD2D281C076D0087CE46 /* SaveMapPopup.swift */,
 				FAA234AD2811B24B00812D63 /* SceneListPopup.swift */,
 				FA1335FA2812E63A00145CD8 /* ParchmentPopup.swift */,
@@ -464,11 +447,11 @@
 		FA6CB16B28103EC7007E2FDC /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				FA564F9728140501002B050C /* p_parchment_01-55-20-112.png */,
+				FA564F9728140501002B050C /* p_parchment_01-65-20-112.png */,
 				FA564F9628140500002B050C /* p_parchment_02-40-30-180.png */,
-				FA8EA8BF2817EAAC00FD4E27 /* c_treasure_01.png */,
-				FA8EA8B6281592D600FD4E27 /* pencil.png */,
-				FA8EA8B82815939200FD4E27 /* thresh.png */,
+				FA69B9F8282D2723003D54C5 /* pencil.png */,
+				FA69B9FA282D272F003D54C5 /* thresh.png */,
+				FA69B9FF282E7A18003D54C5 /* c_treasure_01.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -528,14 +511,6 @@
 				FAA234C42812A6B000812D63 /* CustomARView+Session.swift */,
 			);
 			path = CustomARView;
-			sourceTree = "<group>";
-		};
-		FAE30FC8280ECF3F00DB682C /* project_fonts */ = {
-			isa = PBXGroup;
-			children = (
-				FAE30FC9280ECF5A00DB682C /* treasure.ttf */,
-			);
-			path = project_fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -604,15 +579,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA8EA8B7281592D600FD4E27 /* pencil.png in Resources */,
 				FA48EE4A280E99470033B407 /* Preview Assets.xcassets in Resources */,
-				FA8EA8B92815939200FD4E27 /* thresh.png in Resources */,
-				FA8EA8C02817EAAC00FD4E27 /* c_treasure_01.png in Resources */,
-				FA564F9A28140501002B050C /* p_parchment_01-55-20-112.png in Resources */,
+				FA69B9F9282D2724003D54C5 /* pencil.png in Resources */,
+				FA564F9A28140501002B050C /* p_parchment_01-65-20-112.png in Resources */,
 				FA564F9928140501002B050C /* p_parchment_02-40-30-180.png in Resources */,
 				FAE30FC4280EACCB00DB682C /* Localizable.strings in Resources */,
 				FA48EE47280E99470033B407 /* Assets.xcassets in Resources */,
-				FAE30FCA280ECF5A00DB682C /* treasure.ttf in Resources */,
+				FA69BA00282E7A18003D54C5 /* c_treasure_01.png in Resources */,
+				FA69B9FB282D272F003D54C5 /* thresh.png in Resources */,
 				FA332AA82826A5FB006E9EFE /* c_treasure_01.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -625,7 +599,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAA23485281091E900812D63 /* XButton.swift in Sources */,
-				FA6CB137280EF1F2007E2FDC /* AppCoordinator.swift in Sources */,
 				FA48EE59280E9F4F0033B407 /* MainView.swift in Sources */,
 				FA32843F2810459D00E36A3E /* MyItemBar.swift in Sources */,
 				FA2FAD2C281AF0100087CE46 /* SIM3D.swift in Sources */,
@@ -634,9 +607,9 @@
 				FAA234C52812A6B000812D63 /* CustomARView+Session.swift in Sources */,
 				FA8EA8C228180A5F00FD4E27 /* Treasure.swift in Sources */,
 				FA6CB16328101593007E2FDC /* FileManager.swift in Sources */,
-				FA6CB150280F3284007E2FDC /* ViewSelection.swift in Sources */,
 				FA45C42C28227F1B007C134C /* SessionData.swift in Sources */,
 				FA31B5FF2828720200DA75FE /* MapSheet.swift in Sources */,
+				FA69B9FE282D42A3003D54C5 /* Color.swift in Sources */,
 				FA1975A32822CF4A005AB0E2 /* DispatchQueue.swift in Sources */,
 				FA2FAD2E281C076D0087CE46 /* SaveMapPopup.swift in Sources */,
 				FA2FAD2A281AD77A0087CE46 /* Array.swift in Sources */,
@@ -675,7 +648,6 @@
 				FA332AB128271EB0006E9EFE /* SessionButton.swift in Sources */,
 				FA69B9F1282A8F17003D54C5 /* TreasureFoundPopup.swift in Sources */,
 				FA1335FB2812E63A00145CD8 /* ParchmentPopup.swift in Sources */,
-				FA6CB149280F30F8007E2FDC /* ContentLink.swift in Sources */,
 				FA45C424282019AC007C134C /* ParchmentItem.swift in Sources */,
 				FAA234AC281179B700812D63 /* View.swift in Sources */,
 				FA3284412810517F00E36A3E /* List.swift in Sources */,

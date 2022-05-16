@@ -30,7 +30,7 @@ struct CreateView: View {
                 MyItemBar(presenter: self.presenter)
             }
             if(self.presenter.sessionListSelection == .open) {
-                SceneListPopup(presenter: self.presenter)
+                SceneListPopup(presenter: self.presenter).edgesIgnoringSafeArea(.all)
             }
             
             if(self.presenter.showParchment) {
@@ -46,27 +46,28 @@ struct CreateView: View {
                 SaveMapPopup().environmentObject(presenter)
             }
             
+           
             
         }.edgesIgnoringSafeArea(.all).fullScreen(alignment: .bottom).navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: BackButton(presenter: self.presenter), trailing:
                                     HStack(spacing: 15) {
-                if(presenter.dataToBeStored.count >= 1) {
+                if(presenter.dataToBeStored.count >= 1 && presenter.treasurePlaced) {
                     Button(action: {
                         withAnimation(.easeInOut) {
                             presenter.saveWorldMapPopupShow = true
                         }
                     }) {
                         ZStack {
-                            Image(systemName: "tray.and.arrow.down").foregroundColor(Color.white)
-                        }.frame(width: 38, height: 38).background(Color.black.opacity(0.7)).cornerRadius(100)
+                            Image(systemName: "tray.and.arrow.down").foregroundColor(Color.white).shadow(radius: 3)
+                        }.frame(width: 38, height: 38).background(Color.secondaryColor.opacity(0.7)).cornerRadius(100)
                     }.padding(.top)
                 }
                 Button(action: {
                     withAnimation(.easeInOut) {
                         self.presenter.listSelector(action: .open)}}) {
                     ZStack {
-                        Image(systemName: "list.bullet").foregroundColor(Color.white)
-                    }.frame(width: 38, height: 38).background(Color.black.opacity(0.7)).cornerRadius(100)
+                        Image(systemName: "list.bullet").foregroundColor(Color.white).shadow(radius: 3)
+                    }.frame(width: 38, height: 38).background(Color.secondaryColor.opacity(0.7)).cornerRadius(100)
                 }.padding(.top)
             })
         

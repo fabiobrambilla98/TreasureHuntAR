@@ -24,6 +24,7 @@ class CustomARView: ARView {
         print("DEINIT: CustomARView")
     }
    
+    // MARK: - DEFAULT CONFIGURATION
    var defaultConfiguration: ARWorldTrackingConfiguration {
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = [.horizontal]
@@ -43,6 +44,7 @@ class CustomARView: ARView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - SETUP
     func setup(mode: ARMode) {
         
         if mode == .create {
@@ -60,7 +62,6 @@ class CustomARView: ARView {
     }
     
     // MARK: - AR content
-    
     var actionButtonsAnchorEntity: Entity?
     var tappedObject: CustomModelEntity?
     var presenterType: PresenterType?
@@ -82,6 +83,7 @@ class CustomARView: ARView {
     let storedData = UserDefaults.standard
 
     func resetTracking() {
+        print("Tracking reset")
         self.session.run(defaultConfiguration, options: [.resetTracking, .removeExistingAnchors])
         self.isRelocalizingMap = false
         self.virtualObjectAnchor = nil

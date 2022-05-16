@@ -11,7 +11,7 @@ import SwiftUI
 
 
 final class SelectViewPresenter: ObservableObject {
-    @Published var activeLink: ContentLink?
+   
     
     private var service: AppService = AppService.shared
     @Published var treasureHuntListNames: [String] = []

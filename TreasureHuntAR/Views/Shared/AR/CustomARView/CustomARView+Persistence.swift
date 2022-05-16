@@ -26,12 +26,13 @@ extension CustomARView {
     
     
     func loadSession(number: Int) {
-        
+        print("Session load number \(number)")
         let worldMap: ARWorldMap = {
             var data: Data? = nil
             if let presenter = viewPresenter as? CreateViewPresenter {
                 data = presenter.dataToBeStored[number].sessionWorldMap
             } else if let presenter = viewPresenter as? PlayViewPresenter {
+                print("Session world map loaded")
                 data = presenter.mapSessions[number].sessionWorldMap
             }
             
@@ -56,11 +57,7 @@ extension CustomARView {
             presenter.sessionClueFound = 0
         }
         self.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
-        isRelocalizingMap = true
-        
-        
-        
-        
+       
     }
     
     func saveSession() {
@@ -71,8 +68,8 @@ extension CustomARView {
                     return
                 }
                 
-                for anchorMap in map.anchors {
-                    if anchorMap.name == "parchment" || anchorMap.name == "treasure" {
+                /*for anchorMap in map.anchors {
+                    if anchorMap.name!.hasPrefix(Utils.treasurePrefix.rawValue) || anchorMap.name!.hasPrefix(Utils.parchmentPrefix.rawValue) {
                         for model in self.sessionModelEntities {
                             if model.identifier == anchorMap.identifier {
                                 model.transform = anchorMap.transform
@@ -80,7 +77,7 @@ extension CustomARView {
                         }
                         
                     }
-                }
+                }*/
                 
                 
                 do {

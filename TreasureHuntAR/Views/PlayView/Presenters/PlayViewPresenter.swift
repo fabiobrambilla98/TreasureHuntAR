@@ -42,9 +42,9 @@ final class PlayViewPresenter: Presenters, PlayViewPresenting {
     init(mapName: String) {
         super.init()
         self.mapName = mapName
+        print("Loading map session")
         mapSessions = service.getMap(mapName)
-        
-        
+        print("Map session loaded")
         parchmentImages = self.service.getModelNames(for: ModelTypes.parchment)
         startLocation = service.getStartLocation(name: mapName)
         startLocationImage = service.getStartLocationImage(mapName: mapName)

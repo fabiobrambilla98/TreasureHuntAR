@@ -14,7 +14,7 @@ struct HorizontalView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(LocalizedStringKey(self.text))
+            Text(LocalizedStringKey(self.text)).shadow(radius: 2)
             ScrollView(.horizontal, showsIndicators: false){
                 HStack{
                     ForEach(0 ..< ((type == .parchment) ? presenter.parchmentImages.count : presenter.treasureImages.count), id: \.self) { index in
@@ -30,11 +30,11 @@ struct HorizontalView: View {
                             
                         }) {
                             if(type == .parchment) {
-                                Image(uiImage: presenter.parchmentImages[index].1).resizable().frame(minWidth: 0, maxWidth: 100, minHeight: 0, maxHeight: 100).scaledToFit()
+                                Image(uiImage: presenter.parchmentImages[index].1).resizable().padding()
                             } else {
-                                Image(uiImage: presenter.treasureImages[index].1).resizable().frame(width: 100, height: 100)
+                                Image(uiImage: presenter.treasureImages[index].1).resizable().scaledToFit().padding()
                             }
-                        }
+                        }.frame(width: 100, height: 100).background(Color(hex: 0xe1cea6)).border(Color(hex: 0xbbb086), width: 1.5)
                     }
                 }
             }

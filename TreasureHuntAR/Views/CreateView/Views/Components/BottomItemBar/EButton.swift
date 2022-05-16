@@ -14,17 +14,31 @@ struct EButton: View {
     @Binding var name: String
     
     var body: some View {
-        Button(action: {
-            withAnimation(.easeInOut) {
-                self.presenter.buttonItemsID = itemSelected
-                self.presenter.selectEntityToAdd(name: name)
-                
-            }
-        }) {
-            Image(uiImage: UIImage(named: name)!).resizable()
-                .scaledToFit()
-        }.buttonStyle(PlainButtonStyle())
-            .cornerRadius(5)
-            .frame(minWidth: 0, maxWidth: 60, minHeight: 0, maxHeight: 60)
+        ZStack {
+        ZStack {
+            Button(action: {
+                withAnimation(.easeInOut) {
+                    self.presenter.buttonItemsID = itemSelected
+                    self.presenter.selectEntityToAdd(name: name)
+                    
+                }
+            }) {
+                ZStack{
+                    ZStack {
+                        Image(uiImage: UIImage(named: name)!).resizable()
+                            .scaledToFit()
+                    }
+                    if(name.hasPrefix("c_") && presenter.treasurePlaced) {
+                        ZStack {
+                            
+                        }.fullScreen(alignment: .center).background(Color.black.opacity(0.5))
+                    }
+                    
+                }
+            }.buttonStyle(PlainButtonStyle()).padding(6).disabled(name.hasPrefix("c_") && presenter.treasurePlaced)
+        }.frame(width: 50, height: 50).background(Color.secondaryColor).cornerRadius(5)
+            
+        }.frame(width: 53, height: 53).background(Color.thirdColor).cornerRadius(5)
+            
     }
 }

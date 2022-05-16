@@ -19,9 +19,10 @@ struct SessionActionView: View {
                 Button(action: {
                     withAnimation(.easeInOut) {
                         presenter.saveSession()
+                       
                     }
                 }) {
-                    Text((presenter.saveButtonEnabled) ? "Save" : "Scanning...")
+                    Text((presenter.saveButtonEnabled) ? LocalizedStringKey("save") : LocalizedStringKey("scanning"))
                         .fontWeight(.semibold)
                         .padding()
                         .foregroundColor(.white)
@@ -35,7 +36,7 @@ struct SessionActionView: View {
                             presenter.newSession()
                         }
                     }) {
-                        Text("New")
+                        Text(LocalizedStringKey("new"))
                             .fontWeight(.semibold)
                             .padding()
                             .foregroundColor(.white)

@@ -1,7 +1,24 @@
 "play" = "Play";
 "create" = "Create";
 "parchments" = "Parchments";
+"treasures" = "Treasures";
 "back" = "Homescreen";
 "confirm-back-title" = "Are you sure?";
 "confirm-back-subtitle" = "If you exit without saving, your game map will be deleted";
 "exit" = "Exit";
+"confirm-map-cancel" = "Are you sure you want to delete the map?";
+"delete" = "Delete";
+"select-session-to-load" = "Select the session to load";
+"scene" = "Scene";
+"save" = "Save";
+"cancel" = "Cancel";
+"map-name" = "Map name";
+"name-a-u" = "Name already used!";
+"e-n-m" = "Enter a name for the map";
+"scanning" = "Scanning...";
+"new" = "New";
+"items" = "Items";
+"close" = "Close";
+"session" = "Session";
+"maps" = "Maps";
+

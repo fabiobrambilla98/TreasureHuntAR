@@ -9,21 +9,29 @@ import SwiftUI
 
 struct SaveMapPopup: View {
     
+    enum Actions {
+        case cancel, confirm
+    }
+    
     @State var showErrorMessage: Bool = false
     @State var text: String = ""
     @EnvironmentObject var presenter: CreateViewPresenter
+    @State var action: Actions = .cancel
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         ZStack{
             ZStack {
+            ZStack {
                 
                 VStack {
-                    Text("Enter a name for the map").foregroundColor(Color.white).padding(.top)
+                    Text(LocalizedStringKey("e-n-m")).foregroundColor(Color.white).shadow(radius: 3).padding(5).fixedSize(horizontal: false, vertical: true)
                     Spacer()
                     if(showErrorMessage) {
-                        Text("Nome già utilizzato").foregroundColor(Color.red)
+                        Text(LocalizedStringKey("name-a-u")).foregroundColor(Color.red).shadow(radius: 3).padding()
                     }
-                    TextField("Map name", text: $text).font(.title2).padding()
+                    
+                    TextField(LocalizedStringKey("map-name"), text: $text).font(.title2).padding()
                     Spacer()
                     
                     VStack(spacing: 0) {
@@ -32,27 +40,34 @@ struct SaveMapPopup: View {
                             Spacer()
                             Button(action: {
                                 presenter.saveWorldMapPopupShow = false
+                               
                             }) {
-                                Text("Cancel")
+                                Text(LocalizedStringKey("cancel")).shadow(radius: 3)
                             }
                             Spacer()
                             Divider().foregroundColor(Color.white)
                             Spacer()
                             Button(action: {
                                 if(!presenter.mapAlreadySavedNames.contains(text)) {
+                                    action = .confirm
                                     presenter.saveWorldMap(text: text)
                                 } else {
                                     showErrorMessage = true
                                 }
                             }) {
-                                Text("Save")
+                                Text(LocalizedStringKey("save")).shadow(radius: 3)
                             }
                             Spacer()
-                        }.frame(maxHeight: 45)
+                        }.frame(maxHeight: 45).foregroundColor(Color.white)
                     }
                 }
-            }.frame(minWidth: 0, maxWidth: 270, minHeight: 0, maxHeight: 200, alignment: .bottom).background(Color(.systemGroupedBackground)).cornerRadius(15)
-        }.fullScreen(alignment: .center).background(Color.black.opacity(0.3))
+            }.frame(minWidth: 0, maxWidth: 270, minHeight: 0, maxHeight: 200).background(Color.secondaryColor.opacity(0.9)).cornerRadius(15)
+            }.frame(minWidth: 0, maxWidth: 275, minHeight: 0, maxHeight: 205).background(Color.thirdColor.opacity(0.9)).cornerRadius(15)
+        }.fullScreen(alignment: .center).background(Color.black.opacity(0.3)).onDisappear(){
+            if(action == .confirm) {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }
     }
 }
 

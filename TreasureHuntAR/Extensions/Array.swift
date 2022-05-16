@@ -33,3 +33,16 @@ extension Array where Element == StoreModelEntity {
     }
 }
 
+
+extension Array where Element == StoreModelEntity {
+    mutating func get(_ identifier: String) -> StoreModelEntity? {
+        let returnItem = self.filter(){$0.identifier.uuidString == identifier}
+        
+        if returnItem.isEmpty {
+            return nil
+        }
+        
+        return returnItem[0]
+       
+    }
+}
