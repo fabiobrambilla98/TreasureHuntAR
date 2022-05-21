@@ -11,9 +11,7 @@ import Combine
 import RealityKit
 
 protocol CreateViewPresenting: ObservableObject {
-    
-    
-    func loadWorldMap()
+   
     func openSheet()
     func selectEntity(_ name: String)
 
@@ -77,7 +75,9 @@ final class CreateViewPresenter: Presenters, CreateViewPresenting {
         super.init()
         
         DispatchQueue.main.async { [weak self] in
-            self!.parchmentImages = self!.getModelsImages(for: .parchment)
+            if self!.parchmentImages.isEmpty {
+                self!.parchmentImages = self!.getModelsImages(for: .parchment)
+            }
             
             for name in self!.parchmentImages {
                 self!.lastSelected.append(name.0)
@@ -113,10 +113,6 @@ final class CreateViewPresenter: Presenters, CreateViewPresenting {
         self.lastSelected.updateLast(name)
     }
     
-    
-    func loadWorldMap() {
-        
-    }
     
     func listSelector(action: ShowAction) {
         self.sessionListSelection = action

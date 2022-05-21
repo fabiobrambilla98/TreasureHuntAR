@@ -22,7 +22,6 @@
 		FA3284412810517F00E36A3E /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3284402810517F00E36A3E /* List.swift */; };
 		FA3284432810557500E36A3E /* EButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3284422810557500E36A3E /* EButton.swift */; };
 		FA332AA82826A5FB006E9EFE /* c_treasure_01.usdz in Resources */ = {isa = PBXBuildFile; fileRef = FA332AA72826A5FB006E9EFE /* c_treasure_01.usdz */; };
-		FA332AAB2826C95D006E9EFE /* RKAssetLoading in Frameworks */ = {isa = PBXBuildFile; productRef = FA332AAA2826C95D006E9EFE /* RKAssetLoading */; };
 		FA332AAD2826D373006E9EFE /* ParchmentPlayPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA332AAC2826D373006E9EFE /* ParchmentPlayPopup.swift */; };
 		FA332AB128271EB0006E9EFE /* SessionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA332AB028271EB0006E9EFE /* SessionButton.swift */; };
 		FA332AB32827F4D5006E9EFE /* ARAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA332AB22827F4D5006E9EFE /* ARAnchor.swift */; };
@@ -53,7 +52,6 @@
 		FA6CB159280FF1C4007E2FDC /* AppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB158280FF1C4007E2FDC /* AppService.swift */; };
 		FA6CB15B280FF3B5007E2FDC /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB15A280FF3B5007E2FDC /* Repository.swift */; };
 		FA6CB15D280FF425007E2FDC /* Parchment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB15C280FF425007E2FDC /* Parchment.swift */; };
-		FA6CB16128101060007E2FDC /* PopUpWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB16028101060007E2FDC /* PopUpWindow.swift */; };
 		FA6CB16328101593007E2FDC /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CB16228101593007E2FDC /* FileManager.swift */; };
 		FA70D3022823D49000DB54F2 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70D3012823D49000DB54F2 /* Image.swift */; };
 		FA8EA8AB2815369D00FD4E27 /* ARActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8EA8AA2815369D00FD4E27 /* ARActionButton.swift */; };
@@ -138,7 +136,6 @@
 		FA6CB158280FF1C4007E2FDC /* AppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppService.swift; sourceTree = "<group>"; };
 		FA6CB15A280FF3B5007E2FDC /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		FA6CB15C280FF425007E2FDC /* Parchment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parchment.swift; sourceTree = "<group>"; };
-		FA6CB16028101060007E2FDC /* PopUpWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindow.swift; sourceTree = "<group>"; };
 		FA6CB16228101593007E2FDC /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		FA70D3012823D49000DB54F2 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		FA8EA8AA2815369D00FD4E27 /* ARActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARActionButton.swift; sourceTree = "<group>"; };
@@ -167,7 +164,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA332AAB2826C95D006E9EFE /* RKAssetLoading in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,7 +240,6 @@
 				FA48EE42280E99410033B407 /* TreasureHuntARApp.swift */,
 				FA48EE46280E99470033B407 /* Assets.xcassets */,
 				FA48EE48280E99470033B407 /* Preview Content */,
-				FA6CB16028101060007E2FDC /* PopUpWindow.swift */,
 			);
 			path = TreasureHuntAR;
 			sourceTree = "<group>";
@@ -531,7 +526,6 @@
 			);
 			name = TreasureHuntAR;
 			packageProductDependencies = (
-				FA332AAA2826C95D006E9EFE /* RKAssetLoading */,
 			);
 			productName = TreasureHuntAR;
 			productReference = FA48EE3F280E99410033B407 /* TreasureHuntAR.app */;
@@ -563,7 +557,6 @@
 			);
 			mainGroup = FA48EE36280E99410033B407;
 			packageReferences = (
-				FA332AA92826C95D006E9EFE /* XCRemoteSwiftPackageReference "RealityKit-Asset-Loading" */,
 			);
 			productRefGroup = FA48EE40280E99410033B407 /* Products */;
 			projectDirPath = "";
@@ -615,7 +608,6 @@
 				FA2FAD2A281AD77A0087CE46 /* Array.swift in Sources */,
 				FAA234AE2811B24B00812D63 /* SceneListPopup.swift in Sources */,
 				FAA2348328108F3A00812D63 /* SButton.swift in Sources */,
-				FA6CB16128101060007E2FDC /* PopUpWindow.swift in Sources */,
 				FA8EA8C428180C0800FD4E27 /* HorizontalView.swift in Sources */,
 				FA6CB15D280FF425007E2FDC /* Parchment.swift in Sources */,
 				FA6CB13C280EF657007E2FDC /* CreateViewPresenter.swift in Sources */,
@@ -873,25 +865,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		FA332AA92826C95D006E9EFE /* XCRemoteSwiftPackageReference "RealityKit-Asset-Loading" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Reality-Dev/RealityKit-Asset-Loading";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		FA332AAA2826C95D006E9EFE /* RKAssetLoading */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FA332AA92826C95D006E9EFE /* XCRemoteSwiftPackageReference "RealityKit-Asset-Loading" */;
-			productName = RKAssetLoading;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FA48EE37280E99410033B407 /* Project object */;
 }
