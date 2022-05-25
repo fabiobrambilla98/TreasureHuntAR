@@ -16,9 +16,9 @@ struct ParchmentPlayPopup: View {
                 Image(uiImage: UIImage(named: presenter.parchmentSheetSelected!.0.modelName)!).resizable().scaledToFit()
                     Text("\(presenter.parchmentSheetSelected!.1)").offset(x: presenter.parchmentSheetSelected!.0.offset.x, y: presenter.parchmentSheetSelected!.0.offset.y).onAppear() {
                         UITextView.appearance().backgroundColor = UIColor(white: 0.0, alpha: 0.0)
-                    }.frame(minWidth: 0, maxWidth: presenter.parchmentSheetSelected!.0.offset.width)
+                    }.frame(width: presenter.parchmentSheetSelected!.0.offset.width, alignment: .leading)
                
-            }.frame(width: 250, height: 280)
+            }.frame(width: 250, height: 280, alignment: .leading)
         }.fullScreen(alignment: .center)
             .transition(AnyTransition.scale.animation(.easeIn(duration: 0.2)))
         

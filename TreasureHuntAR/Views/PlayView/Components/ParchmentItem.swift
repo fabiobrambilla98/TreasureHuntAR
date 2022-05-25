@@ -17,7 +17,7 @@ struct ParchmentItem: View {
     var modelEntity: ParchmentEntity
     var text: String
     var body: some View {
-        ZStack(alignment: .topLeading) {
+        ZStack(alignment: .center) {
             Button(action: {
                 presenter.parchmentSheetSelected = (modelEntity, text)
                 presenter.showParchment = true
@@ -25,10 +25,12 @@ struct ParchmentItem: View {
                 ZStack {
                     ZStack(alignment: .topLeading) {
                         presenter.getImage(named: modelEntity.modelName).resizable().scaledToFit()
-                        Text(text).frame(width: self.getOffset(axis: .width, for: modelEntity.offset.width), alignment: .leading).font(.system(size: 8)).offset(x: self.getOffset(axis: .x, for: modelEntity.offset.x), y: self.getOffset(axis: .y, for: modelEntity.offset.y)).foregroundColor(Color.white)
+                      
+                            Text(text).frame(width: self.getOffset(axis: .width, for: modelEntity.offset.width), alignment: .leading).font(.system(size: 8)).offset(x: self.getOffset(axis: .x, for: modelEntity.offset.x), y: self.getOffset(axis: .y, for: modelEntity.offset.y)).foregroundColor(Color.white)
+   
                     }
-                }.frame(width: 100, height: 100)
-            }.frame(width: 100, height: 100).background(Color(hex: 0xe1cea6)).border(Color(hex: 0xbbb086), width: 1.5)
+                }.padding().frame(width: 100, height: 100,alignment: .center)
+            }.frame(width: 100, height: 100, alignment: .center).background(Color(hex: 0xe1cea6)).border(Color(hex: 0xbbb086), width: 1.5)
         }
     }
     

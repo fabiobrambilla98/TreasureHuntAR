@@ -66,7 +66,7 @@ class ParchmentEntity: ObjectEntity, ObservableObject {
                     let mesh = MeshResource.generateText(
                         parchmentText!,
                         extrusionDepth: 0.0001,
-                        font: .systemFont(ofSize: 0.01),
+                        font: .systemFont(ofSize: 0.018),
                         containerFrame: CGRect(x: 0, y: 0, width: 0.3, height: 0.3),
                         alignment: .left,
                         lineBreakMode: .byWordWrapping)

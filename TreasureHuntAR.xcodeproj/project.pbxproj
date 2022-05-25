@@ -19,7 +19,6 @@
 		FA2FAD54281FCF560087CE46 /* SelectViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2FAD53281FCF560087CE46 /* SelectViewPresenter.swift */; };
 		FA31B5FF2828720200DA75FE /* MapSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA31B5FE2828720200DA75FE /* MapSheet.swift */; };
 		FA32843F2810459D00E36A3E /* MyItemBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA32843E2810459D00E36A3E /* MyItemBar.swift */; };
-		FA3284412810517F00E36A3E /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3284402810517F00E36A3E /* List.swift */; };
 		FA3284432810557500E36A3E /* EButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3284422810557500E36A3E /* EButton.swift */; };
 		FA332AA82826A5FB006E9EFE /* c_treasure_01.usdz in Resources */ = {isa = PBXBuildFile; fileRef = FA332AA72826A5FB006E9EFE /* c_treasure_01.usdz */; };
 		FA332AAD2826D373006E9EFE /* ParchmentPlayPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA332AAC2826D373006E9EFE /* ParchmentPlayPopup.swift */; };
@@ -101,7 +100,6 @@
 		FA2FAD53281FCF560087CE46 /* SelectViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewPresenter.swift; sourceTree = "<group>"; };
 		FA31B5FE2828720200DA75FE /* MapSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSheet.swift; sourceTree = "<group>"; };
 		FA32843E2810459D00E36A3E /* MyItemBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyItemBar.swift; sourceTree = "<group>"; };
-		FA3284402810517F00E36A3E /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		FA3284422810557500E36A3E /* EButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EButton.swift; sourceTree = "<group>"; };
 		FA332AA72826A5FB006E9EFE /* c_treasure_01.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; name = c_treasure_01.usdz; path = ../../../../../Documents/c_treasure_01.usdz; sourceTree = "<group>"; };
 		FA332AAC2826D373006E9EFE /* ParchmentPlayPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParchmentPlayPopup.swift; sourceTree = "<group>"; };
@@ -425,7 +423,6 @@
 			children = (
 				FA6CB158280FF1C4007E2FDC /* AppService.swift */,
 				FA6CB15A280FF3B5007E2FDC /* Repository.swift */,
-				FA3284402810517F00E36A3E /* List.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -642,7 +639,6 @@
 				FA1335FB2812E63A00145CD8 /* ParchmentPopup.swift in Sources */,
 				FA45C424282019AC007C134C /* ParchmentItem.swift in Sources */,
 				FAA234AC281179B700812D63 /* View.swift in Sources */,
-				FA3284412810517F00E36A3E /* List.swift in Sources */,
 				FA8EA8AD2815465200FD4E27 /* Entity.swift in Sources */,
 				FAA234BF2812A63B00812D63 /* CustomARView+Gesture.swift in Sources */,
 				FAA234B628129FCC00812D63 /* ARViewContainer.swift in Sources */,
