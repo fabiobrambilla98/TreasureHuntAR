@@ -8,7 +8,7 @@
 import SwiftUI
 import RealityKit
 import Combine
-import RKAssetLoading
+
 
 class TreasureEntity: ObjectEntity {
     var cancellable: AnyCancellable? = nil
